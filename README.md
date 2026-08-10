@@ -70,6 +70,30 @@ without losing or mixing the data.
 A device handles around 100 FGDs comfortably. The real limit is the browser's storage
 allowance rather than a fixed number.
 
+### Inputs and costs
+
+A third tab on the home screen lists every itemised inputs and variable cost line across all
+FGDs on the device, grouped by item, with the number of FGDs it appears in, the average
+quantity where recorded, the average cost, the range and its share of the total. **Export
+detail (CSV)** gives one row per line, which is the file an emission factor calculation or a
+procurement analysis would start from.
+
+Inputs and variable cost rows are chosen from a standard list rather than typed. Selecting from
+the list stores a permanent code alongside the label, so the same product entered in Peru and
+in Honduras groups together even when the interface language differs. **Other, type it in**
+remains available for anything not on the list; those lines are marked "typed in" and group only
+by their exact wording.
+
+Each row also takes an **optional quantity and unit** (kg, l, unit, sack, t). These are never
+required, since a focus group often knows what was spent without knowing how many kilos it
+bought. They exist because cost in local currency cannot be converted into a carbon footprint;
+physical quantity can.
+
+Two limits worth knowing. Categories filled in activity by activity carry no item description,
+so their amounts do not appear on this tab, although they still count in the FGD totals. And
+the item catalogue is a first draft written without country validation. It is expected to be
+corrected by each country contact.
+
 ### Searching the list
 
 A search box sits above the list once there is at least one FGD saved. It matches across the
@@ -116,11 +140,13 @@ The coffee area on the farm is split three ways on tab 1: establishment (new are
 renovation or rehabilitation, and productive areas. A fourth bucket, annual overhead, covers
 costs that are not tied to any area.
 
-Each cost category carries a selector saying which block it belongs to. The defaults are
-sensible (land preparation to establishment, harvesting to productive, farm administration to
-annual overhead) and any of them can be changed per FGD.
+Establishment and renovation get their own tabs, which appear only once an area has been
+entered for them. Each asks the five Tier 3 questions directly (inputs, family labour, paid
+labour, variable costs, fixed costs) with no category breakdown, because a focus group will not
+break a new planting down nine ways. The cost questionnaire tab then covers the productive area
+alone, plus farm administration as annual overhead.
 
-Costs in the three area blocks are entered **per unit of that block's own area**, and the tool
+Costs on the block tabs are entered **per unit of that block's own area**, and the tool
 multiplies each by its block. Annual overhead is entered as a yearly total for the farm, and
 its labels say so. Yield is entered per unit of **productive** area, which is the figure a
 farmer actually quotes, so total production comes from the productive block alone.
@@ -196,7 +222,7 @@ summing or averaging across FGDs in the master sheet.
 ## Updating the app later
 
 When `index.html` changes, upload the new file **and** change the version number in
-`CACHE_NAME` at the top of `sw.js`, currently `"cosp-fgd-blocks-v1"`. Without that change,
+`CACHE_NAME` at the top of `sw.js`, currently `"cosp-fgd-blocks-v2"`. Without that change,
 anyone who already installed the app may keep seeing the old version cached on their device.
 
 Data already captured is not lost when the app is updated. It lives in the browser's storage,

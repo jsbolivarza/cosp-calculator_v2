@@ -216,11 +216,44 @@
   .records-empty h2 { color: var(--night); font-family: 'Exo 2', sans-serif; font-size: 1.1rem; margin-bottom: 8px; }
   .records-empty p { color: var(--text-light); font-size: .88rem; margin-bottom: 18px; }
 
+  .entry-row-item { flex-direction: column; align-items: stretch; gap: 6px; }
+  .entry-row-item .item-cell { display: flex; gap: 8px; align-items: center; }
+  .entry-row-item .item-cell select.item-select { flex: 1.4; min-width: 150px; padding: 6px 9px;
+    border: 1px solid var(--border); border-radius: 5px; font-size: .8rem; font-family: 'Inter', sans-serif; background: #fff; }
+  .entry-row-item .item-cell input.item-other { flex: 1; min-width: 120px; padding: 6px 9px;
+    border: 1px solid var(--tangerine); border-radius: 5px; font-size: .8rem; background: var(--tangerine-tint); }
+  .entry-row-item .qty-cell { display: flex; gap: 8px; align-items: center; }
+  .entry-row-item .qty-cell input[type=number] { flex: 1; min-width: 70px; padding: 6px 9px;
+    border: 1px solid var(--border); border-radius: 5px; font-size: .8rem; }
+  .entry-row-item .qty-cell select { flex: .7; min-width: 78px; padding: 6px 9px;
+    border: 1px solid var(--border); border-radius: 5px; font-size: .8rem; font-family: 'Inter', sans-serif; background: #fff; }
+
+  .block-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; flex-wrap: wrap;
+    background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--eggplant);
+    border-radius: 12px; padding: 14px 18px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(30,30,30,.08); }
+  .block-title { font-family: 'Exo 2', sans-serif; font-weight: 700; font-size: 1rem; color: var(--night); }
+  .block-sub { font-size: .78rem; color: var(--text-light); margin-top: 3px; }
+  .block-figures { display: flex; gap: 22px; flex-wrap: wrap; }
+  .block-figures .b-label { display: block; font-size: .66rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .5px; color: var(--text-light); }
+  .block-figures .b-value { font-family: 'Exo 2', sans-serif; font-weight: 700; font-size: 1.05rem;
+    color: var(--night); font-variant-numeric: tabular-nums; }
+
+  .headline-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-bottom: 12px; }
+  .detail-strip { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(30,30,30,.08); padding: 12px 18px; margin-bottom: 22px;
+    display: flex; gap: 24px; flex-wrap: wrap; }
+  .detail-strip .d-item { min-width: 96px; }
+  .detail-strip .d-label { font-size: .64rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .5px; color: var(--text-light); }
+  .detail-strip .d-value { font-size: .92rem; font-weight: 600; color: var(--night);
+    font-variant-numeric: tabular-nums; margin-top: 2px; }
+
   .land-bar { display: flex; height: 9px; border-radius: 5px; overflow: hidden; margin-top: 12px; background: var(--card-alt); }
   .land-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 7px; font-size: .72rem; color: var(--text-light); }
   .land-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; }
-  .status-select { border: 1px solid var(--eggplant); border-radius: 14px; background: #fff; color: var(--eggplant);
-    font-family: 'Inter', sans-serif; font-weight: 600; font-size: .7rem; padding: 4px 6px; }
+  .status-chip { border: 1px solid var(--eggplant); border-radius: 14px; background: var(--eggplant-tint);
+    color: var(--eggplant); font-weight: 600; font-size: .68rem; padding: 4px 10px; white-space: nowrap; }
   .results-card { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--night);
     border-radius: 0; box-shadow: 0 1px 3px rgba(30,30,30,.08); padding: 16px 20px; margin-top: 24px; }
   .results-card h3 { font-family: 'Exo 2', sans-serif; font-size: .95rem; color: var(--night); margin-bottom: 12px; }
@@ -270,6 +303,8 @@
     .save-status { flex: 1 1 100%; }
     .table-card { padding: 14px; }
     .search-bar { padding: 12px; gap: 10px; }
+    .detail-strip { gap: 14px; padding: 12px; }
+    .block-figures { gap: 14px; }
     .filter-bar { padding: 12px; gap: 10px; }
     .filter-bar .field { flex: 1 1 140px; }
     .filter-bar select { min-width: 0; width: 100%; }
@@ -339,6 +374,7 @@
     <div class="tab-bar">
       <button type="button" class="tab-btn" id="listTabRecords" data-i18n="tab_list_records">My FGDs</button>
       <button type="button" class="tab-btn" id="listTabCompare" data-i18n="tab_list_compare">Compare FGDs</button>
+      <button type="button" class="tab-btn" id="listTabItems" data-i18n="tab_list_items">Inputs and costs</button>
     </div>
 
     <div class="tab-panel" id="listPanelRecords">
@@ -361,6 +397,11 @@
       <div id="compareContainer"></div>
     </div>
 
+    <div class="tab-panel" id="listPanelItems">
+      <div class="notice" data-i18n="items_help"></div>
+      <div id="itemsContainer"></div>
+    </div>
+
   </div>
 
   <!-- ============ Screen B: one FGD open for editing ============ -->
@@ -380,6 +421,10 @@
       <div class="field">
         <label data-i18n="field_coop_name">Cooperative name</label>
         <input type="text" id="coopName" placeholder="" style="min-width:180px">
+      </div>
+      <div class="field">
+        <label data-i18n="field_country">Country</label>
+        <select id="country" style="min-width:150px"></select>
       </div>
       <div class="field">
         <label data-i18n="field_area_unit">Area unit</label>
@@ -404,10 +449,14 @@
       </div>
     </div>
 
-    <div class="tab-bar">
+    <div class="tab-bar" id="editorTabBar">
       <button type="button" class="tab-btn" id="tabBtnActivities" data-tab="activities"><span class="step-num">1</span><span data-i18n="tab1_label">Farm activities</span></button>
-      <button type="button" class="tab-btn" id="tabBtnQuestionnaire" data-tab="questionnaire"><span class="step-num">2</span><span data-i18n="tab2_label">Cost questionnaire</span></button>
+      <button type="button" class="tab-btn" id="tabBtnBlock_establishment" data-tab="block_establishment"><span class="step-num">2</span><span data-i18n="status_establishment">Establishment</span></button>
+      <button type="button" class="tab-btn" id="tabBtnBlock_renovation" data-tab="block_renovation"><span class="step-num">3</span><span data-i18n="status_renovation">Renovation</span></button>
+      <button type="button" class="tab-btn" id="tabBtnQuestionnaire" data-tab="questionnaire"><span class="step-num">4</span><span data-i18n="tab2_label">Cost questionnaire</span></button>
     </div>
+
+    <div id="blockTabsContainer"></div>
 
     <div class="tab-panel" id="tabPanelActivities">
       <div class="activity-group-card">
@@ -465,47 +514,14 @@
 
     <div class="tab-panel" id="tabPanelQuestionnaire">
 
-      <div class="kpi-grid">
-        <div class="kpi-card night">
-          <div class="kpi-label" data-i18n="kpi_total">CPS Total</div>
-          <div class="kpi-value" id="totalCosp">0.00 <small data-i18n="kpi_total_unit">currency/unit</small></div>
-        </div>
-        <div class="kpi-card tangerine">
-          <div class="kpi-label" data-i18n="kpi_inputs">Inputs</div>
-          <div class="kpi-value" id="totalInputs">0.00</div>
-        </div>
-        <div class="kpi-card grey">
-          <div class="kpi-label" data-i18n="kpi_household_days">Family labour days</div>
-          <div class="kpi-value" id="totalHouseholdDays">0.0 <small data-i18n="ph_days">days</small></div>
-        </div>
-        <div class="kpi-card eggplant">
-          <div class="kpi-label" data-i18n="kpi_hired_cost">Paid labour (cost)</div>
-          <div class="kpi-value" id="totalHired">0.00</div>
-        </div>
-        <div class="kpi-card eggplant">
-          <div class="kpi-label" data-i18n="kpi_hired_days">Paid labour days</div>
-          <div class="kpi-value" id="totalHiredDays">0.0 <small data-i18n="ph_days">days</small></div>
-        </div>
-        <div class="kpi-card sky">
-          <div class="kpi-label" data-i18n="kpi_variable">Variable costs</div>
-          <div class="kpi-value" id="totalVariable">0.00</div>
-        </div>
-        <div class="kpi-card mint">
-          <div class="kpi-label" data-i18n="kpi_fixed">Fixed costs</div>
-          <div class="kpi-value" id="totalFixed">0.00</div>
-        </div>
-      </div>
+      <div class="headline-grid" id="headlineGrid"></div>
+      <div class="detail-strip" id="detailStrip"></div>
 
       <div class="section-title">
         <span data-i18n="section_categories">Cost categories</span>
         <span class="edit-activities-link" id="editActivitiesLink" data-i18n="edit_activities_link">Edit selected activities</span>
       </div>
       <div id="categoriesContainer"></div>
-
-      <div class="results-card" id="resultsCard" style="display:none;">
-        <h3 data-i18n="results_title">Results for the whole farm</h3>
-        <div class="results-grid" id="resultsGrid"></div>
-      </div>
 
       <div class="table-card">
         <h3 data-i18n="table_title">Summary by category</h3>
@@ -630,6 +646,33 @@ const TRANSLATIONS = {
     kpi_total_annual: "Total annual cost",
     subtotal_unit_annual: "{c} / year",
     th_farm_area: "Farm area", th_annual_cost_compare: "Annual cost",
+    field_country: "Country", country_none: "Not set",
+    tab_list_items: "Inputs and costs",
+    block_intro: "Costs are entered per unit of this area. Area entered on tab 1:",
+    block_flat_note: "Captured as a block",
+    items_help: "Every itemised input and variable cost line across the FGDs on this device, grouped by item. Lines typed as free text are grouped by their exact wording, so two spellings of the same product appear twice. Picking items from the list avoids that.",
+    items_none: "No itemised lines yet for this filter.",
+    items_mixed_currency: "These FGDs do not all use the same currency, so the amounts below mix currencies. Filter by country, or read the quantities rather than the money.",
+    items_footnote: "Categories filled in activity by activity carry no item description, so their amounts do not appear here. They are still counted in the FGD totals.",
+    filter_country: "Country", filter_component: "Cost type",
+    th_item: "Item", th_fgd_count: "FGDs", th_avg_qty: "Average quantity", th_avg_cost: "Average cost",
+    th_range: "Range", th_share: "Share",
+    item_other: "Other, type it in", item_unnamed: "No description", item_free_text: "typed in",
+    btn_export_items_csv: "Export detail (CSV)",
+    ph_qty: "qty", unit_none: "unit", unit_kg: "kg", unit_l: "l", unit_unit: "unit", unit_sack: "sack", unit_t: "t",
+    it_fert_urea: "Urea", it_fert_npk: "NPK compound fertiliser", it_fert_amm: "Ammonium sulphate",
+    it_fert_phos: "Phosphate rock", it_fert_potassium: "Potassium sulphate", it_fert_foliar: "Foliar fertiliser",
+    it_compost: "Compost", it_manure: "Animal manure", it_lime: "Agricultural lime", it_bioinput: "Biological input",
+    it_fungicide: "Fungicide", it_insecticide: "Insecticide", it_herbicide: "Herbicide",
+    it_traps: "Traps and lures", it_adjuvant: "Adjuvant or surfactant",
+    it_seedlings: "Coffee seedlings", it_seed: "Coffee seed", it_shade: "Shade trees",
+    it_nursery_bags: "Nursery bags", it_substrate: "Nursery substrate",
+    it_sacks: "Harvest sacks", it_baskets: "Harvest baskets", it_drying_mesh: "Drying mesh or beds",
+    it_fuel: "Fuel for machinery", it_small_tools: "Small tools",
+    it_water_energy: "Water and energy", it_transport_farm: "Transport within the farm",
+    it_transport_market: "Transport to the collection point", it_machinery_rental: "Machinery rental",
+    it_soil_analysis: "Soil analysis", it_certification: "Certification cost", it_coop_dues: "Cooperative dues",
+    it_credit: "Credit interest", it_land_rent: "Land rent", it_worker_food: "Food for workers",
     tab_list_records: "My FGDs", tab_list_compare: "Compare FGDs",
     search_label: "Search", search_placeholder: "FGD name, cooperative or FLO-ID", search_clear: "Clear",
     search_no_match: "No FGD matches that search.", search_clear_link: "Clear the search",
@@ -744,6 +787,33 @@ const TRANSLATIONS = {
     kpi_total_annual: "Costo anual total",
     subtotal_unit_annual: "{c} / año",
     th_farm_area: "Área de la finca", th_annual_cost_compare: "Costo anual",
+    field_country: "Pa\u00eds", country_none: "Sin definir",
+    tab_list_items: "Insumos y costos",
+    block_intro: "Los costos se anotan por unidad de esta \u00e1rea. \u00c1rea anotada en la pesta\u00f1a 1:",
+    block_flat_note: "Capturado como bloque",
+    items_help: "Todas las l\u00edneas de insumos y costos variables de los FGD de este dispositivo, agrupadas por \u00edtem. Las l\u00edneas escritas a mano se agrupan por su texto exacto, as\u00ed que dos formas de escribir el mismo producto aparecen dos veces. Elegir del listado evita eso.",
+    items_none: "Todav\u00eda no hay l\u00edneas con \u00edtem para este filtro.",
+    items_mixed_currency: "Estos FGD no usan todos la misma moneda, as\u00ed que los montos de abajo mezclan monedas. Filtren por pa\u00eds, o lean las cantidades en vez del dinero.",
+    items_footnote: "Las categor\u00edas llenadas actividad por actividad no llevan descripci\u00f3n de \u00edtem, as\u00ed que sus montos no aparecen aqu\u00ed. S\u00ed cuentan en los totales del FGD.",
+    filter_country: "Pa\u00eds", filter_component: "Tipo de costo",
+    th_item: "\u00cdtem", th_fgd_count: "FGD", th_avg_qty: "Cantidad promedio", th_avg_cost: "Costo promedio",
+    th_range: "Rango", th_share: "Participaci\u00f3n",
+    item_other: "Otro, escribirlo", item_unnamed: "Sin descripci\u00f3n", item_free_text: "escrito a mano",
+    btn_export_items_csv: "Exportar detalle (CSV)",
+    ph_qty: "cant.", unit_none: "unidad", unit_kg: "kg", unit_l: "l", unit_unit: "unidad", unit_sack: "saco", unit_t: "t",
+    it_fert_urea: "Urea", it_fert_npk: "Fertilizante compuesto NPK", it_fert_amm: "Sulfato de amonio",
+    it_fert_phos: "Roca fosf\u00f3rica", it_fert_potassium: "Sulfato de potasio", it_fert_foliar: "Fertilizante foliar",
+    it_compost: "Compost", it_manure: "Esti\u00e9rcol", it_lime: "Cal agr\u00edcola", it_bioinput: "Insumo biol\u00f3gico",
+    it_fungicide: "Fungicida", it_insecticide: "Insecticida", it_herbicide: "Herbicida",
+    it_traps: "Trampas y atrayentes", it_adjuvant: "Coadyuvante o adherente",
+    it_seedlings: "Pl\u00e1ntulas de caf\u00e9", it_seed: "Semilla de caf\u00e9", it_shade: "\u00c1rboles de sombra",
+    it_nursery_bags: "Bolsas de vivero", it_substrate: "Sustrato de vivero",
+    it_sacks: "Sacos de cosecha", it_baskets: "Canastas de cosecha", it_drying_mesh: "Mallas o camas de secado",
+    it_fuel: "Combustible para maquinaria", it_small_tools: "Herramientas menores",
+    it_water_energy: "Agua y energ\u00eda", it_transport_farm: "Transporte dentro de la finca",
+    it_transport_market: "Transporte al centro de acopio", it_machinery_rental: "Alquiler de maquinaria",
+    it_soil_analysis: "An\u00e1lisis de suelo", it_certification: "Costo de certificaci\u00f3n", it_coop_dues: "Cuota de la cooperativa",
+    it_credit: "Intereses de cr\u00e9dito", it_land_rent: "Alquiler de tierra", it_worker_food: "Alimentaci\u00f3n de trabajadores",
     tab_list_records: "Mis FGD", tab_list_compare: "Comparar FGD",
     search_label: "Buscar", search_placeholder: "Nombre del FGD, cooperativa o FLO-ID", search_clear: "Limpiar",
     search_no_match: "Ningún FGD coincide con esa búsqueda.", search_clear_link: "Quitar la búsqueda",
@@ -857,6 +927,33 @@ const TRANSLATIONS = {
     kpi_total_annual: "Custo anual total",
     subtotal_unit_annual: "{c} / ano",
     th_farm_area: "Área da propriedade", th_annual_cost_compare: "Custo anual",
+    field_country: "Pa\u00eds", country_none: "N\u00e3o definido",
+    tab_list_items: "Insumos e custos",
+    block_intro: "Os custos s\u00e3o anotados por unidade desta \u00e1rea. \u00c1rea informada na aba 1:",
+    block_flat_note: "Capturado como bloco",
+    items_help: "Todas as linhas de insumos e custos vari\u00e1veis dos FGD deste dispositivo, agrupadas por item. As linhas digitadas \u00e0 m\u00e3o s\u00e3o agrupadas pelo texto exato, ent\u00e3o duas grafias do mesmo produto aparecem duas vezes. Escolher da lista evita isso.",
+    items_none: "Ainda n\u00e3o h\u00e1 linhas com item para este filtro.",
+    items_mixed_currency: "Estes FGD n\u00e3o usam todos a mesma moeda, ent\u00e3o os valores abaixo misturam moedas. Filtrem por pa\u00eds, ou leiam as quantidades em vez do dinheiro.",
+    items_footnote: "As categorias preenchidas atividade por atividade n\u00e3o t\u00eam descri\u00e7\u00e3o de item, ent\u00e3o seus valores n\u00e3o aparecem aqui. Eles continuam contando nos totais do FGD.",
+    filter_country: "Pa\u00eds", filter_component: "Tipo de custo",
+    th_item: "Item", th_fgd_count: "FGD", th_avg_qty: "Quantidade m\u00e9dia", th_avg_cost: "Custo m\u00e9dio",
+    th_range: "Faixa", th_share: "Participa\u00e7\u00e3o",
+    item_other: "Outro, digitar", item_unnamed: "Sem descri\u00e7\u00e3o", item_free_text: "digitado",
+    btn_export_items_csv: "Exportar detalhe (CSV)",
+    ph_qty: "qtd.", unit_none: "unidade", unit_kg: "kg", unit_l: "l", unit_unit: "unidade", unit_sack: "saca", unit_t: "t",
+    it_fert_urea: "Ureia", it_fert_npk: "Fertilizante composto NPK", it_fert_amm: "Sulfato de am\u00f4nio",
+    it_fert_phos: "Fosfato de rocha", it_fert_potassium: "Sulfato de pot\u00e1ssio", it_fert_foliar: "Fertilizante foliar",
+    it_compost: "Composto", it_manure: "Esterco", it_lime: "Calc\u00e1rio agr\u00edcola", it_bioinput: "Insumo biol\u00f3gico",
+    it_fungicide: "Fungicida", it_insecticide: "Inseticida", it_herbicide: "Herbicida",
+    it_traps: "Armadilhas e atrativos", it_adjuvant: "Adjuvante ou espalhante",
+    it_seedlings: "Mudas de caf\u00e9", it_seed: "Semente de caf\u00e9", it_shade: "\u00c1rvores de sombra",
+    it_nursery_bags: "Sacos de viveiro", it_substrate: "Substrato de viveiro",
+    it_sacks: "Sacos de colheita", it_baskets: "Cestos de colheita", it_drying_mesh: "Telas ou camas de secagem",
+    it_fuel: "Combust\u00edvel para m\u00e1quinas", it_small_tools: "Ferramentas menores",
+    it_water_energy: "\u00c1gua e energia", it_transport_farm: "Transporte dentro da propriedade",
+    it_transport_market: "Transporte ao ponto de coleta", it_machinery_rental: "Aluguel de m\u00e1quinas",
+    it_soil_analysis: "An\u00e1lise de solo", it_certification: "Custo de certifica\u00e7\u00e3o", it_coop_dues: "Mensalidade da cooperativa",
+    it_credit: "Juros de cr\u00e9dito", it_land_rent: "Aluguel de terra", it_worker_food: "Alimenta\u00e7\u00e3o dos trabalhadores",
     tab_list_records: "Meus FGD", tab_list_compare: "Comparar FGD",
     search_label: "Buscar", search_placeholder: "Nome do FGD, cooperativa ou FLO-ID", search_clear: "Limpar",
     search_no_match: "Nenhum FGD corresponde a essa busca.", search_clear_link: "Limpar a busca",
@@ -921,14 +1018,6 @@ function esc(s){
 // ---- Farm activity groups (Tab 1), matching the SurveyJS main_activities_* checkboxes ----
 const ACTIVITY_GROUPS = [
   {
-    id: "crop_establishment", titleKey: "activity_group1_title", descKey: "activity_group1_desc",
-    options: [
-      { value: "nursery_establishment", labelKey: "opt_nursery_establishment" },
-      { value: "land_preparation", labelKey: "opt_land_preparation" },
-      { value: "planting_grafting_renovation", labelKey: "opt_planting_grafting_renovation" }
-    ]
-  },
-  {
     id: "crop_management", titleKey: "activity_group2_title", descKey: "activity_group2_desc",
     options: [
       { value: "fertilization", labelKey: "opt_fertilization" },
@@ -948,8 +1037,6 @@ const ACTIVITY_GROUPS = [
 
 // ---- Categories (Tier 1), gated by the activity selections above. gate:null = always visible (Administration). ----
 const CATEGORIES = [
-  { id: "land_prep",    labelKey: "cat_land_prep",    gate: { group: "crop_establishment", values: ["land_preparation"] } },
-  { id: "renovation",   labelKey: "cat_renovation",   gate: { group: "crop_establishment", values: ["nursery_establishment", "planting_grafting_renovation"] } },
   { id: "fertilization",labelKey: "cat_fertilization",gate: { group: "crop_management", values: ["fertilization"] } },
   { id: "maintenance",  labelKey: "cat_maintenance",  gate: { group: "crop_management", values: ["pruning_crop_rejuvenation"] } },
   { id: "ipdm",         labelKey: "cat_ipdm",         gate: { group: "crop_management", values: ["pest_disease_control"] } },
@@ -991,19 +1078,12 @@ const LAND_STATUSES = [
 ];
 function statusById(id){ return LAND_STATUSES.find(s => s.id === id); }
 
-// Sensible starting point per category, overridable per FGD. The "renovation" category
-// covers nursery establishment AND replanting, so it could belong to either block;
-// it defaults to establishment and the facilitator moves it when it is a renovation.
-const DEFAULT_CATEGORY_STATUS = {
-  land_prep: "establishment", renovation: "establishment",
-  fertilization: "productive", maintenance: "productive", ipdm: "productive",
-  weed: "productive", harvest: "productive", postharvest: "productive",
-  admin: "annual"
-};
+// Establishment and renovation costs are captured on their own tabs, so every category
+// left in the questionnaire belongs to the productive block. Farm administration is the
+// one exception: it is annual overhead and is not tied to any area.
+const BLOCK_TABS = ["establishment", "renovation"];
 function statusOfCategory(rec, catId){
-  const cs = rec.categories[catId];
-  const id = cs && cs.status;
-  return statusById(id) ? id : (DEFAULT_CATEGORY_STATUS[catId] || "productive");
+  return catId === "admin" ? "annual" : "productive";
 }
 
 // Tier 3 components.
@@ -1014,6 +1094,98 @@ const COMPONENTS = [
   { id: "variable",  labelKey: "comp_variable",  type: "currency", costed: true  },
   { id: "fixed",     labelKey: "comp_fixed",     type: "currency", costed: true,  hasDepreciation: true, hintKey: "comp_fixed_hint" }
 ];
+
+// ---- Countries, units of measure, and the standard item catalogue ----
+const COUNTRIES = [
+  { code: "CO", name: "Colombia" }, { code: "ET", name: "Ethiopia" }, { code: "HN", name: "Honduras" },
+  { code: "ID", name: "Indonesia" }, { code: "KE", name: "Kenya" },   { code: "MX", name: "M\u00e9xico" },
+  { code: "NI", name: "Nicaragua" }, { code: "PE", name: "Per\u00fa" }, { code: "RW", name: "Rwanda" },
+  { code: "UG", name: "Uganda" }
+];
+
+const UNITS = ["kg", "l", "unit", "sack", "t"];
+
+// Items shared by every origin. These are functional descriptions rather than brand names,
+// which is why they can be written once and translated. `code` is permanent: labels may be
+// rewritten at any time, but a code that has been used in the field must never change or
+// every record that used it is orphaned.
+const CATALOG_BASE = [
+  { code: "fert_urea",            comp: "inputs",   key: "it_fert_urea" },
+  { code: "fert_npk",             comp: "inputs",   key: "it_fert_npk" },
+  { code: "fert_amm_sulphate",    comp: "inputs",   key: "it_fert_amm" },
+  { code: "fert_phosphate_rock",  comp: "inputs",   key: "it_fert_phos" },
+  { code: "fert_potassium",       comp: "inputs",   key: "it_fert_potassium" },
+  { code: "fert_foliar",          comp: "inputs",   key: "it_fert_foliar" },
+  { code: "fert_compost",         comp: "inputs",   key: "it_compost" },
+  { code: "fert_manure",          comp: "inputs",   key: "it_manure" },
+  { code: "amend_lime",           comp: "inputs",   key: "it_lime" },
+  { code: "bio_input",            comp: "inputs",   key: "it_bioinput" },
+  { code: "cp_fungicide",         comp: "inputs",   key: "it_fungicide" },
+  { code: "cp_insecticide",       comp: "inputs",   key: "it_insecticide" },
+  { code: "cp_herbicide",         comp: "inputs",   key: "it_herbicide" },
+  { code: "cp_traps",             comp: "inputs",   key: "it_traps" },
+  { code: "cp_adjuvant",          comp: "inputs",   key: "it_adjuvant" },
+  { code: "plant_seedlings",      comp: "inputs",   key: "it_seedlings" },
+  { code: "plant_seed",           comp: "inputs",   key: "it_seed" },
+  { code: "plant_shade_trees",    comp: "inputs",   key: "it_shade" },
+  { code: "nursery_bags",         comp: "inputs",   key: "it_nursery_bags" },
+  { code: "nursery_substrate",    comp: "inputs",   key: "it_substrate" },
+  { code: "harv_sacks",           comp: "inputs",   key: "it_sacks" },
+  { code: "harv_baskets",         comp: "inputs",   key: "it_baskets" },
+  { code: "proc_drying_mesh",     comp: "inputs",   key: "it_drying_mesh" },
+  { code: "proc_fuel",            comp: "inputs",   key: "it_fuel" },
+  { code: "tools_small",          comp: "inputs",   key: "it_small_tools" },
+  { code: "var_water_energy",     comp: "variable", key: "it_water_energy" },
+  { code: "var_transport_farm",   comp: "variable", key: "it_transport_farm" },
+  { code: "var_transport_market", comp: "variable", key: "it_transport_market" },
+  { code: "var_machinery_rental", comp: "variable", key: "it_machinery_rental" },
+  { code: "var_soil_analysis",    comp: "variable", key: "it_soil_analysis" },
+  { code: "var_certification",    comp: "variable", key: "it_certification" },
+  { code: "var_coop_dues",        comp: "variable", key: "it_coop_dues" },
+  { code: "var_credit_interest",  comp: "variable", key: "it_credit" },
+  { code: "var_land_rent",        comp: "variable", key: "it_land_rent" },
+  { code: "var_worker_food",      comp: "variable", key: "it_worker_food" }
+];
+
+// Origin-specific items. Local product names are NOT translated: "guano de isla" stays
+// "guano de isla" whatever language the interface is in, because that is what it is called.
+// These lists are a starting point drafted without country validation; every one of them
+// is expected to be corrected or replaced by the country contact.
+const CATALOG_COUNTRY = {
+  PE: [ { code: "pe_guano_isla",   comp: "inputs",   label: "Guano de isla" },
+        { code: "pe_compost_pulpa",comp: "inputs",   label: "Compost de pulpa de caf\u00e9" },
+        { code: "pe_flete_acopio", comp: "variable", label: "Flete al centro de acopio" } ],
+  CO: [ { code: "co_cal_dolomita", comp: "inputs",   label: "Cal dolomita" },
+        { code: "co_pulpa_compost",comp: "inputs",   label: "Pulpa compostada" },
+        { code: "co_analisis_suelo",comp:"variable", label: "An\u00e1lisis de suelos" } ],
+  HN: [ { code: "hn_gallinaza",    comp: "inputs",   label: "Gallinaza" },
+        { code: "hn_cal_agricola", comp: "inputs",   label: "Cal agr\u00edcola" } ],
+  NI: [ { code: "ni_gallinaza",    comp: "inputs",   label: "Gallinaza" },
+        { code: "ni_cal_agricola", comp: "inputs",   label: "Cal agr\u00edcola" } ],
+  MX: [ { code: "mx_composta",     comp: "inputs",   label: "Composta de pulpa" },
+        { code: "mx_cal_agricola", comp: "inputs",   label: "Cal agr\u00edcola" } ],
+  // Left empty on purpose: drafting East African and Indonesian item names without a
+  // country contact would produce a list that looks authoritative and is wrong.
+  ET: [], KE: [], RW: [], UG: [], ID: []
+};
+
+function catalogFor(rec, compId){
+  const country = (rec && rec.country) || "";
+  const extra = CATALOG_COUNTRY[country] || [];
+  const base = CATALOG_BASE.filter(i => i.comp === compId).map(i => ({ code: i.code, label: t(i.key) }));
+  const local = extra.filter(i => i.comp === compId).map(i => ({ code: i.code, label: i.label }));
+  return base.concat(local).sort((a, b) => a.label.localeCompare(b.label));
+}
+function catalogLabel(code){
+  if(!code) return "";
+  const b = CATALOG_BASE.find(i => i.code === code);
+  if(b) return t(b.key);
+  for(const c of Object.keys(CATALOG_COUNTRY)){
+    const f = CATALOG_COUNTRY[c].find(i => i.code === code);
+    if(f) return f.label;
+  }
+  return "";
+}
 
 // Coffee presentation options and GBE conversion ratios (kg of that presentation per 1 kg GBE).
 // cherry/dry_parchment derived from FI's own survey glossary; dried_cherry and wet_parchment per Jonnathan.
@@ -1052,7 +1224,9 @@ function generateRecordId(){
 
 function emptyEntry(comp){
   if(comp.hasDepreciation) return { label: "", purchaseCost: "", usefulLife: "" };
-  if(comp.type === "currency") return { label: "", value: "" };
+  // Quantity and unit are optional throughout: a focus group often knows what was spent
+  // without knowing how many kilos it bought, and a required field would invite invention.
+  if(comp.type === "currency") return { code: "", label: "", qty: "", unit: "", value: "" };
   if(comp.hasContractOption) return { label: "", entryType: "days", days: "", value: "" };
   return { label: "", days: "" };
 }
@@ -1084,7 +1258,6 @@ function defaultRecord(){
   CATEGORIES.forEach(cat => {
     cats[cat.id] = {
       mode: "global",
-      status: DEFAULT_CATEGORY_STATUS[cat.id] || "productive",
       global: emptyGlobal(),
       activities: [ { name: "", ...emptyActivityComponents() } ],
       open: false
@@ -1098,9 +1271,12 @@ function defaultRecord(){
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     },
-    fgdName: "", floId: "", coopName: "", areaUnit: "ha", areaUnitOther: "", currency: "", dailyWage: "",
+    fgdName: "", floId: "", coopName: "", country: "", areaUnit: "ha", areaUnitOther: "", currency: "", dailyWage: "",
     presentation: "cherry", gbeRatio: "5.00", yieldPerHa: "",
     areas: { establishment: "", renovation: "", productive: "" },
+    // Establishment and renovation are captured as a flat set of Tier 3 questions rather
+    // than by category: a focus group will not break a new planting down nine ways.
+    blockCosts: { establishment: emptyGlobal(), renovation: emptyGlobal() },
     selectedActivities: emptyActivitiesState(),
     activeTab: "activities",
     categories: cats
@@ -1112,6 +1288,7 @@ function sanitizeRecord(parsed){
   const merged = Object.assign(base, parsed, {
     meta: Object.assign(base.meta, (parsed && parsed.meta) || {}),
     areas: Object.assign(base.areas, (parsed && parsed.areas) || {}),
+    blockCosts: Object.assign(base.blockCosts, (parsed && parsed.blockCosts) || {}),
     selectedActivities: Object.assign(base.selectedActivities, (parsed && parsed.selectedActivities) || {}),
     categories: Object.assign(base.categories, (parsed && parsed.categories) || {})
   });
@@ -1127,32 +1304,48 @@ function sanitizeRecord(parsed){
     const f = num(parsed.gbeFactor);
     merged.gbeRatio = f > 0 ? (1 / f).toFixed(2) : "";
   }
+  // Records captured before establishment and renovation had their own tabs kept those
+  // costs in two categories that no longer exist. Fold them into the matching block so
+  // nothing already collected in the field is lost.
+  const LEGACY_CAT_TO_BLOCK = { land_prep: "establishment", renovation: "renovation" };
+  Object.keys(LEGACY_CAT_TO_BLOCK).forEach(oldCat => {
+    const legacy = parsed && parsed.categories && parsed.categories[oldCat];
+    if(!legacy) return;
+    const target = merged.blockCosts[LEGACY_CAT_TO_BLOCK[oldCat]];
+    COMPONENTS.forEach(c => {
+      const moved = [];
+      if(legacy.mode === "activity" && Array.isArray(legacy.activities)){
+        // Activity rows carry no per-item description, so the activity name becomes the label.
+        legacy.activities.forEach(act => {
+          const v = act[c.id];
+          if(c.hasDepreciation && v && (v.purchaseCost || v.usefulLife)) moved.push({ label: act.name || "", purchaseCost: v.purchaseCost || "", usefulLife: v.usefulLife || "" });
+          else if(c.hasContractOption && v && (v.days || v.value)) moved.push({ label: act.name || "", entryType: v.entryType || "days", days: v.days || "", value: v.value || "" });
+          else if(c.type === "days" && v) moved.push({ label: act.name || "", days: v });
+          else if(c.type === "currency" && v) moved.push({ code: "", label: act.name || "", qty: "", unit: "", value: v });
+        });
+      }else if(legacy.global && Array.isArray(legacy.global[c.id])){
+        legacy.global[c.id].forEach(e => {
+          const hasValue = e && (e.value || e.days || e.purchaseCost);
+          if(hasValue) moved.push(Object.assign({}, e));
+        });
+      }
+      if(moved.length){
+        const existing = (target[c.id] || []).filter(e => e.value || e.days || e.purchaseCost);
+        target[c.id] = existing.concat(moved);
+      }
+    });
+    delete merged.categories[oldCat];
+  });
+
   CATEGORIES.forEach(cat => {
     const cs = merged.categories[cat.id];
-    // Records captured before land blocks existed have no status; give them the default.
-    if(!statusById(cs.status)) cs.status = DEFAULT_CATEGORY_STATUS[cat.id] || "productive";
+    delete cs.status;                    // status is now implied by which tab the cost sits on
     if(!cs.global) cs.global = emptyGlobal();
     COMPONENTS.forEach(c => {
       if(!Array.isArray(cs.global[c.id]) || !cs.global[c.id].length){
         cs.global[c.id] = [emptyEntry(c)];
       }
-      if(c.hasContractOption){
-        cs.global[c.id].forEach(e => {
-          if(!e.entryType) e.entryType = "days";
-          if(e.value === undefined) e.value = "";
-        });
-      }
-      if(c.hasDepreciation){
-        cs.global[c.id].forEach(e => {
-          // Migrate the old flat {label,value} fixed-cost shape: treat the old value as the
-          // purchase cost with a 1-year useful life, so previously saved totals don't change.
-          if(e.purchaseCost === undefined){
-            e.purchaseCost = e.value !== undefined ? e.value : "";
-            e.usefulLife = "1";
-          }
-          if(e.usefulLife === undefined) e.usefulLife = "";
-        });
-      }
+      normaliseEntries(cs.global[c.id], c);
     });
     if(!cs.activities || !cs.activities.length) cs.activities = [ { name: "", ...emptyActivityComponents() } ];
     cs.activities.forEach(act => {
@@ -1172,7 +1365,34 @@ function sanitizeRecord(parsed){
       });
     });
   });
+  // Block containers use the same entry shapes as a category's global bucket.
+  BLOCK_TABS.forEach(blockId => {
+    const bc = merged.blockCosts[blockId] || (merged.blockCosts[blockId] = emptyGlobal());
+    COMPONENTS.forEach(c => {
+      if(!Array.isArray(bc[c.id]) || !bc[c.id].length) bc[c.id] = [emptyEntry(c)];
+      normaliseEntries(bc[c.id], c);
+    });
+  });
   return merged;
+}
+
+// Fills in fields added by later versions so old entries keep working unchanged.
+function normaliseEntries(entries, comp){
+  entries.forEach(e => {
+    if(comp.hasContractOption){
+      if(!e.entryType) e.entryType = "days";
+      if(e.value === undefined) e.value = "";
+    }
+    if(comp.hasDepreciation){
+      if(e.purchaseCost === undefined){ e.purchaseCost = e.value !== undefined ? e.value : ""; e.usefulLife = "1"; }
+      if(e.usefulLife === undefined) e.usefulLife = "";
+    }
+    if(comp.type === "currency" && !comp.hasDepreciation){
+      if(e.code === undefined) e.code = "";
+      if(e.qty === undefined) e.qty = "";
+      if(e.unit === undefined) e.unit = "";
+    }
+  });
 }
 
 function loadAllRecords(){
@@ -1349,6 +1569,12 @@ function totalFarmArea(rec){
 // one cost per unit of area, divided by one yield. Nothing already captured changes.
 function usesBlocks(rec){ return totalFarmArea(rec) > 0; }
 
+// A block's costs live in a flat bucket of the same shape as a category's global bucket,
+// so they can be measured with the same functions.
+function blockState(rec, blockId){
+  return { mode: "global", global: rec.blockCosts[blockId] };
+}
+
 // Everything the list screen, the comparison tab and the exports need about one FGD.
 function recordSummary(rec){
   const useBlocks = usesBlocks(rec);
@@ -1363,6 +1589,25 @@ function recordSummary(rec){
   const perCategory = {};
   let total = 0, hhDays = 0, hiredDays = 0;
 
+  // Establishment and renovation: one flat bucket each, priced per unit of their own area.
+  BLOCK_TABS.forEach(blockId => {
+    if(!useBlocks) return;                       // no areas entered: these tabs are not in play
+    const bs = blockState(rec, blockId);
+    const area = blocks[blockId].area || 0;
+    const perArea = categoryTotal(rec, bs);
+    const bHh = categoryHouseholdDays(bs);
+    const bHired = categoryHiredDays(bs);
+    blocks[blockId].perArea = perArea;
+    blocks[blockId].total = perArea * area;
+    blocks[blockId].hhDays = bHh * area;
+    blocks[blockId].hiredDays = bHired * area;
+    total += perArea * area;
+    hhDays += bHh * area;
+    hiredDays += bHired * area;
+    COMPONENTS.forEach(c => comps[c.id] += componentMonetary(rec, bs, c) * area);
+  });
+
+  // The questionnaire categories: productive area, plus farm administration as annual overhead.
   CATEGORIES.forEach(cat => {
     const cs = rec.categories[cat.id];
     const visible = isCategoryVisibleIn(rec, cat);
@@ -1370,15 +1615,12 @@ function recordSummary(rec){
     const perArea = visible ? categoryTotal(rec, cs) : 0;
     const catHh = visible ? categoryHouseholdDays(cs) : 0;
     const catHired = visible ? categoryHiredDays(cs) : 0;
-    // In block mode an area-based category is scaled by its own block's area; an
-    // "annual" category is already an absolute yearly amount, so it scales by one.
-    const mult = !useBlocks ? 1 : (status === "annual" ? 1 : (blocks[status].area || 0));
+    const mult = !useBlocks ? 1 : (status === "annual" ? 1 : (blocks.productive.area || 0));
 
     perCategory[cat.id] = {
       visible, status, mode: cs.mode,
       perArea, annual: perArea * mult,
-      hhDays: catHh, hiredDays: catHired,
-      hhDaysAnnual: catHh * mult, hiredDaysAnnual: catHired * mult
+      hhDays: catHh, hiredDays: catHired
     };
     if(!visible) return;
 
@@ -1397,9 +1639,9 @@ function recordSummary(rec){
   const productiveArea = num((rec.areas || {}).productive);
   const ratio = gbeRatioOf(rec);
 
-  // Yield is quoted per unit of PRODUCTIVE area, the figure a farmer actually knows.
-  // Total production therefore comes from the productive block alone, while the cost
-  // it has to cover is the whole farm's, including this year's new plantings.
+  // Yield is quoted per unit of PRODUCTIVE area, the figure a farmer actually knows, so
+  // production comes from that block alone. The cost it has to cover is the whole farm's,
+  // including this year's new plantings, because that is what the harvest has to pay for.
   const production = useBlocks ? yieldOf(rec) * productiveArea : 0;
   const productionGbe = ratio > 0 ? production / ratio : 0;
 
@@ -1414,12 +1656,41 @@ function recordSummary(rec){
   return {
     useBlocks, blocks, perCategory,
     farmArea, productiveArea, production, productionGbe,
-    total,                       // annual cost in block mode, cost per area unit otherwise
-    perAreaCost,                 // always a cost per unit of area, so it is comparable
+    total, perAreaCost,
     components: comps, hhDays, hiredDays,
     yieldPres: yieldOf(rec), yieldGbe: yieldGbeOf(rec),
     pricePres, priceGbe
   };
+}
+
+// Every itemised inputs / variable-cost line in one FGD, flattened. Used by the
+// cross-FGD item comparison and by the detail CSV.
+function itemLinesFor(rec){
+  const lines = [];
+  const push = (scopeLabel, blockId, catId, comp, e) => {
+    if(!e) return;
+    const value = num(e.value);
+    const qty = num(e.qty);
+    if(!value && !qty && !e.label && !e.code) return;
+    lines.push({
+      fgdId: rec.meta.id, fgdName: rec.fgdName, coopName: rec.coopName,
+      country: rec.country || "", currency: (rec.currency || "").trim(),
+      block: blockId, category: catId, component: comp.id,
+      code: e.code || "", label: e.code ? catalogLabel(e.code) : (e.label || ""),
+      qty: e.qty || "", unit: e.unit || "", value: e.value || ""
+    });
+  };
+  const itemComps = COMPONENTS.filter(c => c.type === "currency" && !c.hasDepreciation);
+  BLOCK_TABS.forEach(blockId => {
+    itemComps.forEach(c => (rec.blockCosts[blockId][c.id] || []).forEach(e => push(null, blockId, "", c, e)));
+  });
+  CATEGORIES.forEach(cat => {
+    if(!isCategoryVisibleIn(rec, cat)) return;
+    const cs = rec.categories[cat.id];
+    if(cs.mode !== "global") return;   // activity mode carries no per-item description
+    itemComps.forEach(c => (cs.global[c.id] || []).forEach(e => push(null, statusOfCategory(rec, cat.id), cat.id, c, e)));
+  });
+  return lines;
 }
 
 function fmt(n){ return n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
@@ -1602,6 +1873,7 @@ function fillSetupFields(){
   document.getElementById("presentationSelect").value = state.presentation || "cherry";
   document.getElementById("gbeRatioInput").value = state.gbeRatio || "";
   document.getElementById("yieldPerHaInput").value = state.yieldPerHa || "";
+  document.getElementById("country").value = state.country || "";
   document.getElementById("areaEstablishment").value = (state.areas && state.areas.establishment) || "";
   document.getElementById("areaRenovation").value = (state.areas && state.areas.renovation) || "";
   document.getElementById("areaProductive").value = (state.areas && state.areas.productive) || "";
@@ -1616,9 +1888,12 @@ function openRecord(id){
   applyScreen();
   fillSetupFields();
   refreshUnitLabels();
+  refreshBlockTabVisibility();
   renderActivitiesTab();
   renderQuestionnaireTab();
-  switchTab(state.activeTab === "questionnaire" ? "questionnaire" : "activities");
+  const wanted = state.activeTab || "activities";
+  const blockOk = BLOCK_TABS.some(b => "block_" + b === wanted && num(state.areas[b]) > 0);
+  switchTab(blockOk || wanted === "questionnaire" ? wanted : "activities");
   setSaveStatus(t("save_status_auto"));
   window.scrollTo(0, 0);
 }
@@ -1694,9 +1969,47 @@ function renderActivitiesTab(){
 
 // ==================== TAB 2: QUESTIONNAIRE ====================
 
-function globalComponentHtml(catId, comp, catState){
-  const entries = catState.global[comp.id];
+// A "scope" is either a questionnaire category ("cat:harvest") or one of the two flat
+// block tabs ("blk:establishment"). Both hold the same entry shapes, so one renderer serves
+// the questionnaire and the establishment / renovation tabs.
+function scopeEntries(scope, compId){
+  const [kind, id] = scope.split(":");
+  return kind === "blk" ? state.blockCosts[id][compId] : state.categories[id].global[compId];
+}
+function scopePath(scope, compId, i, field){
+  const [kind, id] = scope.split(":");
+  return kind === "blk"
+    ? `blockCosts.${id}.${compId}.${i}.${field}`
+    : `categories.${id}.global.${compId}.${i}.${field}`;
+}
+function scopeExampleCat(scope){
+  const [kind, id] = scope.split(":");
+  return kind === "blk" ? null : id;   // block tabs use the generic examples
+}
+function scopeUnitSuffix(scope){
+  const [kind, id] = scope.split(":");
+  if(kind === "blk") return ti("unit_per_area");
+  return unitSuffixForCat(id);
+}
+
+function itemPickerHtml(scope, comp, i, entry){
+  const items = catalogFor(state, comp.id);
+  const isOther = !entry.code;
+  const opts = items.map(it =>
+    `<option value="${esc(it.code)}" ${entry.code === it.code ? "selected" : ""}>${esc(it.label)}</option>`).join("");
+  return `
+    <select class="item-select" data-path="${scopePath(scope, comp.id, i, 'code')}">
+      <option value="" ${isOther ? "selected" : ""}>${esc(t("item_other"))}</option>
+      ${opts}
+    </select>
+    ${isOther ? `<input type="text" class="item-other" placeholder="${esc(t('ph_description_generic'))}" data-path="${scopePath(scope, comp.id, i, 'label')}" value="${esc(entry.label)}">` : ""}`;
+}
+
+function globalComponentHtml(scope, comp, catState){
+  const entries = scopeEntries(scope, comp.id);
   const hintHtml = comp.hintKey ? ` <span class="c-hint">(${esc(t(comp.hintKey))})</span>` : "";
+  const exCat = scopeExampleCat(scope);
+  const ex = categoryExamples(exCat);
   let subtotalHtml;
   if(comp.hasDepreciation){
     subtotalHtml = fmt(entries.reduce((s,e) => s + depreciatedAnnualCost(e), 0));
@@ -1715,52 +2028,59 @@ function globalComponentHtml(catId, comp, catState){
   }
 
   const rowsHtml = entries.map((entry, i) => {
-    const ex = categoryExamples(catId);
     const removeBtn = entries.length > 1
-      ? `<button type="button" class="remove-btn" data-remove-entry="${catId}|${comp.id}" data-index="${i}" title="${esc(t('remove_btn_title'))}">&times;</button>`
+      ? `<button type="button" class="remove-btn" data-remove-entry="${scope}|${comp.id}" data-index="${i}" title="${esc(t('remove_btn_title'))}">&times;</button>`
       : `<span style="width:22px;display:inline-block;"></span>`;
     if(comp.hasDepreciation){
       const annual = depreciatedAnnualCost(entry);
       return `
         <div class="entry-row">
-          <input type="text" placeholder="${esc(t('ph_tool_equipment'))}" data-path="categories.${catId}.global.${comp.id}.${i}.label" value="${esc(entry.label)}">
-          <input type="number" step="any" min="0" placeholder="${esc(t('ph_purchase_cost'))}" data-path="categories.${catId}.global.${comp.id}.${i}.purchaseCost" value="${esc(entry.purchaseCost)}">
-          <input type="number" step="any" min="1" placeholder="${esc(t('ph_useful_life'))}" data-path="categories.${catId}.global.${comp.id}.${i}.usefulLife" value="${esc(entry.usefulLife)}">
-          <span class="computed-cost" data-entry-cost="${catId}|${comp.id}|${i}">${fmt(annual)}${esc(t("unit_per_year"))}</span>
+          <input type="text" placeholder="${esc(t('ph_tool_equipment'))}" data-path="${scopePath(scope, comp.id, i, 'label')}" value="${esc(entry.label)}">
+          <input type="number" step="any" min="0" placeholder="${esc(t('ph_purchase_cost'))}" data-path="${scopePath(scope, comp.id, i, 'purchaseCost')}" value="${esc(entry.purchaseCost)}">
+          <input type="number" step="any" min="1" placeholder="${esc(t('ph_useful_life'))}" data-path="${scopePath(scope, comp.id, i, 'usefulLife')}" value="${esc(entry.usefulLife)}">
+          <span class="computed-cost" data-entry-cost="${scope}|${comp.id}|${i}">${fmt(annual)}${esc(t("unit_per_year"))}</span>
           ${removeBtn}
         </div>`;
     } else if(comp.type === "currency"){
-      const placeholder = comp.id === "inputs" ? `${t('ph_description_generic')} (${ex.input})` : t('ph_cost_generic');
+      // Item picker, then an optional quantity and unit, then the money. Quantity and unit
+      // are what a footprint calculation would need later; money alone cannot give it.
       return `
-        <div class="entry-row">
-          <input type="text" placeholder="${esc(placeholder)}" data-path="categories.${catId}.global.${comp.id}.${i}.label" value="${esc(entry.label)}">
-          <input type="number" step="any" min="0" placeholder="0.00" data-path="categories.${catId}.global.${comp.id}.${i}.value" value="${esc(entry.value)}">
-          ${removeBtn}
+        <div class="entry-row entry-row-item">
+          <div class="item-cell">${itemPickerHtml(scope, comp, i, entry)}</div>
+          <div class="qty-cell">
+            <input type="number" step="any" min="0" placeholder="${esc(t('ph_qty'))}" data-path="${scopePath(scope, comp.id, i, 'qty')}" value="${esc(entry.qty)}">
+            <select data-path="${scopePath(scope, comp.id, i, 'unit')}">
+              <option value="">${esc(t("unit_none"))}</option>
+              ${UNITS.map(u => `<option value="${u}" ${entry.unit === u ? "selected" : ""}>${esc(t("unit_" + u))}</option>`).join("")}
+            </select>
+            <input type="number" step="any" min="0" placeholder="0.00" data-path="${scopePath(scope, comp.id, i, 'value')}" value="${esc(entry.value)}">
+            ${removeBtn}
+          </div>
         </div>`;
     } else if(comp.hasContractOption){
       const isLumpsum = entry.entryType === "lumpsum";
       const entryCost = isLumpsum ? num(entry.value) : num(entry.days) * wage();
       return `
         <div class="entry-row">
-          <div class="entry-type-toggle" data-entry-type-toggle="${catId}|${comp.id}|${i}">
+          <div class="entry-type-toggle" data-entry-type-toggle="${scope}|${comp.id}|${i}">
             <button type="button" class="${!isLumpsum ? 'active' : ''}" data-entry-type="days">${esc(t('entrytype_days'))}</button>
             <button type="button" class="${isLumpsum ? 'active' : ''}" data-entry-type="lumpsum">${esc(t('entrytype_lumpsum'))}</button>
           </div>
-          <input type="text" placeholder="${esc(t('ph_description_generic') + ' (' + ex.labour + ')')}" data-path="categories.${catId}.global.${comp.id}.${i}.label" value="${esc(entry.label)}">
+          <input type="text" placeholder="${esc(t('ph_description_generic') + ' (' + ex.labour + ')')}" data-path="${scopePath(scope, comp.id, i, 'label')}" value="${esc(entry.label)}">
           ${isLumpsum
-            ? `<input type="number" step="any" min="0" placeholder="${esc(t('ph_fixed_amount'))}" data-path="categories.${catId}.global.${comp.id}.${i}.value" value="${esc(entry.value)}">`
-            : `<input type="number" step="any" min="0" placeholder="${esc(t('ph_days'))}" data-path="categories.${catId}.global.${comp.id}.${i}.days" value="${esc(entry.days)}">`
+            ? `<input type="number" step="any" min="0" placeholder="${esc(t('ph_fixed_amount'))}" data-path="${scopePath(scope, comp.id, i, 'value')}" value="${esc(entry.value)}">`
+            : `<input type="number" step="any" min="0" placeholder="${esc(t('ph_days'))}" data-path="${scopePath(scope, comp.id, i, 'days')}" value="${esc(entry.days)}">`
           }
-          <span class="computed-cost" data-entry-cost="${catId}|${comp.id}|${i}">${fmt(entryCost)}</span>
+          <span class="computed-cost" data-entry-cost="${scope}|${comp.id}|${i}">${fmt(entryCost)}</span>
           ${removeBtn}
         </div>`;
     } else {
       const entryCost = comp.costed ? num(entry.days) * wage() : 0;
       return `
         <div class="entry-row">
-          <input type="text" placeholder="${esc(t('ph_description_generic') + ' (' + ex.labour + ')')}" data-path="categories.${catId}.global.${comp.id}.${i}.label" value="${esc(entry.label)}">
-          <input type="number" step="any" min="0" placeholder="${esc(t('ph_days'))}" data-path="categories.${catId}.global.${comp.id}.${i}.days" value="${esc(entry.days)}">
-          ${comp.costed ? `<span class="computed-cost" data-entry-cost="${catId}|${comp.id}|${i}">${fmt(entryCost)}</span>` : ''}
+          <input type="text" placeholder="${esc(t('ph_description_generic') + ' (' + ex.labour + ')')}" data-path="${scopePath(scope, comp.id, i, 'label')}" value="${esc(entry.label)}">
+          <input type="number" step="any" min="0" placeholder="${esc(t('ph_days'))}" data-path="${scopePath(scope, comp.id, i, 'days')}" value="${esc(entry.days)}">
+          ${comp.costed ? `<span class="computed-cost" data-entry-cost="${scope}|${comp.id}|${i}">${fmt(entryCost)}</span>` : ''}
           ${removeBtn}
         </div>`;
     }
@@ -1770,10 +2090,10 @@ function globalComponentHtml(catId, comp, catState){
     <div class="component-block ${comp.type === 'days' && !comp.costed ? 'not-costed' : ''}" data-component="${comp.id}">
       <div class="component-block-head">
         <span class="c-name">${esc(t(comp.labelKey))}${hintHtml}</span>
-        <span class="c-subtotal" data-component-subtotal="${catId}|${comp.id}">${subtotalHtml}</span>
+        <span class="c-subtotal" data-component-subtotal="${scope}|${comp.id}">${subtotalHtml}</span>
       </div>
       ${rowsHtml}
-      <button type="button" class="add-entry-btn" data-add-entry="${catId}|${comp.id}">${esc(t("add_entry_prefix"))} ${esc(t(comp.labelKey).toLowerCase())}</button>
+      <button type="button" class="add-entry-btn" data-add-entry="${scope}|${comp.id}">${esc(t("add_entry_prefix"))} ${esc(t(comp.labelKey).toLowerCase())}</button>
     </div>`;
 }
 
@@ -1866,9 +2186,7 @@ function renderCategories(){
       <div class="cat-head ${cs.open ? 'open' : ''}" data-toggle-open="${cat.id}">
         <span class="name"><span class="chevron">&#9656;</span>&nbsp; ${esc(t(cat.labelKey))}</span>
         <div class="cat-right">
-          <select class="status-select" data-status-select="${cat.id}" title="${esc(t('status_label'))}">
-            ${LAND_STATUSES.map(st => `<option value="${st.id}" ${st.id === status ? 'selected' : ''}>${esc(t(st.labelKey))}</option>`).join("")}
-          </select>
+          ${status === "annual" ? `<span class="status-chip">${esc(t("status_annual"))}</span>` : ""}
           <div class="toggle-group" data-mode-toggle="${cat.id}">
             <button type="button" class="${globalActive ? 'active' : ''}" data-mode="global">${esc(t('mode_global'))}</button>
             <button type="button" class="${!globalActive ? 'active' : ''}" data-mode="activity">${esc(t('mode_activity'))}</button>
@@ -1878,7 +2196,7 @@ function renderCategories(){
       </div>
       <div class="cat-body ${cs.open ? 'open' : ''}" data-body="${cat.id}">
         ${globalActive ? `
-          ${componentsForCategory(cat).map(c => globalComponentHtml(cat.id, c, cs)).join("")}
+          ${componentsForCategory(cat).map(c => globalComponentHtml("cat:" + cat.id, c, cs)).join("")}
         ` : `
           <div data-activities="${cat.id}">
             ${cs.activities.map((act, i) => `
@@ -1902,13 +2220,13 @@ function renderCategories(){
     </div>`;
   }).join("");
 
-  attachCategoryListeners();
+  attachCategoryListeners(container);
 }
 
-function attachCategoryListeners(){
-  document.querySelectorAll("[data-toggle-open]").forEach(el => {
+function attachCategoryListeners(root){
+  root.querySelectorAll("[data-toggle-open]").forEach(el => {
     el.addEventListener("click", (e) => {
-      if(e.target.closest("[data-mode-toggle]") || e.target.closest("[data-status-select]")) return;
+      if(e.target.closest("[data-mode-toggle]")) return;
       const id = el.getAttribute("data-toggle-open");
       state.categories[id].open = !state.categories[id].open;
       renderCategories();
@@ -1916,16 +2234,7 @@ function attachCategoryListeners(){
     });
   });
 
-  document.querySelectorAll("[data-status-select]").forEach(sel => {
-    sel.addEventListener("change", () => {
-      state.categories[sel.getAttribute("data-status-select")].status = sel.value;
-      saveState();
-      renderCategories();
-      updateTotalsOnly();
-    });
-  });
-
-  document.querySelectorAll("[data-mode-toggle]").forEach(group => {
+  root.querySelectorAll("[data-mode-toggle]").forEach(group => {
     group.querySelectorAll("button").forEach(btn => {
       btn.addEventListener("click", () => {
         const id = group.getAttribute("data-mode-toggle");
@@ -1938,7 +2247,7 @@ function attachCategoryListeners(){
     });
   });
 
-  document.querySelectorAll("[data-add-activity]").forEach(btn => {
+  root.querySelectorAll("[data-add-activity]").forEach(btn => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-add-activity");
       state.categories[id].activities.push({ name: "", ...emptyActivityComponents() });
@@ -1948,7 +2257,7 @@ function attachCategoryListeners(){
     });
   });
 
-  document.querySelectorAll("[data-remove-activity]").forEach(btn => {
+  root.querySelectorAll("[data-remove-activity]").forEach(btn => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-remove-activity");
       const idx = parseInt(btn.getAttribute("data-index"), 10);
@@ -1959,41 +2268,36 @@ function attachCategoryListeners(){
     });
   });
 
-  document.querySelectorAll("[data-add-entry]").forEach(btn => {
+  root.querySelectorAll("[data-add-entry]").forEach(btn => {
     btn.addEventListener("click", () => {
-      const [catId, compId] = btn.getAttribute("data-add-entry").split("|");
-      const comp = COMPONENTS.find(c => c.id === compId);
-      state.categories[catId].global[compId].push(emptyEntry(comp));
+      const [scope, compId] = btn.getAttribute("data-add-entry").split("|");
+      scopeEntries(scope, compId).push(emptyEntry(COMPONENTS.find(c => c.id === compId)));
       saveState();
-      renderCategories();
-      updateTotalsOnly();
+      renderActiveCostTabs();
     });
   });
 
-  document.querySelectorAll("[data-remove-entry]").forEach(btn => {
+  root.querySelectorAll("[data-remove-entry]").forEach(btn => {
     btn.addEventListener("click", () => {
-      const [catId, compId] = btn.getAttribute("data-remove-entry").split("|");
-      const idx = parseInt(btn.getAttribute("data-index"), 10);
-      state.categories[catId].global[compId].splice(idx, 1);
+      const [scope, compId] = btn.getAttribute("data-remove-entry").split("|");
+      scopeEntries(scope, compId).splice(parseInt(btn.getAttribute("data-index"), 10), 1);
       saveState();
-      renderCategories();
-      updateTotalsOnly();
+      renderActiveCostTabs();
     });
   });
 
-  document.querySelectorAll("[data-entry-type-toggle]").forEach(group => {
+  root.querySelectorAll("[data-entry-type-toggle]").forEach(group => {
     group.querySelectorAll("button").forEach(btn => {
       btn.addEventListener("click", () => {
-        const [catId, compId, idx] = group.getAttribute("data-entry-type-toggle").split("|");
-        state.categories[catId].global[compId][parseInt(idx,10)].entryType = btn.getAttribute("data-entry-type");
+        const [scope, compId, idx] = group.getAttribute("data-entry-type-toggle").split("|");
+        scopeEntries(scope, compId)[parseInt(idx,10)].entryType = btn.getAttribute("data-entry-type");
         saveState();
-        renderCategories();
-        updateTotalsOnly();
+        renderActiveCostTabs();
       });
     });
   });
 
-  document.querySelectorAll("[data-entry-type-toggle-activity]").forEach(group => {
+  root.querySelectorAll("[data-entry-type-toggle-activity]").forEach(group => {
     group.querySelectorAll("button").forEach(btn => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -2006,13 +2310,64 @@ function attachCategoryListeners(){
     });
   });
 
-  document.querySelectorAll("#categoriesContainer input[data-path]").forEach(input => {
-    input.addEventListener("input", () => {
-      setByPath(state, input.getAttribute("data-path"), input.value);
-      saveState();
-      updateTotalsOnly();
-    });
+  bindPathInputs(root);
+}
+
+// Text and number boxes patch the totals in place so typing never loses focus. Dropdowns
+// change the shape of the row (picking "Other" reveals a free-text box), so they redraw.
+function bindPathInputs(root){
+  root.querySelectorAll("[data-path]").forEach(el => {
+    if(el.tagName === "SELECT"){
+      el.addEventListener("change", () => {
+        setByPath(state, el.getAttribute("data-path"), el.value);
+        saveState();
+        renderActiveCostTabs();
+      });
+    }else{
+      el.addEventListener("input", () => {
+        setByPath(state, el.getAttribute("data-path"), el.value);
+        saveState();
+        updateTotalsOnly();
+      });
+    }
   });
+}
+
+// ---- Tabs 2 and 3: establishment and renovation, Tier 3 questions only ----
+function renderBlockTabs(){
+  if(!state) return;
+  const container = document.getElementById("blockTabsContainer");
+  container.innerHTML = BLOCK_TABS.map(blockId => {
+    const area = num(state.areas[blockId]);
+    const bs = blockState(state, blockId);
+    const totalPerArea = categoryTotal(state, bs);
+    const st = statusById(blockId);
+    return `
+      <div class="tab-panel" id="blockPanel_${blockId}">
+        <div class="block-head">
+          <div>
+            <div class="block-title">${esc(t(st.labelKey))}</div>
+            <div class="block-sub">${esc(t("block_intro"))} ${fmtDays(area)} ${esc(areaUnitOf(state))}</div>
+          </div>
+          <div class="block-figures">
+            <div><span class="b-label">${esc(t("th_cost_per_area"))}</span><span class="b-value">${fmt(totalPerArea)}</span></div>
+            <div><span class="b-label">${esc(t("th_annual_cost"))}</span><span class="b-value">${fmt(totalPerArea * area)}</span></div>
+          </div>
+        </div>
+        ${COMPONENTS.map(c => globalComponentHtml("blk:" + blockId, c, bs)).join("")}
+      </div>`;
+  }).join("");
+  BLOCK_TABS.forEach(blockId => {
+    const panel = document.getElementById("blockPanel_" + blockId);
+    if(panel) panel.classList.toggle("active", state.activeTab === "block_" + blockId);
+  });
+  attachCategoryListeners(container);
+}
+
+function renderActiveCostTabs(){
+  renderCategories();
+  renderBlockTabs();
+  updateTotalsOnly();
 }
 
 function setByPath(obj, path, value){
@@ -2052,7 +2407,7 @@ function updateTotalsOnly(){
 
     if(cs.mode === "global"){
       COMPONENTS.forEach(comp => {
-        const el = document.querySelector(`[data-component-subtotal="${cat.id}|${comp.id}"]`);
+        const el = document.querySelector(`[data-component-subtotal="cat:${cat.id}|${comp.id}"]`);
         if(!el) return;
         const entries = cs.global[comp.id];
         if(comp.hasDepreciation){
@@ -2072,7 +2427,7 @@ function updateTotalsOnly(){
         }
 
         entries.forEach((entry, i) => {
-          const costEl = document.querySelector(`[data-entry-cost="${cat.id}|${comp.id}|${i}"]`);
+          const costEl = document.querySelector(`[data-entry-cost="cat:${cat.id}|${comp.id}|${i}"]`);
           if(!costEl) return;
           if(comp.hasDepreciation){
             costEl.textContent = fmt(depreciatedAnnualCost(entry)) + t("unit_per_year");
@@ -2102,21 +2457,41 @@ function updateTotalsOnly(){
   });
 
   const S = recordSummary(state);
-  const totalLabelEl = document.querySelector('[data-i18n="kpi_total"]');
-  if(totalLabelEl) totalLabelEl.textContent = S.useBlocks ? t("kpi_total_annual") : t("kpi_total");
-  document.getElementById("totalCosp").innerHTML = S.useBlocks
-    ? fmt(S.total) + ` <small>${esc(currencyOf(state))}</small>`
-    : fmt(S.total) + ` <small>${esc(ti("kpi_total_unit"))}</small>`;
-  document.getElementById("totalInputs").textContent = fmt(S.components.inputs);
-  document.getElementById("totalHouseholdDays").innerHTML = fmtDays(S.hhDays) + ` <small>${esc(t("ph_days"))}</small>`;
-  document.getElementById("totalHired").textContent = fmt(S.components.hired);
-  document.getElementById("totalHiredDays").innerHTML = fmtDays(S.hiredDays) + ` <small>${esc(t("ph_days"))}</small>`;
-  document.getElementById("totalVariable").textContent = fmt(S.components.variable);
-  document.getElementById("totalFixed").textContent = fmt(S.components.fixed);
-
+  renderHeadline(S);
   renderLandCard(S);
-  renderResultsCard(S);
   renderSummaryTable(S);
+}
+
+// Three headline figures, then one compact strip. Previously this was seven KPI cards plus
+// a seven-cell results card that repeated two of them.
+function renderHeadline(S){
+  const c = currencyOf(state);
+  const u = areaUnitOf(state);
+  const card = (cls, label, value, unit) => `
+    <div class="kpi-card ${cls}">
+      <div class="kpi-label">${esc(label)}</div>
+      <div class="kpi-value">${esc(value)}${unit ? ` <small>${esc(unit)}</small>` : ""}</div>
+    </div>`;
+  document.getElementById("headlineGrid").innerHTML =
+      card("night", S.useBlocks ? t("kpi_total_annual") : t("kpi_total"),
+           fmt(S.total), S.useBlocks ? c : ti("kpi_total_unit"))
+    + card("eggplant", t("th_price_pres"), fmtPrice(S.pricePres), c + "/kg")
+    + card("mint", t("th_price_gbe"), fmtPrice(S.priceGbe), c + "/kg GBE");
+
+  const item = (label, value) => `<div class="d-item"><div class="d-label">${esc(label)}</div><div class="d-value">${esc(value)}</div></div>`;
+  let strip = "";
+  if(S.useBlocks){
+    strip += item(t("res_farm_area"), fmtDays(S.farmArea) + " " + u);
+    strip += item(t("res_production"), fmtDays(S.production) + " kg");
+    strip += item(t("res_cost_per_area"), fmt(S.perAreaCost));
+  }
+  strip += item(t("kpi_inputs"), fmt(S.components.inputs));
+  strip += item(t("kpi_variable"), fmt(S.components.variable));
+  strip += item(t("kpi_fixed"), fmt(S.components.fixed));
+  strip += item(t("kpi_hired_cost"), fmt(S.components.hired));
+  strip += item(t("kpi_household_days"), fmtDays(S.hhDays));
+  strip += item(t("kpi_hired_days"), fmtDays(S.hiredDays));
+  document.getElementById("detailStrip").innerHTML = strip;
 }
 
 // ---- Tab 1: land block card ----
@@ -2146,26 +2521,6 @@ function renderLandCard(S){
   }
   document.getElementById("landNote").textContent = sum.farmArea > 0 ? t("land_note_active") : t("land_note_blank");
 }
-
-// ---- Tab 2: whole-farm results, only meaningful once areas exist ----
-function renderResultsCard(S){
-  const card = document.getElementById("resultsCard");
-  if(!state || !S.useBlocks){ card.style.display = "none"; return; }
-  card.style.display = "";
-  const u = areaUnitOf(state);
-  const c = currencyOf(state);
-  const cell = (label, value) => `<div><div class="r-label">${esc(label)}</div><div class="r-value">${esc(value)}</div></div>`;
-  document.getElementById("resultsGrid").innerHTML =
-      cell(t("res_farm_area"), fmtDays(S.farmArea) + " " + u)
-    + cell(t("res_production"), fmtDays(S.production) + " kg")
-    + cell(t("res_production_gbe"), fmtDays(S.productionGbe) + " kg GBE")
-    + cell(t("res_total_annual"), fmt(S.total) + " " + c)
-    + cell(t("res_cost_per_area"), fmt(S.perAreaCost) + " " + c + "/" + u)
-    + cell(t("th_price_pres"), fmtPrice(S.pricePres))
-    + cell(t("th_price_gbe"), fmtPrice(S.priceGbe));
-}
-
-
 
 // data-label on every cell drives the stacked card layout on phones (see the
 // max-width:700px rules). It has no effect on wide screens.
@@ -2202,6 +2557,19 @@ function renderSummaryTable(S){
     // Grouped by land block, with a subtotal under each. No allocation happens between
     // blocks: the subtotals are simply added up.
     LAND_STATUSES.forEach(st => {
+      if(BLOCK_TABS.includes(st.id)){
+        const b = sum.blocks[st.id];
+        if(!b.area && !b.total) return;
+        html += `<tr class="block-row">
+          ${head(esc(t(st.labelKey)) + ` (${fmtDays(b.area)} ${esc(areaUnitOf(state))})`)}
+          ${cell(1, esc(t("block_flat_note")))}
+          ${cell(2, fmtDays(b.hhDays))}
+          ${cell(3, fmtDays(b.hiredDays))}
+          ${cell(4, fmt(b.perArea))}
+          ${cell(5, fmt(b.total))}
+        </tr>`;
+        return;
+      }
       const inBlock = cats.filter(cat => sum.perCategory[cat.id].status === st.id);
       if(!inBlock.length) return;
       inBlock.forEach(cat => {
@@ -2262,8 +2630,7 @@ function renderSummaryTable(S){
 }
 
 function renderQuestionnaireTab(){
-  renderCategories();
-  updateTotalsOnly();
+  renderActiveCostTabs();
 }
 
 // ==================== TAB 3: COMPARISON ACROSS FGDs ====================
@@ -2416,6 +2783,115 @@ function renderCompareTab(){
   wireFilters();
 }
 
+// ==================== INPUTS AND VARIABLE COSTS ACROSS FGDs ====================
+let itemFilters = { country: "", component: "inputs" };
+
+function renderItemsTab(){
+  const container = document.getElementById("itemsContainer");
+  const all = sortedRecords();
+  if(!all.length){
+    container.innerHTML = `<div class="empty-state">${esc(t("records_empty_title"))}</div>`;
+    return;
+  }
+  const countryOptions = [...new Set(all.map(r => r.country).filter(Boolean))];
+  if(itemFilters.country && !countryOptions.includes(itemFilters.country)) itemFilters.country = "";
+
+  const scoped = all.filter(r => !itemFilters.country || r.country === itemFilters.country);
+  const lines = scoped.flatMap(itemLinesFor).filter(l => l.component === itemFilters.component);
+
+  const countryName = code => (COUNTRIES.find(c => c.code === code) || {}).name || code;
+  const filterBar = `
+    <div class="filter-bar">
+      <div class="field">
+        <label>${esc(t("filter_country"))}</label>
+        <select data-item-filter="country">
+          <option value="">${esc(t("filter_all"))}</option>
+          ${countryOptions.map(c => `<option value="${esc(c)}" ${c === itemFilters.country ? "selected" : ""}>${esc(countryName(c))}</option>`).join("")}
+        </select>
+      </div>
+      <div class="field">
+        <label>${esc(t("filter_component"))}</label>
+        <select data-item-filter="component">
+          <option value="inputs" ${itemFilters.component === "inputs" ? "selected" : ""}>${esc(t("comp_inputs"))}</option>
+          <option value="variable" ${itemFilters.component === "variable" ? "selected" : ""}>${esc(t("comp_variable"))}</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-outline btn-sm filter-reset" data-items-csv>${esc(t("btn_export_items_csv"))}</button>
+    </div>`;
+
+  function wire(){
+    container.querySelectorAll("[data-item-filter]").forEach(el =>
+      el.addEventListener("change", () => { itemFilters[el.getAttribute("data-item-filter")] = el.value; renderItemsTab(); }));
+    const csv = container.querySelector("[data-items-csv]");
+    if(csv) csv.addEventListener("click", exportItemDetailCsv);
+  }
+
+  if(!lines.length){
+    container.innerHTML = filterBar + `<div class="empty-state">${esc(t("items_none"))}</div>`;
+    wire();
+    return;
+  }
+
+  // Group by catalogue code where there is one; fall back to the typed text otherwise, which
+  // is exactly why the catalogue exists: free text fragments into near-duplicates.
+  const groups = {};
+  lines.forEach(l => {
+    const key = l.code || ("free:" + normalizeSearch(l.label));
+    const g = groups[key] || (groups[key] = { label: l.label || t("item_unnamed"), coded: !!l.code, fgds: new Set(), values: [], qtys: [], units: new Set() });
+    g.fgds.add(l.fgdId);
+    if(num(l.value)) g.values.push(num(l.value));
+    if(num(l.qty)){ g.qtys.push(num(l.qty)); if(l.unit) g.units.add(l.unit); }
+  });
+  const rows = Object.values(groups).map(g => {
+    const sum = g.values.reduce((a,b) => a+b, 0);
+    return { label: g.label, coded: g.coded, fgds: g.fgds.size, sum,
+             avg: g.values.length ? sum / g.values.length : 0,
+             min: g.values.length ? Math.min(...g.values) : 0,
+             max: g.values.length ? Math.max(...g.values) : 0,
+             qtyAvg: g.qtys.length ? g.qtys.reduce((a,b)=>a+b,0) / g.qtys.length : null,
+             unit: g.units.size === 1 ? [...g.units][0] : (g.units.size > 1 ? "mixed" : "") };
+  }).sort((a,b) => b.sum - a.sum);
+  const grand = rows.reduce((s,r) => s + r.sum, 0);
+  const mixedCurrency = new Set(scoped.map(r => (r.currency || "").toUpperCase()).filter(Boolean)).size > 1;
+
+  container.innerHTML = filterBar
+    + (mixedCurrency ? `<div class="warn-note">${esc(t("items_mixed_currency"))}</div>` : "")
+    + `<div class="table-card" style="margin-top:0;">
+      <table class="dt">
+        <thead><tr>
+          <th>${esc(t("th_item"))}</th>
+          <th class="num">${esc(t("th_fgd_count"))}</th>
+          <th class="num">${esc(t("th_avg_qty"))}</th>
+          <th class="num">${esc(t("th_avg_cost"))}</th>
+          <th class="num">${esc(t("th_range"))}</th>
+          <th class="num">${esc(t("th_share"))}</th>
+        </tr></thead>
+        <tbody>
+          ${rows.map(r => `<tr>
+            <td class="row-head" data-label="${esc(t("th_item"))}">${esc(r.label)}${r.coded ? "" : ` <span class="c-hint">(${esc(t("item_free_text"))})</span>`}</td>
+            <td class="num" data-label="${esc(t("th_fgd_count"))}">${r.fgds}</td>
+            <td class="num" data-label="${esc(t("th_avg_qty"))}">${r.qtyAvg === null ? "\u2014" : fmtDays(r.qtyAvg) + (r.unit && r.unit !== "mixed" ? " " + t("unit_" + r.unit) : "")}</td>
+            <td class="num" data-label="${esc(t("th_avg_cost"))}">${fmt(r.avg)}</td>
+            <td class="num" data-label="${esc(t("th_range"))}">${fmt(r.min)} \u2013 ${fmt(r.max)}</td>
+            <td class="num" data-label="${esc(t("th_share"))}">${grand > 0 ? Math.round((r.sum / grand) * 100) : 0}%</td>
+          </tr>`).join("")}
+        </tbody>
+      </table>
+    </div>
+    <p class="records-count">${esc(t("items_footnote"))}</p>`;
+  wire();
+}
+
+function exportItemDetailCsv(){
+  const lines = sortedRecords().flatMap(itemLinesFor);
+  if(!lines.length) return;
+  const cols = ["fgd_id","fgd_name","coop_name","country","currency","land_block","category","component","item_code","item_label","quantity","unit","cost"];
+  const body = lines.map(l => [l.fgdId,l.fgdName,l.coopName,l.country,l.currency,l.block,l.category,l.component,l.code,l.label,l.qty,l.unit,l.value]
+    .map(csvEscape).join(","));
+  downloadFile(`cps_input_detail_${today()}.csv`, "text/csv", cols.join(",") + "\n" + body.join("\n") + "\n");
+  setSaveStatus(t("save_status_csv") + " " + new Date().toLocaleTimeString());
+}
+
 // ==================== TABS ====================
 
 function switchTab(tab){
@@ -2429,6 +2905,27 @@ function switchTab(tab){
     document.getElementById(panelId).classList.toggle("active", tab === name);
     document.getElementById(btnId).classList.toggle("active", tab === name);
   });
+  BLOCK_TABS.forEach(blockId => {
+    const btn = document.getElementById("tabBtnBlock_" + blockId);
+    const panel = document.getElementById("blockPanel_" + blockId);
+    if(btn) btn.classList.toggle("active", tab === "block_" + blockId);
+    if(panel) panel.classList.toggle("active", tab === "block_" + blockId);
+  });
+}
+
+// A block tab only exists once the farm has area in that state. Hiding it keeps the
+// questionnaire down to what the FGD actually needs to answer.
+function refreshBlockTabVisibility(){
+  if(!state) return;
+  let stepNo = 2;
+  BLOCK_TABS.forEach(blockId => {
+    const btn = document.getElementById("tabBtnBlock_" + blockId);
+    const show = num(state.areas[blockId]) > 0;
+    btn.style.display = show ? "" : "none";
+    if(show) btn.querySelector(".step-num").textContent = stepNo++;
+    if(!show && state.activeTab === "block_" + blockId) switchTab("activities");
+  });
+  document.getElementById("tabBtnQuestionnaire").querySelector(".step-num").textContent = stepNo;
 }
 
 // The overview screen has its own two tabs: the list of FGDs, and the comparison
@@ -2437,11 +2934,15 @@ function switchTab(tab){
 let listTab = "records";
 function switchListTab(tab){
   listTab = tab;
-  document.getElementById("listPanelRecords").classList.toggle("active", tab === "records");
-  document.getElementById("listPanelCompare").classList.toggle("active", tab === "compare");
-  document.getElementById("listTabRecords").classList.toggle("active", tab === "records");
-  document.getElementById("listTabCompare").classList.toggle("active", tab === "compare");
-  if(tab === "records") renderRecordsList(); else renderCompareTab();
+  [["records","listPanelRecords","listTabRecords"],
+   ["compare","listPanelCompare","listTabCompare"],
+   ["items","listPanelItems","listTabItems"]].forEach(([name, panel, btn]) => {
+    document.getElementById(panel).classList.toggle("active", tab === name);
+    document.getElementById(btn).classList.toggle("active", tab === name);
+  });
+  if(tab === "records") renderRecordsList();
+  else if(tab === "compare") renderCompareTab();
+  else renderItemsTab();
 }
 
 // ==================== LANGUAGE ====================
@@ -2466,6 +2967,13 @@ function applyStaticTranslations(){
   document.title = t("app_title") + " — " + t("app_subtitle");
 }
 
+function rebuildCountrySelect(){
+  const sel = document.getElementById("country");
+  sel.innerHTML = `<option value="">${esc(t("country_none"))}</option>`
+    + COUNTRIES.map(c => `<option value="${c.code}">${esc(c.name)}</option>`).join("");
+  if(state) sel.value = state.country || "";
+}
+
 function rebuildPresentationSelect(){
   const sel = document.getElementById("presentationSelect");
   sel.innerHTML = PRESENTATIONS.map(p => `<option value="${p.value}">${esc(t(p.labelKey))}</option>`).join("");
@@ -2478,6 +2986,7 @@ function setLanguage(lang){
   document.querySelectorAll("#langToggle button").forEach(b => b.classList.toggle("active", b.getAttribute("data-lang") === lang));
   applyStaticTranslations();
   rebuildPresentationSelect();
+  rebuildCountrySelect();
   if(state){
     state.meta.lang = lang;
     saveState();
@@ -2520,9 +3029,10 @@ bindSetupField("yieldPerHaInput", "yieldPerHa", () => { updateYieldGbeDisplay();
       if(!state) return;
       state.areas[key] = e.target.value;
       saveState();
-      // Entering the first area switches the whole record from "per unit of area" to
-      // whole-farm figures, so the questionnaire labels and summary have to redraw too.
-      renderQuestionnaireTab();
+      // Entering an area both switches the record to whole-farm figures and decides
+      // whether that block's tab exists at all.
+      refreshBlockTabVisibility();
+      renderActiveCostTabs();
     });
   });
 
@@ -2531,6 +3041,13 @@ document.getElementById("areaUnit").addEventListener("change", (e) => {
   state.areaUnit = e.target.value;
   saveState();
   refreshUnitLabels();
+});
+
+document.getElementById("country").addEventListener("change", (e) => {
+  if(!state) return;
+  state.country = e.target.value;
+  saveState();
+  renderActiveCostTabs();          // the item catalogue depends on the country
 });
 
 document.getElementById("presentationSelect").addEventListener("change", (e) => {
@@ -2556,8 +3073,13 @@ document.getElementById("recordSearchClear").addEventListener("click", clearReco
 
 document.getElementById("listTabRecords").addEventListener("click", () => switchListTab("records"));
 document.getElementById("listTabCompare").addEventListener("click", () => switchListTab("compare"));
+document.getElementById("listTabItems").addEventListener("click", () => switchListTab("items"));
 document.getElementById("tabBtnActivities").addEventListener("click", () => switchTab("activities"));
 document.getElementById("tabBtnQuestionnaire").addEventListener("click", () => switchTab("questionnaire"));
+BLOCK_TABS.forEach(blockId => {
+  document.getElementById("tabBtnBlock_" + blockId)
+    .addEventListener("click", () => switchTab("block_" + blockId));
+});
 document.getElementById("continueToQuestionnaire").addEventListener("click", () => switchTab("questionnaire"));
 document.getElementById("editActivitiesLink").addEventListener("click", () => switchTab("activities"));
 
@@ -2603,6 +3125,7 @@ function csvColumnsForRecord(rec){
   push("fgd_name", rec.fgdName);
   push("flo_id", rec.floId);
   push("coop_name", rec.coopName);
+  push("country", rec.country || "");
   push("area_unit", rec.areaUnit);
   push("area_unit_custom_name", rec.areaUnitOther || "");
   push("currency", rec.currency);
@@ -2617,6 +3140,10 @@ function csvColumnsForRecord(rec){
   push("area_productive", (rec.areas || {}).productive || "");
   push("area_total_coffee", s.farmArea);
 
+  BLOCK_TABS.forEach(blockId => {
+    const bs = blockState(rec, blockId);
+    COMPONENTS.forEach(c => push(blockId + "_" + c.id + "_per_area_unit", componentMonetary(rec, bs, c)));
+  });
   CATEGORIES.forEach(cat => {
     const c = s.perCategory[cat.id];
     push(cat.id + "_selected", c.visible ? 1 : 0);
@@ -2752,6 +3279,7 @@ document.getElementById("importFileInput").addEventListener("change", (e) => {
     b.classList.toggle("active", b.getAttribute("data-lang") === appLang));
   applyStaticTranslations();
   rebuildPresentationSelect();
+  rebuildCountrySelect();
 
   const list = sortedRecords();
   if(list.length === 1){

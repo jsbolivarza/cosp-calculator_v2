@@ -71,6 +71,30 @@ seguidos sin perder ni mezclar los datos.
 Un dispositivo aguanta sin problema del orden de 100 FGD. El límite real es el espacio de
 almacenamiento del navegador, no un número fijo.
 
+### Insumos y costos
+
+Una tercera pestaña en la pantalla de inicio lista todas las líneas de insumos y costos
+variables de todos los FGD del dispositivo, agrupadas por ítem, con en cuántos FGD aparece cada
+uno, la cantidad promedio cuando está anotada, el costo promedio, el rango y su participación en
+el total. **Exportar detalle (CSV)** entrega una fila por línea, que es el archivo del que
+partiría un cálculo de huella de carbono o un análisis de compras.
+
+Las filas de insumos y costos variables se eligen de un listado en vez de escribirse. Al elegir
+del listado se guarda un código permanente junto a la etiqueta, así que el mismo producto
+anotado en Perú y en Honduras se agrupa aunque el idioma de la interfaz sea distinto. **Otro,
+escribirlo** sigue disponible para lo que no esté en el listado; esas líneas se marcan como
+"escrito a mano" y se agrupan solo por su texto exacto.
+
+Cada fila acepta además una **cantidad y unidad opcionales** (kg, l, unidad, saco, t). Nunca son
+obligatorias, porque un grupo focal muchas veces sabe cuánto gastó sin saber cuántos kilos
+compró. Existen porque el costo en moneda local no se puede convertir en huella de carbono; la
+cantidad física sí.
+
+Dos límites que conviene conocer. Las categorías llenadas actividad por actividad no llevan
+descripción de ítem, así que sus montos no aparecen en esta pestaña, aunque sí cuentan en los
+totales del FGD. Y el catálogo de ítems es un primer borrador escrito sin validación de los
+países. Se espera que cada contacto de país lo corrija.
+
 ### Buscar en la lista
 
 Arriba de la lista hay un buscador, que aparece en cuanto haya al menos un FGD guardado. Busca
@@ -119,12 +143,15 @@ El área de café de la finca se divide en tres en la pestaña 1: establecimient
 renovación o rehabilitación, y áreas productivas. Un cuarto grupo, costo anual fijo, recoge los
 costos que no dependen de ninguna área.
 
-Cada categoría de costo lleva un selector que indica a qué bloque pertenece. Los valores por
-defecto son razonables (preparación de tierra a establecimiento, cosecha a productiva,
-administración a costo anual fijo) y cualquiera se puede cambiar por FGD.
+Establecimiento y renovación tienen sus propias pestañas, que aparecen solo cuando se anota un
+área para ellas. Cada una pregunta directamente las cinco de Tier 3 (insumos, mano de obra
+familiar, mano de obra contratada, costos variables, costos fijos), sin desglose por categoría,
+porque en un grupo focal nadie desglosa una siembra nueva en nueve categorías. La pestaña del
+cuestionario de costos queda entonces solo para el área productiva, más la administración como
+costo anual fijo.
 
-Los costos de los tres bloques con área se anotan **por unidad de área de ese mismo bloque**, y
-la herramienta los multiplica por ella. El costo anual fijo se anota como total del año para la
+Los costos de las pestañas de bloque se anotan **por unidad de área de ese mismo bloque**, y la
+herramienta los multiplica por ella. El costo anual fijo se anota como total del año para la
 finca, y sus etiquetas lo dicen. El rendimiento se anota por unidad de área **productiva**, que
 es la cifra que el productor realmente conoce, así que la producción total sale solo del bloque
 productivo.
@@ -202,7 +229,7 @@ revisar esas columnas antes de sumar o promediar entre FGD en la hoja maestra.
 ## Actualizar la app más adelante
 
 Cuando cambie `index.html`, hay que subir el archivo nuevo **y** cambiar el número de versión
-en `CACHE_NAME`, al inicio de `sw.js`, actualmente `"cosp-fgd-blocks-v1"`. Sin ese cambio,
+en `CACHE_NAME`, al inicio de `sw.js`, actualmente `"cosp-fgd-blocks-v2"`. Sin ese cambio,
 quien ya instaló la app puede seguir viendo la versión vieja guardada en su dispositivo.
 
 Los datos ya capturados no se pierden al actualizar la app. Viven en el almacenamiento del
