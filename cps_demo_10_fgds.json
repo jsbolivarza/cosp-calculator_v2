@@ -1,0 +1,6184 @@
+[
+  {
+    "meta": {
+      "id": "fgd_demo_01",
+      "formatVersion": 6,
+      "lang": "es",
+      "createdAt": "2026-06-04T13:20:00.000Z",
+      "updatedAt": "2026-06-04T16:45:00.000Z"
+    },
+    "fgdName": "FGD_Peru_Cusco_01",
+    "floId": "24193",
+    "coopName": "Cooperativa Agraria Valle Sagrado",
+    "areaUnit": "ha",
+    "areaUnitOther": "",
+    "currency": "PEN",
+    "dailyWage": "50",
+    "presentation": "dry_parchment",
+    "gbeRatio": "1.25",
+    "yieldPerHa": "1150",
+    "areas": {
+      "establishment": "0.5",
+      "renovation": "0.8",
+      "productive": "2.4"
+    },
+    "selectedActivities": {
+      "crop_establishment": [
+        "planting_grafting_renovation"
+      ],
+      "crop_management": [
+        "fertilization",
+        "pest_disease_control",
+        "weed_management",
+        "pruning_crop_rejuvenation"
+      ],
+      "harvesting_processing": [
+        "coffee_harvesting",
+        "coffee_processing"
+      ]
+    },
+    "activeTab": "questionnaire",
+    "categories": {
+      "land_prep": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "renovation": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "Plantones de café (variedad resistente)",
+              "value": "755"
+            },
+            {
+              "label": "Bolsas para vivero",
+              "value": "75"
+            },
+            {
+              "label": "Sustrato y abono de vivero",
+              "value": "164"
+            }
+          ],
+          "household": [
+            {
+              "label": "Llenado de bolsas y siembra en vivero",
+              "days": "9"
+            },
+            {
+              "label": "Trasplante a campo",
+              "days": "5"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Apertura de hoyos y siembra",
+              "entryType": "days",
+              "days": "9",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Malla rachel para vivero",
+              "purchaseCost": "257",
+              "usefulLife": "4"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "fertilization": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Urea 46%",
+              "value": "627"
+            },
+            {
+              "label": "Guano de isla",
+              "value": "510"
+            },
+            {
+              "label": "Roca fosfórica",
+              "value": "262"
+            }
+          ],
+          "household": [
+            {
+              "label": "Abonamiento primera aplicación",
+              "days": "5"
+            },
+            {
+              "label": "Abonamiento segunda aplicación",
+              "days": "4"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Aplicación de abono",
+              "entryType": "days",
+              "days": "4",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Flete de abonos desde el pueblo",
+              "value": "156"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "maintenance": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Poda de mantenimiento",
+              "days": "8"
+            },
+            {
+              "label": "Deshije y raspa",
+              "days": "4"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Poda de recepa",
+              "entryType": "days",
+              "days": "6",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Tijeras y serrucho de poda",
+              "purchaseCost": "279",
+              "usefulLife": "4"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "ipdm": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Fungicida para roya",
+              "value": "265"
+            },
+            {
+              "label": "Trampas para broca",
+              "value": "114"
+            }
+          ],
+          "household": [
+            {
+              "label": "Monitoreo y recojo de broca",
+              "days": "7"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Fumigación",
+              "entryType": "days",
+              "days": "4",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Bomba de fumigar (mochila)",
+              "purchaseCost": "346",
+              "usefulLife": "5"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "weed": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Herbicida",
+              "value": "167"
+            }
+          ],
+          "household": [
+            {
+              "label": "Deshierbe manual",
+              "days": "11"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Deshierbe por contrato (todo el lote)",
+              "entryType": "lumpsum",
+              "days": "",
+              "value": "474"
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Machetes y limas",
+              "purchaseCost": "82",
+              "usefulLife": "2"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "harvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Sacos de cosecha",
+              "value": "190"
+            },
+            {
+              "label": "Mallas de secado",
+              "value": "137"
+            }
+          ],
+          "household": [
+            {
+              "label": "Recolección de cerezas",
+              "days": "17"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Recolección de cerezas",
+              "entryType": "days",
+              "days": "36",
+              "value": ""
+            },
+            {
+              "label": "Acarreo a la finca",
+              "entryType": "days",
+              "days": "5",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Alimentación de jornaleros",
+              "value": "395"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "postharvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Combustible para despulpadora",
+              "value": "235"
+            }
+          ],
+          "household": [
+            {
+              "label": "Despulpado y lavado",
+              "days": "7"
+            },
+            {
+              "label": "Secado y volteo",
+              "days": "9"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Apoyo en despulpado",
+              "entryType": "days",
+              "days": "3",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Agua y energía del módulo de beneficio",
+              "value": "165"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Despulpadora manual",
+              "purchaseCost": "2490",
+              "usefulLife": "10"
+            },
+            {
+              "label": "Tanque de fermentación",
+              "purchaseCost": "916",
+              "usefulLife": "8"
+            },
+            {
+              "label": "Secador solar / camas africanas",
+              "purchaseCost": "1773",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "admin": {
+        "mode": "global",
+        "status": "annual",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Registros, reuniones de la cooperativa",
+              "days": "7"
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Cuota y servicios de la cooperativa",
+              "value": "248"
+            },
+            {
+              "label": "Costo de certificación (prorrateado)",
+              "value": "214"
+            },
+            {
+              "label": "Transporte del café al centro de acopio",
+              "value": "312"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Balanza y equipo de oficina",
+              "purchaseCost": "381",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      }
+    }
+  },
+  {
+    "meta": {
+      "id": "fgd_demo_02",
+      "formatVersion": 6,
+      "lang": "es",
+      "createdAt": "2026-06-06T13:20:00.000Z",
+      "updatedAt": "2026-06-06T16:45:00.000Z"
+    },
+    "fgdName": "FGD_Peru_Cusco_02",
+    "floId": "24193",
+    "coopName": "Cooperativa Agraria Valle Sagrado",
+    "areaUnit": "ha",
+    "areaUnitOther": "",
+    "currency": "PEN",
+    "dailyWage": "50",
+    "presentation": "dry_parchment",
+    "gbeRatio": "1.25",
+    "yieldPerHa": "980",
+    "areas": {
+      "establishment": "",
+      "renovation": "",
+      "productive": ""
+    },
+    "selectedActivities": {
+      "crop_establishment": [],
+      "crop_management": [
+        "fertilization",
+        "weed_management",
+        "pruning_crop_rejuvenation"
+      ],
+      "harvesting_processing": [
+        "coffee_harvesting",
+        "coffee_processing"
+      ]
+    },
+    "activeTab": "questionnaire",
+    "categories": {
+      "land_prep": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "renovation": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "fertilization": {
+        "mode": "activity",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "Aplicación etapa vegetativa",
+            "inputs": "440",
+            "household": "4",
+            "hired": {
+              "entryType": "days",
+              "days": "3",
+              "value": ""
+            },
+            "variable": "63",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          },
+          {
+            "name": "Aplicación post-cosecha",
+            "inputs": "413",
+            "household": "3",
+            "hired": {
+              "entryType": "days",
+              "days": "2",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          },
+          {
+            "name": "Análisis de suelo",
+            "inputs": "",
+            "household": "1",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "160",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "maintenance": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Poda de mantenimiento",
+              "days": "8"
+            },
+            {
+              "label": "Deshije y raspa",
+              "days": "4"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Poda de recepa",
+              "entryType": "days",
+              "days": "4",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Tijeras y serrucho de poda",
+              "purchaseCost": "273",
+              "usefulLife": "4"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "ipdm": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "weed": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Herbicida",
+              "value": "167"
+            }
+          ],
+          "household": [
+            {
+              "label": "Deshierbe manual",
+              "days": "11"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Deshierbe manual",
+              "entryType": "days",
+              "days": "7",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Machetes y limas",
+              "purchaseCost": "129",
+              "usefulLife": "2"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "harvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Sacos de cosecha",
+              "value": "166"
+            },
+            {
+              "label": "Mallas de secado",
+              "value": "98"
+            }
+          ],
+          "household": [
+            {
+              "label": "Recolección de cerezas",
+              "days": "22"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Cosecha a destajo (por lata)",
+              "entryType": "lumpsum",
+              "days": "",
+              "value": "2696"
+            }
+          ],
+          "variable": [
+            {
+              "label": "Alimentación de jornaleros",
+              "value": "456"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "postharvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Combustible para despulpadora",
+              "value": "167"
+            }
+          ],
+          "household": [
+            {
+              "label": "Despulpado y lavado",
+              "days": "7"
+            },
+            {
+              "label": "Secado y volteo",
+              "days": "9"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Apoyo en despulpado",
+              "entryType": "days",
+              "days": "5",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Agua y energía del módulo de beneficio",
+              "value": "148"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Despulpadora manual",
+              "purchaseCost": "2730",
+              "usefulLife": "10"
+            },
+            {
+              "label": "Tanque de fermentación",
+              "purchaseCost": "1330",
+              "usefulLife": "8"
+            },
+            {
+              "label": "Secador solar / camas africanas",
+              "purchaseCost": "1669",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "admin": {
+        "mode": "global",
+        "status": "annual",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Registros, reuniones de la cooperativa",
+              "days": "6"
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Cuota y servicios de la cooperativa",
+              "value": "218"
+            },
+            {
+              "label": "Costo de certificación (prorrateado)",
+              "value": "152"
+            },
+            {
+              "label": "Transporte del café al centro de acopio",
+              "value": "195"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Balanza y equipo de oficina",
+              "purchaseCost": "356",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      }
+    }
+  },
+  {
+    "meta": {
+      "id": "fgd_demo_03",
+      "formatVersion": 6,
+      "lang": "es",
+      "createdAt": "2026-06-08T13:20:00.000Z",
+      "updatedAt": "2026-06-08T16:45:00.000Z"
+    },
+    "fgdName": "FGD_Peru_Junin_01",
+    "floId": "18740",
+    "coopName": "Cooperativa Cafetalera Chanchamayo",
+    "areaUnit": "ha",
+    "areaUnitOther": "",
+    "currency": "PEN",
+    "dailyWage": "55",
+    "presentation": "dry_parchment",
+    "gbeRatio": "1.25",
+    "yieldPerHa": "1420",
+    "areas": {
+      "establishment": "1.2",
+      "renovation": "0.6",
+      "productive": "3.8"
+    },
+    "selectedActivities": {
+      "crop_establishment": [
+        "nursery_establishment",
+        "planting_grafting_renovation"
+      ],
+      "crop_management": [
+        "fertilization",
+        "pest_disease_control",
+        "weed_management",
+        "pruning_crop_rejuvenation"
+      ],
+      "harvesting_processing": [
+        "coffee_harvesting",
+        "coffee_processing"
+      ]
+    },
+    "activeTab": "questionnaire",
+    "categories": {
+      "land_prep": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "renovation": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "Plantones de café (variedad resistente)",
+              "value": "729"
+            },
+            {
+              "label": "Bolsas para vivero",
+              "value": "83"
+            },
+            {
+              "label": "Sustrato y abono de vivero",
+              "value": "140"
+            }
+          ],
+          "household": [
+            {
+              "label": "Llenado de bolsas y siembra en vivero",
+              "days": "9"
+            },
+            {
+              "label": "Trasplante a campo",
+              "days": "5"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Apertura de hoyos y siembra",
+              "entryType": "days",
+              "days": "7",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Malla rachel para vivero",
+              "purchaseCost": "200",
+              "usefulLife": "4"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "fertilization": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Urea 46%",
+              "value": "687"
+            },
+            {
+              "label": "Guano de isla",
+              "value": "366"
+            },
+            {
+              "label": "Roca fosfórica",
+              "value": "162"
+            }
+          ],
+          "household": [
+            {
+              "label": "Abonamiento primera aplicación",
+              "days": "5"
+            },
+            {
+              "label": "Abonamiento segunda aplicación",
+              "days": "4"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Aplicación de abono",
+              "entryType": "days",
+              "days": "7",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Flete de abonos desde el pueblo",
+              "value": "127"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "maintenance": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Poda de mantenimiento",
+              "days": "8"
+            },
+            {
+              "label": "Deshije y raspa",
+              "days": "4"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Poda de recepa",
+              "entryType": "days",
+              "days": "4",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Tijeras y serrucho de poda",
+              "purchaseCost": "195",
+              "usefulLife": "4"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "ipdm": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Fungicida para roya",
+              "value": "328"
+            },
+            {
+              "label": "Trampas para broca",
+              "value": "176"
+            }
+          ],
+          "household": [
+            {
+              "label": "Monitoreo y recojo de broca",
+              "days": "7"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Fumigación",
+              "entryType": "days",
+              "days": "2",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Bomba de fumigar (mochila)",
+              "purchaseCost": "417",
+              "usefulLife": "5"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "weed": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Herbicida",
+              "value": "168"
+            }
+          ],
+          "household": [
+            {
+              "label": "Deshierbe manual",
+              "days": "11"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Deshierbe manual",
+              "entryType": "days",
+              "days": "9",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Machetes y limas",
+              "purchaseCost": "122",
+              "usefulLife": "2"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "harvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Sacos de cosecha",
+              "value": "171"
+            },
+            {
+              "label": "Mallas de secado",
+              "value": "84"
+            }
+          ],
+          "household": [
+            {
+              "label": "Recolección de cerezas",
+              "days": "20"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Recolección de cerezas",
+              "entryType": "days",
+              "days": "39",
+              "value": ""
+            },
+            {
+              "label": "Acarreo a la finca",
+              "entryType": "days",
+              "days": "6",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Alimentación de jornaleros",
+              "value": "460"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "postharvest": {
+        "mode": "activity",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "Despulpado",
+            "inputs": "83",
+            "household": "3",
+            "hired": {
+              "entryType": "days",
+              "days": "2",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "2810",
+              "usefulLife": "10"
+            }
+          },
+          {
+            "name": "Fermentado y lavado",
+            "inputs": "",
+            "household": "4",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "51",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          },
+          {
+            "name": "Secado en camas",
+            "inputs": "",
+            "household": "8",
+            "hired": {
+              "entryType": "days",
+              "days": "2",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "1255",
+              "usefulLife": "6"
+            }
+          }
+        ],
+        "open": false
+      },
+      "admin": {
+        "mode": "global",
+        "status": "annual",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Registros, reuniones de la cooperativa",
+              "days": "7"
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Cuota y servicios de la cooperativa",
+              "value": "187"
+            },
+            {
+              "label": "Costo de certificación (prorrateado)",
+              "value": "190"
+            },
+            {
+              "label": "Transporte del café al centro de acopio",
+              "value": "191"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Balanza y equipo de oficina",
+              "purchaseCost": "404",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      }
+    }
+  },
+  {
+    "meta": {
+      "id": "fgd_demo_04",
+      "formatVersion": 6,
+      "lang": "es",
+      "createdAt": "2026-06-10T13:20:00.000Z",
+      "updatedAt": "2026-06-10T16:45:00.000Z"
+    },
+    "fgdName": "FGD_Peru_Junin_02",
+    "floId": "18740",
+    "coopName": "Cooperativa Cafetalera Chanchamayo",
+    "areaUnit": "ha",
+    "areaUnitOther": "",
+    "currency": "PEN",
+    "dailyWage": "55",
+    "presentation": "wet_parchment",
+    "gbeRatio": "2.56",
+    "yieldPerHa": "2350",
+    "areas": {
+      "establishment": "0",
+      "renovation": "0.4",
+      "productive": "2.1"
+    },
+    "selectedActivities": {
+      "crop_establishment": [],
+      "crop_management": [
+        "fertilization",
+        "pest_disease_control",
+        "weed_management"
+      ],
+      "harvesting_processing": [
+        "coffee_harvesting",
+        "coffee_processing"
+      ]
+    },
+    "activeTab": "questionnaire",
+    "categories": {
+      "land_prep": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "renovation": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "fertilization": {
+        "mode": "activity",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "Aplicación etapa vegetativa",
+            "inputs": "580",
+            "household": "4",
+            "hired": {
+              "entryType": "days",
+              "days": "3",
+              "value": ""
+            },
+            "variable": "68",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          },
+          {
+            "name": "Aplicación post-cosecha",
+            "inputs": "417",
+            "household": "3",
+            "hired": {
+              "entryType": "days",
+              "days": "2",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          },
+          {
+            "name": "Análisis de suelo",
+            "inputs": "",
+            "household": "1",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "170",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "maintenance": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "ipdm": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Fungicida para roya",
+              "value": "277"
+            },
+            {
+              "label": "Trampas para broca",
+              "value": "117"
+            }
+          ],
+          "household": [
+            {
+              "label": "Monitoreo y recojo de broca",
+              "days": "7"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Fumigación",
+              "entryType": "days",
+              "days": "3",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Bomba de fumigar (mochila)",
+              "purchaseCost": "466",
+              "usefulLife": "5"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "weed": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Herbicida",
+              "value": "165"
+            }
+          ],
+          "household": [
+            {
+              "label": "Deshierbe manual",
+              "days": "11"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Deshierbe por contrato (todo el lote)",
+              "entryType": "lumpsum",
+              "days": "",
+              "value": "465"
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Machetes y limas",
+              "purchaseCost": "105",
+              "usefulLife": "2"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "harvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Sacos de cosecha",
+              "value": "122"
+            },
+            {
+              "label": "Mallas de secado",
+              "value": "155"
+            }
+          ],
+          "household": [
+            {
+              "label": "Recolección de cerezas",
+              "days": "20"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Recolección de cerezas",
+              "entryType": "days",
+              "days": "35",
+              "value": ""
+            },
+            {
+              "label": "Acarreo a la finca",
+              "entryType": "days",
+              "days": "5",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Alimentación de jornaleros",
+              "value": "595"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "postharvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Combustible para despulpadora",
+              "value": "215"
+            }
+          ],
+          "household": [
+            {
+              "label": "Despulpado y lavado",
+              "days": "7"
+            },
+            {
+              "label": "Secado y volteo",
+              "days": "9"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Apoyo en despulpado",
+              "entryType": "days",
+              "days": "6",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Agua y energía del módulo de beneficio",
+              "value": "120"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Despulpadora manual",
+              "purchaseCost": "2583",
+              "usefulLife": "10"
+            },
+            {
+              "label": "Tanque de fermentación",
+              "purchaseCost": "1197",
+              "usefulLife": "8"
+            },
+            {
+              "label": "Secador solar / camas africanas",
+              "purchaseCost": "1515",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "admin": {
+        "mode": "global",
+        "status": "annual",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Registros, reuniones de la cooperativa",
+              "days": "7"
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Cuota y servicios de la cooperativa",
+              "value": "211"
+            },
+            {
+              "label": "Costo de certificación (prorrateado)",
+              "value": "228"
+            },
+            {
+              "label": "Transporte del café al centro de acopio",
+              "value": "303"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Balanza y equipo de oficina",
+              "purchaseCost": "341",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      }
+    }
+  },
+  {
+    "meta": {
+      "id": "fgd_demo_05",
+      "formatVersion": 6,
+      "lang": "es",
+      "createdAt": "2026-06-12T13:20:00.000Z",
+      "updatedAt": "2026-06-12T16:45:00.000Z"
+    },
+    "fgdName": "FGD_Peru_SanMartin_01",
+    "floId": "11952",
+    "coopName": "Cooperativa Oro Verde",
+    "areaUnit": "ha",
+    "areaUnitOther": "",
+    "currency": "PEN",
+    "dailyWage": "45",
+    "presentation": "dry_parchment",
+    "gbeRatio": "1.25",
+    "yieldPerHa": "1620",
+    "areas": {
+      "establishment": "0.9",
+      "renovation": "1.1",
+      "productive": "4.5"
+    },
+    "selectedActivities": {
+      "crop_establishment": [
+        "land_preparation",
+        "planting_grafting_renovation"
+      ],
+      "crop_management": [
+        "fertilization",
+        "pest_disease_control",
+        "weed_management",
+        "pruning_crop_rejuvenation"
+      ],
+      "harvesting_processing": [
+        "coffee_harvesting",
+        "coffee_processing"
+      ]
+    },
+    "activeTab": "questionnaire",
+    "categories": {
+      "land_prep": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "Alquiler de motoguadaña",
+              "value": "326"
+            }
+          ],
+          "household": [
+            {
+              "label": "Limpieza y trazado del terreno",
+              "days": "6"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Limpieza del terreno",
+              "entryType": "days",
+              "days": "4",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Transporte de materiales",
+              "value": "84"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "renovation": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "Plantones de café (variedad resistente)",
+              "value": "750"
+            },
+            {
+              "label": "Bolsas para vivero",
+              "value": "105"
+            },
+            {
+              "label": "Sustrato y abono de vivero",
+              "value": "156"
+            }
+          ],
+          "household": [
+            {
+              "label": "Llenado de bolsas y siembra en vivero",
+              "days": "9"
+            },
+            {
+              "label": "Trasplante a campo",
+              "days": "5"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Apertura de hoyos y siembra",
+              "entryType": "days",
+              "days": "6",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Malla rachel para vivero",
+              "purchaseCost": "263",
+              "usefulLife": "4"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "fertilization": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Urea 46%",
+              "value": "719"
+            },
+            {
+              "label": "Guano de isla",
+              "value": "510"
+            },
+            {
+              "label": "Roca fosfórica",
+              "value": "170"
+            }
+          ],
+          "household": [
+            {
+              "label": "Abonamiento primera aplicación",
+              "days": "5"
+            },
+            {
+              "label": "Abonamiento segunda aplicación",
+              "days": "4"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Aplicación de abono",
+              "entryType": "days",
+              "days": "5",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Flete de abonos desde el pueblo",
+              "value": "109"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "maintenance": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Poda de mantenimiento",
+              "days": "8"
+            },
+            {
+              "label": "Deshije y raspa",
+              "days": "4"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Poda de recepa",
+              "entryType": "days",
+              "days": "4",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Tijeras y serrucho de poda",
+              "purchaseCost": "242",
+              "usefulLife": "4"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "ipdm": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Fungicida para roya",
+              "value": "240"
+            },
+            {
+              "label": "Trampas para broca",
+              "value": "109"
+            }
+          ],
+          "household": [
+            {
+              "label": "Monitoreo y recojo de broca",
+              "days": "7"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Fumigación",
+              "entryType": "days",
+              "days": "3",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Bomba de fumigar (mochila)",
+              "purchaseCost": "473",
+              "usefulLife": "5"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "weed": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Herbicida",
+              "value": "151"
+            }
+          ],
+          "household": [
+            {
+              "label": "Deshierbe manual",
+              "days": "11"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Deshierbe manual",
+              "entryType": "days",
+              "days": "8",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Machetes y limas",
+              "purchaseCost": "96",
+              "usefulLife": "2"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "harvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Sacos de cosecha",
+              "value": "174"
+            },
+            {
+              "label": "Mallas de secado",
+              "value": "150"
+            }
+          ],
+          "household": [
+            {
+              "label": "Recolección de cerezas",
+              "days": "27"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Cosecha a destajo (por lata)",
+              "entryType": "lumpsum",
+              "days": "",
+              "value": "2269"
+            }
+          ],
+          "variable": [
+            {
+              "label": "Alimentación de jornaleros",
+              "value": "532"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "postharvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Combustible para despulpadora",
+              "value": "147"
+            }
+          ],
+          "household": [
+            {
+              "label": "Despulpado y lavado",
+              "days": "7"
+            },
+            {
+              "label": "Secado y volteo",
+              "days": "9"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Apoyo en despulpado",
+              "entryType": "days",
+              "days": "5",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Agua y energía del módulo de beneficio",
+              "value": "126"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Despulpadora manual",
+              "purchaseCost": "2682",
+              "usefulLife": "10"
+            },
+            {
+              "label": "Tanque de fermentación",
+              "purchaseCost": "1316",
+              "usefulLife": "8"
+            },
+            {
+              "label": "Secador solar / camas africanas",
+              "purchaseCost": "1289",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "admin": {
+        "mode": "global",
+        "status": "annual",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Registros, reuniones de la cooperativa",
+              "days": "7"
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Cuota y servicios de la cooperativa",
+              "value": "195"
+            },
+            {
+              "label": "Costo de certificación (prorrateado)",
+              "value": "156"
+            },
+            {
+              "label": "Transporte del café al centro de acopio",
+              "value": "277"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Balanza y equipo de oficina",
+              "purchaseCost": "335",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      }
+    }
+  },
+  {
+    "meta": {
+      "id": "fgd_demo_06",
+      "formatVersion": 6,
+      "lang": "es",
+      "createdAt": "2026-06-14T13:20:00.000Z",
+      "updatedAt": "2026-06-14T16:45:00.000Z"
+    },
+    "fgdName": "FGD_Peru_SanMartin_02",
+    "floId": "11952",
+    "coopName": "Cooperativa Oro Verde",
+    "areaUnit": "ha",
+    "areaUnitOther": "",
+    "currency": "PEN",
+    "dailyWage": "45",
+    "presentation": "dry_parchment",
+    "gbeRatio": "1.25",
+    "yieldPerHa": "1240",
+    "areas": {
+      "establishment": "",
+      "renovation": "",
+      "productive": ""
+    },
+    "selectedActivities": {
+      "crop_establishment": [],
+      "crop_management": [
+        "fertilization",
+        "pest_disease_control",
+        "pruning_crop_rejuvenation"
+      ],
+      "harvesting_processing": [
+        "coffee_harvesting",
+        "coffee_processing"
+      ]
+    },
+    "activeTab": "questionnaire",
+    "categories": {
+      "land_prep": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "renovation": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "fertilization": {
+        "mode": "activity",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "Aplicación etapa vegetativa",
+            "inputs": "552",
+            "household": "4",
+            "hired": {
+              "entryType": "days",
+              "days": "3",
+              "value": ""
+            },
+            "variable": "88",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          },
+          {
+            "name": "Aplicación post-cosecha",
+            "inputs": "470",
+            "household": "3",
+            "hired": {
+              "entryType": "days",
+              "days": "2",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          },
+          {
+            "name": "Análisis de suelo",
+            "inputs": "",
+            "household": "1",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "179",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "maintenance": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Poda de mantenimiento",
+              "days": "8"
+            },
+            {
+              "label": "Deshije y raspa",
+              "days": "4"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Poda de recepa",
+              "entryType": "days",
+              "days": "5",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Tijeras y serrucho de poda",
+              "purchaseCost": "261",
+              "usefulLife": "4"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "ipdm": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Fungicida para roya",
+              "value": "244"
+            },
+            {
+              "label": "Trampas para broca",
+              "value": "147"
+            }
+          ],
+          "household": [
+            {
+              "label": "Monitoreo y recojo de broca",
+              "days": "7"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Fumigación",
+              "entryType": "days",
+              "days": "3",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Bomba de fumigar (mochila)",
+              "purchaseCost": "363",
+              "usefulLife": "5"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "weed": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "harvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Sacos de cosecha",
+              "value": "168"
+            },
+            {
+              "label": "Mallas de secado",
+              "value": "88"
+            }
+          ],
+          "household": [
+            {
+              "label": "Recolección de cerezas",
+              "days": "26"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Recolección de cerezas",
+              "entryType": "days",
+              "days": "34",
+              "value": ""
+            },
+            {
+              "label": "Acarreo a la finca",
+              "entryType": "days",
+              "days": "5",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Alimentación de jornaleros",
+              "value": "574"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "postharvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Combustible para despulpadora",
+              "value": "219"
+            }
+          ],
+          "household": [
+            {
+              "label": "Despulpado y lavado",
+              "days": "7"
+            },
+            {
+              "label": "Secado y volteo",
+              "days": "9"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Apoyo en despulpado",
+              "entryType": "days",
+              "days": "3",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Agua y energía del módulo de beneficio",
+              "value": "174"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Despulpadora manual",
+              "purchaseCost": "2697",
+              "usefulLife": "10"
+            },
+            {
+              "label": "Tanque de fermentación",
+              "purchaseCost": "958",
+              "usefulLife": "8"
+            },
+            {
+              "label": "Secador solar / camas africanas",
+              "purchaseCost": "1375",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "admin": {
+        "mode": "global",
+        "status": "annual",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Registros, reuniones de la cooperativa",
+              "days": "4"
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Cuota y servicios de la cooperativa",
+              "value": "238"
+            },
+            {
+              "label": "Costo de certificación (prorrateado)",
+              "value": "209"
+            },
+            {
+              "label": "Transporte del café al centro de acopio",
+              "value": "272"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Balanza y equipo de oficina",
+              "purchaseCost": "257",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      }
+    }
+  },
+  {
+    "meta": {
+      "id": "fgd_demo_07",
+      "formatVersion": 6,
+      "lang": "es",
+      "createdAt": "2026-06-16T13:20:00.000Z",
+      "updatedAt": "2026-06-16T16:45:00.000Z"
+    },
+    "fgdName": "FGD_Peru_Cajamarca_01",
+    "floId": "27508",
+    "coopName": "Cooperativa Sol y Café",
+    "areaUnit": "ha",
+    "areaUnitOther": "",
+    "currency": "PEN",
+    "dailyWage": "48",
+    "presentation": "dry_parchment",
+    "gbeRatio": "1.25",
+    "yieldPerHa": "890",
+    "areas": {
+      "establishment": "0",
+      "renovation": "0.7",
+      "productive": "1.6"
+    },
+    "selectedActivities": {
+      "crop_establishment": [
+        "nursery_establishment"
+      ],
+      "crop_management": [
+        "fertilization",
+        "weed_management",
+        "pruning_crop_rejuvenation"
+      ],
+      "harvesting_processing": [
+        "coffee_harvesting",
+        "coffee_processing"
+      ]
+    },
+    "activeTab": "questionnaire",
+    "categories": {
+      "land_prep": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "renovation": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "Plantones de café (variedad resistente)",
+              "value": "686"
+            },
+            {
+              "label": "Bolsas para vivero",
+              "value": "101"
+            },
+            {
+              "label": "Sustrato y abono de vivero",
+              "value": "155"
+            }
+          ],
+          "household": [
+            {
+              "label": "Llenado de bolsas y siembra en vivero",
+              "days": "9"
+            },
+            {
+              "label": "Trasplante a campo",
+              "days": "5"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Apertura de hoyos y siembra",
+              "entryType": "days",
+              "days": "6",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Malla rachel para vivero",
+              "purchaseCost": "213",
+              "usefulLife": "4"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "fertilization": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Urea 46%",
+              "value": "536"
+            },
+            {
+              "label": "Guano de isla",
+              "value": "451"
+            },
+            {
+              "label": "Roca fosfórica",
+              "value": "220"
+            }
+          ],
+          "household": [
+            {
+              "label": "Abonamiento primera aplicación",
+              "days": "5"
+            },
+            {
+              "label": "Abonamiento segunda aplicación",
+              "days": "4"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Aplicación de abono",
+              "entryType": "days",
+              "days": "5",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Flete de abonos desde el pueblo",
+              "value": "131"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "maintenance": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Poda de mantenimiento",
+              "days": "8"
+            },
+            {
+              "label": "Deshije y raspa",
+              "days": "4"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Poda de recepa",
+              "entryType": "days",
+              "days": "6",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Tijeras y serrucho de poda",
+              "purchaseCost": "189",
+              "usefulLife": "4"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "ipdm": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "weed": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Herbicida",
+              "value": "139"
+            }
+          ],
+          "household": [
+            {
+              "label": "Deshierbe manual",
+              "days": "11"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Deshierbe por contrato (todo el lote)",
+              "entryType": "lumpsum",
+              "days": "",
+              "value": "730"
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Machetes y limas",
+              "purchaseCost": "84",
+              "usefulLife": "2"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "harvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Sacos de cosecha",
+              "value": "137"
+            },
+            {
+              "label": "Mallas de secado",
+              "value": "90"
+            }
+          ],
+          "household": [
+            {
+              "label": "Recolección de cerezas",
+              "days": "24"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Recolección de cerezas",
+              "entryType": "days",
+              "days": "33",
+              "value": ""
+            },
+            {
+              "label": "Acarreo a la finca",
+              "entryType": "days",
+              "days": "6",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Alimentación de jornaleros",
+              "value": "345"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "postharvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Combustible para despulpadora",
+              "value": "140"
+            }
+          ],
+          "household": [
+            {
+              "label": "Despulpado y lavado",
+              "days": "7"
+            },
+            {
+              "label": "Secado y volteo",
+              "days": "9"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Apoyo en despulpado",
+              "entryType": "days",
+              "days": "2",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Agua y energía del módulo de beneficio",
+              "value": "108"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Despulpadora manual",
+              "purchaseCost": "2892",
+              "usefulLife": "10"
+            },
+            {
+              "label": "Tanque de fermentación",
+              "purchaseCost": "937",
+              "usefulLife": "8"
+            },
+            {
+              "label": "Secador solar / camas africanas",
+              "purchaseCost": "1989",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "admin": {
+        "mode": "global",
+        "status": "annual",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Registros, reuniones de la cooperativa",
+              "days": "5"
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Cuota y servicios de la cooperativa",
+              "value": "174"
+            },
+            {
+              "label": "Costo de certificación (prorrateado)",
+              "value": "149"
+            },
+            {
+              "label": "Transporte del café al centro de acopio",
+              "value": "232"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Balanza y equipo de oficina",
+              "purchaseCost": "334",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      }
+    }
+  },
+  {
+    "meta": {
+      "id": "fgd_demo_08",
+      "formatVersion": 6,
+      "lang": "es",
+      "createdAt": "2026-06-18T13:20:00.000Z",
+      "updatedAt": "2026-06-18T16:45:00.000Z"
+    },
+    "fgdName": "FGD_Peru_Cajamarca_02",
+    "floId": "27508",
+    "coopName": "Cooperativa Sol y Café",
+    "areaUnit": "ha",
+    "areaUnitOther": "",
+    "currency": "PEN",
+    "dailyWage": "48",
+    "presentation": "cherry",
+    "gbeRatio": "5.00",
+    "yieldPerHa": "5800",
+    "areas": {
+      "establishment": "",
+      "renovation": "",
+      "productive": ""
+    },
+    "selectedActivities": {
+      "crop_establishment": [],
+      "crop_management": [
+        "fertilization",
+        "pest_disease_control",
+        "weed_management"
+      ],
+      "harvesting_processing": [
+        "coffee_harvesting"
+      ]
+    },
+    "activeTab": "questionnaire",
+    "categories": {
+      "land_prep": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "renovation": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "fertilization": {
+        "mode": "activity",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "Aplicación etapa vegetativa",
+            "inputs": "543",
+            "household": "4",
+            "hired": {
+              "entryType": "days",
+              "days": "3",
+              "value": ""
+            },
+            "variable": "90",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          },
+          {
+            "name": "Aplicación post-cosecha",
+            "inputs": "520",
+            "household": "3",
+            "hired": {
+              "entryType": "days",
+              "days": "2",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          },
+          {
+            "name": "Análisis de suelo",
+            "inputs": "",
+            "household": "1",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "156",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "maintenance": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "ipdm": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Fungicida para roya",
+              "value": "257"
+            },
+            {
+              "label": "Trampas para broca",
+              "value": "122"
+            }
+          ],
+          "household": [
+            {
+              "label": "Monitoreo y recojo de broca",
+              "days": "7"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Fumigación",
+              "entryType": "days",
+              "days": "4",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Bomba de fumigar (mochila)",
+              "purchaseCost": "462",
+              "usefulLife": "5"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "weed": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Herbicida",
+              "value": "180"
+            }
+          ],
+          "household": [
+            {
+              "label": "Deshierbe manual",
+              "days": "11"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Deshierbe manual",
+              "entryType": "days",
+              "days": "6",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Machetes y limas",
+              "purchaseCost": "125",
+              "usefulLife": "2"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "harvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Sacos de cosecha",
+              "value": "183"
+            },
+            {
+              "label": "Mallas de secado",
+              "value": "88"
+            }
+          ],
+          "household": [
+            {
+              "label": "Recolección de cerezas",
+              "days": "18"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Cosecha a destajo (por lata)",
+              "entryType": "lumpsum",
+              "days": "",
+              "value": "2364"
+            }
+          ],
+          "variable": [
+            {
+              "label": "Alimentación de jornaleros",
+              "value": "399"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "postharvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "admin": {
+        "mode": "global",
+        "status": "annual",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Registros, reuniones de la cooperativa",
+              "days": "5"
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Cuota y servicios de la cooperativa",
+              "value": "224"
+            },
+            {
+              "label": "Costo de certificación (prorrateado)",
+              "value": "186"
+            },
+            {
+              "label": "Transporte del café al centro de acopio",
+              "value": "315"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Balanza y equipo de oficina",
+              "purchaseCost": "347",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      }
+    }
+  },
+  {
+    "meta": {
+      "id": "fgd_demo_09",
+      "formatVersion": 6,
+      "lang": "es",
+      "createdAt": "2026-06-20T13:20:00.000Z",
+      "updatedAt": "2026-06-20T16:45:00.000Z"
+    },
+    "fgdName": "FGD_Peru_Amazonas_01",
+    "floId": "30611",
+    "coopName": "Cooperativa Cafetalera Bagua Grande",
+    "areaUnit": "ha",
+    "areaUnitOther": "",
+    "currency": "PEN",
+    "dailyWage": "60",
+    "presentation": "dry_parchment",
+    "gbeRatio": "1.25",
+    "yieldPerHa": "1780",
+    "areas": {
+      "establishment": "1.5",
+      "renovation": "1",
+      "productive": "5.2"
+    },
+    "selectedActivities": {
+      "crop_establishment": [
+        "land_preparation",
+        "nursery_establishment",
+        "planting_grafting_renovation"
+      ],
+      "crop_management": [
+        "fertilization",
+        "pest_disease_control",
+        "weed_management",
+        "pruning_crop_rejuvenation"
+      ],
+      "harvesting_processing": [
+        "coffee_harvesting",
+        "coffee_processing"
+      ]
+    },
+    "activeTab": "questionnaire",
+    "categories": {
+      "land_prep": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "Alquiler de motoguadaña",
+              "value": "320"
+            }
+          ],
+          "household": [
+            {
+              "label": "Limpieza y trazado del terreno",
+              "days": "6"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Limpieza del terreno",
+              "entryType": "days",
+              "days": "4",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Transporte de materiales",
+              "value": "90"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "renovation": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "Plantones de café (variedad resistente)",
+              "value": "587"
+            },
+            {
+              "label": "Bolsas para vivero",
+              "value": "92"
+            },
+            {
+              "label": "Sustrato y abono de vivero",
+              "value": "161"
+            }
+          ],
+          "household": [
+            {
+              "label": "Llenado de bolsas y siembra en vivero",
+              "days": "9"
+            },
+            {
+              "label": "Trasplante a campo",
+              "days": "5"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Apertura de hoyos y siembra",
+              "entryType": "days",
+              "days": "7",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Malla rachel para vivero",
+              "purchaseCost": "266",
+              "usefulLife": "4"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "fertilization": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Urea 46%",
+              "value": "741"
+            },
+            {
+              "label": "Guano de isla",
+              "value": "456"
+            },
+            {
+              "label": "Roca fosfórica",
+              "value": "234"
+            }
+          ],
+          "household": [
+            {
+              "label": "Abonamiento primera aplicación",
+              "days": "5"
+            },
+            {
+              "label": "Abonamiento segunda aplicación",
+              "days": "4"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Aplicación de abono",
+              "entryType": "days",
+              "days": "7",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Flete de abonos desde el pueblo",
+              "value": "108"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "maintenance": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Poda de mantenimiento",
+              "days": "8"
+            },
+            {
+              "label": "Deshije y raspa",
+              "days": "4"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Poda de recepa",
+              "entryType": "days",
+              "days": "4",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Tijeras y serrucho de poda",
+              "purchaseCost": "254",
+              "usefulLife": "4"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "ipdm": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Fungicida para roya",
+              "value": "375"
+            },
+            {
+              "label": "Trampas para broca",
+              "value": "140"
+            }
+          ],
+          "household": [
+            {
+              "label": "Monitoreo y recojo de broca",
+              "days": "7"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Fumigación",
+              "entryType": "days",
+              "days": "4",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Bomba de fumigar (mochila)",
+              "purchaseCost": "497",
+              "usefulLife": "5"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "weed": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Herbicida",
+              "value": "227"
+            }
+          ],
+          "household": [
+            {
+              "label": "Deshierbe manual",
+              "days": "11"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Deshierbe manual",
+              "entryType": "days",
+              "days": "10",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Machetes y limas",
+              "purchaseCost": "113",
+              "usefulLife": "2"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "harvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Sacos de cosecha",
+              "value": "120"
+            },
+            {
+              "label": "Mallas de secado",
+              "value": "128"
+            }
+          ],
+          "household": [
+            {
+              "label": "Recolección de cerezas",
+              "days": "17"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Recolección de cerezas",
+              "entryType": "days",
+              "days": "42",
+              "value": ""
+            },
+            {
+              "label": "Acarreo a la finca",
+              "entryType": "days",
+              "days": "4",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Alimentación de jornaleros",
+              "value": "581"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "postharvest": {
+        "mode": "activity",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "Despulpado",
+            "inputs": "108",
+            "household": "3",
+            "hired": {
+              "entryType": "days",
+              "days": "2",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "2289",
+              "usefulLife": "10"
+            }
+          },
+          {
+            "name": "Fermentado y lavado",
+            "inputs": "",
+            "household": "4",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "58",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          },
+          {
+            "name": "Secado en camas",
+            "inputs": "",
+            "household": "8",
+            "hired": {
+              "entryType": "days",
+              "days": "2",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "1124",
+              "usefulLife": "6"
+            }
+          }
+        ],
+        "open": false
+      },
+      "admin": {
+        "mode": "global",
+        "status": "annual",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Registros, reuniones de la cooperativa",
+              "days": "6"
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Cuota y servicios de la cooperativa",
+              "value": "163"
+            },
+            {
+              "label": "Costo de certificación (prorrateado)",
+              "value": "163"
+            },
+            {
+              "label": "Transporte del café al centro de acopio",
+              "value": "215"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Balanza y equipo de oficina",
+              "purchaseCost": "327",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      }
+    }
+  },
+  {
+    "meta": {
+      "id": "fgd_demo_10",
+      "formatVersion": 6,
+      "lang": "es",
+      "createdAt": "2026-06-22T13:20:00.000Z",
+      "updatedAt": "2026-06-22T16:45:00.000Z"
+    },
+    "fgdName": "FGD_Peru_Amazonas_02",
+    "floId": "30611",
+    "coopName": "Cooperativa Cafetalera Bagua Grande",
+    "areaUnit": "ha",
+    "areaUnitOther": "",
+    "currency": "PEN",
+    "dailyWage": "60",
+    "presentation": "dry_parchment",
+    "gbeRatio": "1.25",
+    "yieldPerHa": "1050",
+    "areas": {
+      "establishment": "0",
+      "renovation": "0",
+      "productive": "1.9"
+    },
+    "selectedActivities": {
+      "crop_establishment": [],
+      "crop_management": [
+        "fertilization",
+        "weed_management"
+      ],
+      "harvesting_processing": [
+        "coffee_harvesting",
+        "coffee_processing"
+      ]
+    },
+    "activeTab": "questionnaire",
+    "categories": {
+      "land_prep": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "renovation": {
+        "mode": "global",
+        "status": "establishment",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "fertilization": {
+        "mode": "activity",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "Aplicación etapa vegetativa",
+            "inputs": "601",
+            "household": "4",
+            "hired": {
+              "entryType": "days",
+              "days": "3",
+              "value": ""
+            },
+            "variable": "82",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          },
+          {
+            "name": "Aplicación post-cosecha",
+            "inputs": "562",
+            "household": "3",
+            "hired": {
+              "entryType": "days",
+              "days": "2",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          },
+          {
+            "name": "Análisis de suelo",
+            "inputs": "",
+            "household": "1",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "142",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "maintenance": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "ipdm": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "",
+              "days": ""
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "weed": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Herbicida",
+              "value": "215"
+            }
+          ],
+          "household": [
+            {
+              "label": "Deshierbe manual",
+              "days": "11"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Deshierbe por contrato (todo el lote)",
+              "entryType": "lumpsum",
+              "days": "",
+              "value": "633"
+            }
+          ],
+          "variable": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Machetes y limas",
+              "purchaseCost": "111",
+              "usefulLife": "2"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "harvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Sacos de cosecha",
+              "value": "124"
+            },
+            {
+              "label": "Mallas de secado",
+              "value": "125"
+            }
+          ],
+          "household": [
+            {
+              "label": "Recolección de cerezas",
+              "days": "22"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Recolección de cerezas",
+              "entryType": "days",
+              "days": "27",
+              "value": ""
+            },
+            {
+              "label": "Acarreo a la finca",
+              "entryType": "days",
+              "days": "4",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Alimentación de jornaleros",
+              "value": "339"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "",
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "postharvest": {
+        "mode": "global",
+        "status": "productive",
+        "global": {
+          "inputs": [
+            {
+              "label": "Combustible para despulpadora",
+              "value": "152"
+            }
+          ],
+          "household": [
+            {
+              "label": "Despulpado y lavado",
+              "days": "7"
+            },
+            {
+              "label": "Secado y volteo",
+              "days": "9"
+            }
+          ],
+          "hired": [
+            {
+              "label": "Apoyo en despulpado",
+              "entryType": "days",
+              "days": "3",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Agua y energía del módulo de beneficio",
+              "value": "124"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Despulpadora manual",
+              "purchaseCost": "2936",
+              "usefulLife": "10"
+            },
+            {
+              "label": "Tanque de fermentación",
+              "purchaseCost": "1491",
+              "usefulLife": "8"
+            },
+            {
+              "label": "Secador solar / camas africanas",
+              "purchaseCost": "1624",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      },
+      "admin": {
+        "mode": "global",
+        "status": "annual",
+        "global": {
+          "inputs": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "household": [
+            {
+              "label": "Registros, reuniones de la cooperativa",
+              "days": "6"
+            }
+          ],
+          "hired": [
+            {
+              "label": "",
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "label": "Cuota y servicios de la cooperativa",
+              "value": "253"
+            },
+            {
+              "label": "Costo de certificación (prorrateado)",
+              "value": "227"
+            },
+            {
+              "label": "Transporte del café al centro de acopio",
+              "value": "327"
+            }
+          ],
+          "fixed": [
+            {
+              "label": "Balanza y equipo de oficina",
+              "purchaseCost": "350",
+              "usefulLife": "6"
+            }
+          ]
+        },
+        "activities": [
+          {
+            "name": "",
+            "inputs": "",
+            "household": "",
+            "hired": {
+              "entryType": "days",
+              "days": "",
+              "value": ""
+            },
+            "variable": "",
+            "fixed": {
+              "purchaseCost": "",
+              "usefulLife": ""
+            }
+          }
+        ],
+        "open": false
+      }
+    }
+  }
+]

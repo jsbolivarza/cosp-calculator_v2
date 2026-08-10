@@ -1,0 +1,2780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPS Calculator — FGD data entry</title>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#001B6E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Calculadora CPS">
+<link rel="icon" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --tangerine: #FF8000; --tangerine-tint: #FFF1E0;
+    --eggplant: #7B1DAB; --eggplant-tint: #F2E6F9;
+    --flower: #FF4571;   --flower-tint: #FFE7ED;
+    --sky: #0FC0FC;      --sky-tint: #E3F8FF;
+    --mint: #09FBD3;     --mint-tint: #E0FFFA; --mint-dark: #0a7d5c;
+    --night: #001B6E;    --grey: #9CA399; --grey-dark: #6b7268;
+    --bg: #FFFFFF; --card: #FFFFFF; --card-alt: #F7F8F6;
+    --border: #E3E5E0; --text: #1E1E1E; --text-light: #6b7268;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 60px; }
+
+  header { background: #FFFFFF; padding: 18px 32px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    box-shadow: 0 1px 0 var(--border); border-bottom: 1px solid var(--border); }
+  header .left { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  header .logo { font-family: 'Exo 2', sans-serif; font-size: 1.4rem; font-weight: 800;
+    letter-spacing: .3px; text-transform: uppercase; color: var(--night); }
+  header .logo span { font-style: italic; opacity: .65; font-size: 1rem; margin-left: 10px; font-weight: 600; text-transform: none; }
+  .lang-switch { display: flex; align-items: center; gap: 10px; background: var(--tangerine-tint);
+    border: 1px solid var(--tangerine); border-radius: 24px; padding: 6px 14px 6px 16px; }
+  .lang-switch-label { font-size: .78rem; font-weight: 700; color: var(--night); }
+  .lang-switch .toggle-group { border-color: var(--tangerine); }
+  .lang-switch .toggle-group button { color: var(--tangerine); font-weight: 700; padding: 6px 14px; font-size: .82rem; }
+  .lang-switch .toggle-group button.active { background: var(--tangerine); color: #fff; }
+
+  /* ---- Top action bar: file actions, reachable from every tab ---- */
+  .top-actions { background: var(--card-alt); border-bottom: 1px solid var(--border);
+    padding: 10px 32px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .top-actions .spacer { flex: 1 1 auto; }
+  .save-status { font-size: .74rem; color: var(--text-light); white-space: nowrap; }
+
+  #dashboard { padding: 26px 32px; max-width: 1400px; margin: 0 auto; }
+
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  .notice { background: var(--sky-tint); border-left: 4px solid var(--sky);
+    padding: 12px 20px; font-size: .83rem; color: #003a52; margin-bottom: 22px; line-height: 1.55; border-radius: 0 8px 8px 0; }
+  .notice strong { color: var(--night); }
+
+  .setup-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(30,30,30,.08); padding: 18px 20px; margin-bottom: 22px;
+    display: flex; gap: 18px; flex-wrap: wrap; align-items: flex-end; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; color: var(--text-light); }
+  .field input, .field select {
+    padding: 8px 11px; border: 1px solid var(--border); border-radius: 6px;
+    font-family: 'Inter', sans-serif; font-size: .85rem; min-width: 170px; background: #fff; color: var(--text);
+  }
+  .field input:focus, .field select:focus { outline: none; border-color: var(--tangerine); }
+  .field.wage input { min-width: 150px; border-color: var(--tangerine); background: var(--tangerine-tint); font-weight: 600; }
+
+  .tab-bar { display: flex; gap: 8px; margin-bottom: 22px; border-bottom: 2px solid var(--border); overflow-x: auto; }
+  .tab-btn { background: none; border: none; padding: 12px 6px; margin-right: 22px; font-family: 'Exo 2', sans-serif;
+    font-weight: 700; font-size: .92rem; color: var(--text-light); cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; }
+  .tab-btn.active { color: var(--night); border-bottom-color: var(--tangerine); }
+  .tab-btn .step-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px;
+    border-radius: 50%; background: var(--border); color: var(--text-light); font-size: .72rem; margin-right: 7px; }
+  .tab-btn.active .step-num { background: var(--tangerine); color: #fff; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .activity-group-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(30,30,30,.08); padding: 18px 20px; margin-bottom: 14px; }
+  .activity-group-card h3 { font-family: 'Exo 2', sans-serif; font-size: .95rem; color: var(--night); margin-bottom: 4px; }
+  .activity-group-card .group-desc { font-size: .78rem; color: var(--text-light); margin-bottom: 12px; }
+  .activity-choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 10px; }
+  .activity-choice { display: flex; align-items: center; gap: 9px; padding: 10px 12px; border: 1px solid var(--border);
+    border-radius: 8px; cursor: pointer; font-size: .84rem; background: var(--card-alt); }
+  .activity-choice:hover { border-color: var(--tangerine); }
+  .activity-choice.checked { border-color: var(--tangerine); background: var(--tangerine-tint); }
+  .activity-choice input { width: 16px; height: 16px; accent-color: var(--tangerine); flex-shrink: 0; }
+  .continue-row { display: flex; justify-content: flex-end; margin-top: 18px; }
+
+  .empty-state { background: var(--card-alt); border: 1px dashed var(--border); border-radius: 12px;
+    padding: 30px; text-align: center; color: var(--text-light); font-size: .88rem; }
+  .empty-state a { color: var(--tangerine); font-weight: 600; cursor: pointer; text-decoration: underline; }
+
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 26px;
+    position: sticky; top: 10px; z-index: 20; }
+  .kpi-card { background: var(--card); border-radius: 12px; padding: 16px 18px;
+    box-shadow: 0 1px 3px rgba(30,30,30,.08); border: 1px solid var(--border);
+    border-left: 4px solid var(--tangerine); }
+  .kpi-card.night { border-left-color: var(--night); background: var(--night); }
+  .kpi-card.night .kpi-label { color: rgba(255,255,255,.7); }
+  .kpi-card.night .kpi-value { color: #fff; }
+  .kpi-card.eggplant { border-left-color: var(--eggplant); }
+  .kpi-card.sky { border-left-color: var(--sky); }
+  .kpi-card.flower { border-left-color: var(--flower); }
+  .kpi-card.mint { border-left-color: var(--mint-dark); }
+  .kpi-card.grey { border-left-color: var(--grey-dark); }
+  .kpi-label { font-size: .68rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .5px; color: var(--text-light); margin-bottom: 5px; }
+  .kpi-value { font-family: 'Exo 2', sans-serif; font-weight: 700; font-size: 1.4rem;
+    color: var(--night); line-height: 1; font-variant-numeric: tabular-nums; }
+  .kpi-value small { font-size: .74rem; font-weight: 600; color: var(--text-light); }
+
+  .section-title { font-family: 'Exo 2', sans-serif; font-weight: 700; font-size: 1.05rem;
+    color: var(--night); margin: 26px 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .section-title:first-of-type { margin-top: 0; }
+  .section-title .edit-activities-link { font-family: 'Inter', sans-serif; font-size: .76rem; font-weight: 600; color: var(--tangerine); cursor: pointer; text-decoration: underline; }
+
+  .category { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(30,30,30,.08); margin-bottom: 14px; overflow: hidden; }
+  .cat-head { display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px; cursor: pointer; flex-wrap: wrap; gap: 10px; background: var(--card-alt); }
+  .cat-head .name { font-family: 'Exo 2', sans-serif; font-weight: 700; font-size: .95rem; color: var(--night); }
+  .cat-head .cat-right { display: flex; align-items: center; gap: 16px; }
+  .cat-head .cat-total { font-family: 'Exo 2', sans-serif; font-weight: 700; font-size: .98rem; color: var(--tangerine);
+    font-variant-numeric: tabular-nums; }
+  .chevron { font-size: .75rem; color: var(--text-light); transition: transform .15s; display: inline-block; }
+  .cat-head.open .chevron { transform: rotate(90deg); }
+
+  .toggle-group { display: inline-flex; border: 1px solid var(--night); border-radius: 20px; overflow: hidden; font-size: .72rem; }
+  .toggle-group button { border: none; background: #fff; color: var(--night); padding: 5px 13px; cursor: pointer; font-weight: 600; font-family: 'Inter', sans-serif; }
+  .toggle-group button.active { background: var(--night); color: #fff; }
+
+  .cat-body { padding: 0; max-height: 0; overflow: hidden; transition: max-height .2s ease; }
+  .cat-body.open { padding: 18px 20px 20px; max-height: 4000px; }
+
+  .component-block { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+  .component-block.not-costed { border-color: var(--grey); }
+  .component-block-head { display: flex; justify-content: space-between; align-items: center;
+    background: var(--card-alt); padding: 9px 14px; gap: 10px; }
+  .component-block-head .c-name { font-size: .78rem; font-weight: 600; color: var(--night); text-transform: uppercase; letter-spacing: .3px; }
+  .component-block-head .c-name .c-hint { text-transform: none; font-weight: 400; color: var(--text-light); font-size: .72rem; letter-spacing: 0; }
+  .component-block-head .c-subtotal { font-size: .8rem; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; text-align: right; }
+  .component-block-head .c-subtotal .c-subtotal-days { display: block; font-size: .7rem; font-weight: 600; color: var(--text-light); }
+  .entry-row { display: flex; gap: 8px; align-items: center; padding: 8px 14px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+  .entry-row input[type=text] { flex: 1.3; min-width: 140px; padding: 6px 9px; border: 1px solid var(--border); border-radius: 5px; font-size: .8rem; }
+  .entry-row input[type=number] { flex: .7; min-width: 90px; padding: 6px 9px; border: 1px solid var(--border); border-radius: 5px; font-size: .8rem; }
+  .entry-row .computed-cost { flex: .8; font-size: .78rem; color: var(--text-light); font-variant-numeric: tabular-nums; text-align: right; padding-right: 4px; }
+  .entry-row .remove-btn { background: none; border: none; color: var(--flower); cursor: pointer; font-size: .95rem; padding: 2px 6px; line-height: 1; }
+  .entry-type-toggle { display: inline-flex; border: 1px solid var(--eggplant); border-radius: 14px; overflow: hidden; font-size: .68rem; flex-shrink: 0; }
+  .entry-type-toggle button { border: none; background: #fff; color: var(--eggplant); padding: 4px 8px; cursor: pointer; font-weight: 600; font-family: 'Inter', sans-serif; }
+  .entry-type-toggle button.active { background: var(--eggplant); color: #fff; }
+  .add-entry-btn { display: block; width: 100%; text-align: left; background: none; border: none;
+    border-top: 1px dashed var(--border); color: var(--tangerine); font-weight: 600; font-size: .78rem;
+    padding: 8px 14px; cursor: pointer; }
+  .add-entry-btn:hover { background: var(--tangerine-tint); }
+
+  .activity-row { border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; background: var(--card-alt); }
+  .activity-top { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+  .activity-top input[type=text] { flex: 1; padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: .82rem; background: #fff; }
+  .activity-remove { background: none; border: 1px solid var(--flower); color: var(--flower); border-radius: 6px;
+    padding: 5px 10px; cursor: pointer; font-size: .74rem; }
+  .activity-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 10px; }
+  .activity-grid .field label { color: var(--text-light); font-weight: 600; }
+  .activity-grid input { background: #fff; }
+  .add-activity-btn { background: #fff; border: 1px dashed var(--night); color: var(--night); border-radius: 6px;
+    padding: 7px 14px; cursor: pointer; font-size: .78rem; font-weight: 600; }
+
+  .activity-hired-block { border: 1px solid var(--eggplant-tint); border-radius: 8px; padding: 10px 12px; margin-top: 10px; background: #fff; }
+  .activity-hired-block .ahb-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+  .activity-hired-block .c-name { font-size: .78rem; font-weight: 600; color: var(--night); text-transform: uppercase; letter-spacing: .3px; }
+  .activity-hired-block .c-name .c-hint { text-transform: none; font-weight: 400; color: var(--text-light); font-size: .72rem; letter-spacing: 0; }
+  .activity-hired-block .ahb-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .activity-hired-block .ahb-row input[type=number] { flex: 1; min-width: 140px; padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: .82rem; background: #fff; }
+  .activity-hired-block .ahb-row .computed-cost { font-size: .8rem; font-weight: 600; color: var(--eggplant); white-space: nowrap; }
+
+  .subtotal-line { font-size: .78rem; color: var(--text-light); text-align: right; margin-top: 8px; }
+  .subtotal-line strong { color: var(--night); font-family: 'Exo 2', sans-serif; }
+  .subtotal-line .note { display: block; font-size: .7rem; color: var(--grey-dark); margin-top: 2px; }
+
+  .table-card { background: var(--card); border-radius: 12px; padding: 22px;
+    box-shadow: 0 1px 3px rgba(30,30,30,.08); border: 1px solid var(--border); margin-top: 24px; }
+  .table-card h3 { font-family: 'Exo 2', sans-serif; font-weight: 600; font-size: .95rem; color: var(--night); margin-bottom: 4px; }
+  .table-card .table-note { font-size: .74rem; color: var(--text-light); margin-bottom: 12px; }
+  table.dt { width: 100%; border-collapse: collapse; font-size: .8rem; }
+  table.dt th { text-align: left; color: var(--text-light); font-weight: 600; padding: 8px 10px; border-bottom: 2px solid var(--border); }
+  table.dt th.num, table.dt td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  table.dt td { padding: 7px 10px; border-bottom: 1px solid var(--border); }
+  table.dt tr.total-row td { font-weight: 700; color: var(--night); background: var(--tangerine-tint); border-top: 2px solid var(--tangerine); }
+
+  .btn { padding: 10px 18px; border-radius: 8px; border: none; font-size: .82rem; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; min-height: 40px; }
+  .btn-primary { background: var(--night); color: #fff; }
+  .btn-save { background: var(--tangerine); color: #fff; }
+  .btn-outline { background: #fff; border: 1px solid var(--night); color: var(--night); }
+  .btn-danger { background: #fff; border: 1px solid var(--flower); color: var(--flower); }
+  .btn-sm { padding: 6px 12px; font-size: .76rem; min-height: 34px; }
+  .btn-icon { border: 1px solid var(--flower); background: #fff; color: var(--flower); border-radius: 6px;
+    width: 34px; height: 34px; cursor: pointer; font-size: .9rem; }
+
+  /* ---- Records list screen ---- */
+  .records-count { color: var(--text-light); font-size: .85rem; margin: -6px 0 14px; }
+  .records-list { display: flex; flex-direction: column; gap: 10px; }
+  .record-card { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap;
+    border: 1px solid var(--border); border-left: 4px solid var(--tangerine); border-radius: 10px;
+    padding: 14px 16px; background: var(--card-alt); }
+  .record-card.current { border-left-color: var(--night); background: #fff; box-shadow: 0 1px 3px rgba(30,30,30,.08); }
+  .record-card-main { flex: 1 1 260px; }
+  .record-card-title { font-weight: 700; color: var(--night); font-family: 'Exo 2', sans-serif; font-size: 1.02rem; }
+  .record-card-sub { color: var(--text-light); font-size: .85rem; margin-top: 2px; }
+  .record-card-total { color: var(--night); font-size: .85rem; font-weight: 600; margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .record-card-date { color: var(--grey-dark); font-size: .76rem; margin-top: 4px; }
+  .record-card-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .records-empty { text-align: center; padding: 40px 20px; }
+  .records-empty h2 { color: var(--night); font-family: 'Exo 2', sans-serif; font-size: 1.1rem; margin-bottom: 8px; }
+  .records-empty p { color: var(--text-light); font-size: .88rem; margin-bottom: 18px; }
+
+  .land-bar { display: flex; height: 9px; border-radius: 5px; overflow: hidden; margin-top: 12px; background: var(--card-alt); }
+  .land-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 7px; font-size: .72rem; color: var(--text-light); }
+  .land-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; }
+  .status-select { border: 1px solid var(--eggplant); border-radius: 14px; background: #fff; color: var(--eggplant);
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: .7rem; padding: 4px 6px; }
+  .results-card { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--night);
+    border-radius: 0; box-shadow: 0 1px 3px rgba(30,30,30,.08); padding: 16px 20px; margin-top: 24px; }
+  .results-card h3 { font-family: 'Exo 2', sans-serif; font-size: .95rem; color: var(--night); margin-bottom: 12px; }
+  .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 14px; }
+  .results-grid .r-label { font-size: .68rem; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; color: var(--text-light); }
+  .results-grid .r-value { font-family: 'Exo 2', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--night);
+    font-variant-numeric: tabular-nums; margin-top: 4px; }
+  table.dt tr.block-row td { background: var(--card-alt); font-weight: 700; color: var(--night); }
+
+  .search-bar { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(30,30,30,.08); padding: 14px 18px; margin-bottom: 14px; }
+  .search-bar .field { flex: 1 1 260px; }
+  .search-bar .field input { min-width: 0; width: 100%; }
+
+  .filter-bar { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(30,30,30,.08); padding: 14px 18px; margin-bottom: 14px; }
+  .filter-bar select { min-width: 150px; }
+  .filter-bar .filter-reset { align-self: flex-end; }
+
+  .warn-note { background: var(--tangerine-tint); border-left: 4px solid var(--tangerine);
+    padding: 10px 16px; font-size: .8rem; color: #8a4500; margin-bottom: 14px; border-radius: 0 8px 8px 0; }
+
+  /* ---- Confirmation dialog. Native confirm() is unreliable in iOS browsers
+         that are not Safari, so this is plain in-page HTML instead. ---- */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(30,30,30,.45);
+    display: flex; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+  .modal-box { background: #fff; border-radius: 12px; padding: 22px; max-width: 380px; width: 100%;
+    box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+  .modal-box p { margin-bottom: 18px; font-size: .95rem; line-height: 1.5; }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+
+  @media (max-width: 900px) {
+    #dashboard { padding: 18px 14px; }
+    header, .top-actions { padding-left: 14px; padding-right: 14px; }
+    .kpi-grid { position: static; }
+  }
+
+  /* ---- Phones: turn wide data tables into stacked cards, one per row.
+         Only presentation changes here; CSV and JSON exports are built
+         from the data, not from this markup, so they are unaffected. ---- */
+  @media (max-width: 700px) {
+    .top-actions { gap: 6px; padding: 8px 12px; }
+    .top-actions .btn { padding: 7px 10px; font-size: .74rem; min-height: 36px; flex: 1 1 auto; }
+    .top-actions .spacer { display: none; }
+    .save-status { flex: 1 1 100%; }
+    .table-card { padding: 14px; }
+    .search-bar { padding: 12px; gap: 10px; }
+    .filter-bar { padding: 12px; gap: 10px; }
+    .filter-bar .field { flex: 1 1 140px; }
+    .filter-bar select { min-width: 0; width: 100%; }
+    .record-card-actions .btn { flex: 1 1 auto; }
+
+    table.dt thead { display: none; }
+    table.dt, table.dt tbody, table.dt tr, table.dt td { display: block; width: 100%; }
+    table.dt tr { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px;
+      padding: 4px 0 6px; background: var(--card); }
+    table.dt td { border-bottom: 1px dotted var(--border); padding: 7px 12px;
+      display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
+    table.dt td:last-child { border-bottom: none; }
+    table.dt td::before { content: attr(data-label); flex: 1 1 auto; text-align: left;
+      font-size: .68rem; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; color: var(--text-light); }
+    table.dt td.num { text-align: right; }
+    table.dt td.row-head { background: var(--card-alt); border-bottom: 1px solid var(--border);
+      font-family: 'Exo 2', sans-serif; font-weight: 700; color: var(--night); font-size: .9rem; display: block; }
+    table.dt td.row-head::before { content: none; }
+    table.dt td.empty-cell { display: none; }
+    table.dt tr.total-row { border: 2px solid var(--tangerine); }
+    table.dt tr.total-row td { background: transparent; }
+    table.dt tr.total-row td.row-head { background: var(--tangerine-tint); }
+  }
+
+  @media print {
+    header, .top-actions, .tab-bar, .btn, .add-entry-btn, .add-activity-btn, .modal-overlay { display: none !important; }
+    .table-card, .category { border: none; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="left">
+    <div class="logo" data-i18n="app_title">CPS Calculator <span data-i18n="app_subtitle">FGD data entry</span></div>
+  </div>
+  <div class="lang-switch">
+    <span class="lang-switch-label" data-i18n="lang_switch_label">Language:</span>
+    <div class="toggle-group" id="langToggle">
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="es">ES</button>
+      <button type="button" data-lang="pt">PT</button>
+    </div>
+  </div>
+</header>
+
+<!-- File actions live here so they are reachable from every tab, not only the last one. -->
+<div class="top-actions">
+  <button type="button" class="btn btn-outline btn-sm" id="btnMyRecords" data-i18n="btn_my_records">My FGDs</button>
+  <button type="button" class="btn btn-save btn-sm" id="btnNewRecord" data-i18n="btn_new_record">+ New FGD</button>
+  <button type="button" class="btn btn-outline btn-sm editor-only" id="btnExportJson" data-i18n="btn_export_this_json">Save this FGD (JSON)</button>
+  <button type="button" class="btn btn-outline btn-sm editor-only" id="btnExportCsv" data-i18n="btn_export_this_csv">Export this FGD (CSV)</button>
+  <button type="button" class="btn btn-primary btn-sm" id="btnExportAllCsv" data-i18n="btn_export_all_csv">Export all (CSV)</button>
+  <button type="button" class="btn btn-primary btn-sm" id="btnExportAllJson" data-i18n="btn_export_all_json">Back up all (JSON)</button>
+  <button type="button" class="btn btn-outline btn-sm" id="btnImportJson" data-i18n="btn_import_json">Load JSON</button>
+  <input type="file" id="importFileInput" accept="application/json,.json" style="display:none;">
+  <button type="button" class="btn btn-danger btn-sm" id="btnDeleteAll" data-i18n="btn_delete_all">Delete all data</button>
+  <span class="spacer"></span>
+  <span class="save-status" id="saveStatus" data-i18n="save_status_auto">Autosaved</span>
+</div>
+
+<div id="dashboard">
+
+  <!-- ============ Screen A: list of FGDs stored on this device ============ -->
+  <div class="screen" id="screenList">
+
+    <div class="tab-bar">
+      <button type="button" class="tab-btn" id="listTabRecords" data-i18n="tab_list_records">My FGDs</button>
+      <button type="button" class="tab-btn" id="listTabCompare" data-i18n="tab_list_compare">Compare FGDs</button>
+    </div>
+
+    <div class="tab-panel" id="listPanelRecords">
+      <div class="notice" data-i18n="records_help"></div>
+      <!-- Deliberately outside #recordsListContainer: that container is rebuilt on every
+           keystroke, and an input inside it would be destroyed and lose focus each time. -->
+      <div class="search-bar" id="recordSearchBar">
+        <div class="field">
+          <label for="recordSearch" data-i18n="search_label">Search</label>
+          <input type="search" id="recordSearch" autocomplete="off" data-i18n-ph="search_placeholder"
+            placeholder="FGD name, cooperative or FLO-ID">
+        </div>
+        <button type="button" class="btn btn-outline btn-sm" id="recordSearchClear" data-i18n="search_clear">Clear</button>
+      </div>
+      <div id="recordsListContainer"></div>
+    </div>
+
+    <div class="tab-panel" id="listPanelCompare">
+      <div class="notice" data-i18n="compare_help"></div>
+      <div id="compareContainer"></div>
+    </div>
+
+  </div>
+
+  <!-- ============ Screen B: one FGD open for editing ============ -->
+  <div class="screen" id="screenEditor">
+
+    <div class="notice" data-i18n="notice"></div>
+
+    <div class="setup-card">
+      <div class="field">
+        <label data-i18n="field_fgd_name">FGD name or code</label>
+        <input type="text" id="fgdName" placeholder="e.g. FGD_Peru_Cusco_01">
+      </div>
+      <div class="field">
+        <label data-i18n="field_flo_id">FLO-ID</label>
+        <input type="text" id="floId" placeholder="FLO-ID" style="min-width:120px">
+      </div>
+      <div class="field">
+        <label data-i18n="field_coop_name">Cooperative name</label>
+        <input type="text" id="coopName" placeholder="" style="min-width:180px">
+      </div>
+      <div class="field">
+        <label data-i18n="field_area_unit">Area unit</label>
+        <select id="areaUnit">
+          <option value="ha" data-i18n="area_unit_ha">Hectare (ha)</option>
+          <option value="mz" data-i18n="area_unit_mz">Manzana</option>
+          <option value="acre" data-i18n="area_unit_acre">Acre</option>
+          <option value="otro" data-i18n="area_unit_other">Other</option>
+        </select>
+      </div>
+      <div class="field" id="areaUnitOtherField" style="display:none;">
+        <label data-i18n="field_area_unit_other_name">Name of that unit</label>
+        <input type="text" id="areaUnitOther" placeholder="e.g. cuerda, tarea" style="min-width:150px">
+      </div>
+      <div class="field">
+        <label data-i18n="field_currency">Local currency</label>
+        <input type="text" id="currency" placeholder="e.g. PEN, COP, GTQ" style="min-width:110px">
+      </div>
+      <div class="field wage">
+        <label data-i18n="field_daily_wage">Daily wage (currency/day)</label>
+        <input type="number" step="any" min="0" id="dailyWage" placeholder="0.00">
+      </div>
+    </div>
+
+    <div class="tab-bar">
+      <button type="button" class="tab-btn" id="tabBtnActivities" data-tab="activities"><span class="step-num">1</span><span data-i18n="tab1_label">Farm activities</span></button>
+      <button type="button" class="tab-btn" id="tabBtnQuestionnaire" data-tab="questionnaire"><span class="step-num">2</span><span data-i18n="tab2_label">Cost questionnaire</span></button>
+    </div>
+
+    <div class="tab-panel" id="tabPanelActivities">
+      <div class="activity-group-card">
+        <h3 data-i18n="land_card_title">Coffee land on the farm</h3>
+        <div class="group-desc" data-i18n="land_card_desc"></div>
+        <div class="setup-card" style="box-shadow:none; border:none; padding:0; margin-bottom:0;">
+          <div class="field">
+            <label data-i18n-unit="area_establishment_l">Establishment (new areas)</label>
+            <input type="number" step="any" min="0" id="areaEstablishment" placeholder="0.00">
+          </div>
+          <div class="field">
+            <label data-i18n-unit="area_renovation_l">Renovation / rehabilitation</label>
+            <input type="number" step="any" min="0" id="areaRenovation" placeholder="0.00">
+          </div>
+          <div class="field">
+            <label data-i18n-unit="area_productive_l">Productive areas</label>
+            <input type="number" step="any" min="0" id="areaProductive" placeholder="0.00">
+          </div>
+          <div class="field">
+            <label data-i18n="area_total">Total coffee area</label>
+            <input type="text" id="areaTotalDisplay" disabled style="background:var(--card-alt); font-weight:600; color:var(--eggplant);">
+          </div>
+        </div>
+        <div class="land-bar" id="landBar"></div>
+        <div class="land-legend" id="landLegend"></div>
+        <div class="table-note" style="margin-top:10px;" id="landNote"></div>
+      </div>
+      <div class="activity-group-card">
+        <h3 data-i18n="presentation_card_title">Coffee type and yield</h3>
+        <div class="group-desc" data-i18n="presentation_card_desc"></div>
+        <div class="setup-card" style="box-shadow:none; border:none; padding:0; margin-bottom:0;">
+          <div class="field">
+            <label data-i18n="field_presentation">Coffee type sold</label>
+            <select id="presentationSelect"></select>
+          </div>
+          <div class="field">
+            <label data-i18n="field_gbe_ratio">Kg of this type = 1 kg GBE</label>
+            <input type="number" step="any" min="0" id="gbeRatioInput" placeholder="e.g. 5.00">
+          </div>
+          <div class="field">
+            <label data-i18n-unit="field_yield">Real yield (kg per area unit, in that type)</label>
+            <input type="number" step="any" min="0" id="yieldPerHaInput" placeholder="0.00">
+          </div>
+          <div class="field">
+            <label data-i18n="field_yield_equiv">Equivalent yield</label>
+            <input type="text" id="yieldGbeDisplay" disabled style="background:var(--card-alt); font-weight:600; color:var(--eggplant);">
+          </div>
+        </div>
+      </div>
+      <div id="activityGroupsContainer"></div>
+      <div class="continue-row">
+        <button type="button" class="btn btn-primary" id="continueToQuestionnaire" data-i18n="continue_btn">Continue to questionnaire →</button>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tabPanelQuestionnaire">
+
+      <div class="kpi-grid">
+        <div class="kpi-card night">
+          <div class="kpi-label" data-i18n="kpi_total">CPS Total</div>
+          <div class="kpi-value" id="totalCosp">0.00 <small data-i18n="kpi_total_unit">currency/unit</small></div>
+        </div>
+        <div class="kpi-card tangerine">
+          <div class="kpi-label" data-i18n="kpi_inputs">Inputs</div>
+          <div class="kpi-value" id="totalInputs">0.00</div>
+        </div>
+        <div class="kpi-card grey">
+          <div class="kpi-label" data-i18n="kpi_household_days">Family labour days</div>
+          <div class="kpi-value" id="totalHouseholdDays">0.0 <small data-i18n="ph_days">days</small></div>
+        </div>
+        <div class="kpi-card eggplant">
+          <div class="kpi-label" data-i18n="kpi_hired_cost">Paid labour (cost)</div>
+          <div class="kpi-value" id="totalHired">0.00</div>
+        </div>
+        <div class="kpi-card eggplant">
+          <div class="kpi-label" data-i18n="kpi_hired_days">Paid labour days</div>
+          <div class="kpi-value" id="totalHiredDays">0.0 <small data-i18n="ph_days">days</small></div>
+        </div>
+        <div class="kpi-card sky">
+          <div class="kpi-label" data-i18n="kpi_variable">Variable costs</div>
+          <div class="kpi-value" id="totalVariable">0.00</div>
+        </div>
+        <div class="kpi-card mint">
+          <div class="kpi-label" data-i18n="kpi_fixed">Fixed costs</div>
+          <div class="kpi-value" id="totalFixed">0.00</div>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <span data-i18n="section_categories">Cost categories</span>
+        <span class="edit-activities-link" id="editActivitiesLink" data-i18n="edit_activities_link">Edit selected activities</span>
+      </div>
+      <div id="categoriesContainer"></div>
+
+      <div class="results-card" id="resultsCard" style="display:none;">
+        <h3 data-i18n="results_title">Results for the whole farm</h3>
+        <div class="results-grid" id="resultsGrid"></div>
+      </div>
+
+      <div class="table-card">
+        <h3 data-i18n="table_title">Summary by category</h3>
+        <div class="table-note" data-i18n="table_note"></div>
+        <table class="dt" id="summaryTable">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-overlay" id="confirmModal" style="display:none;">
+  <div class="modal-box">
+    <p id="confirmModalMessage"></p>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-outline" id="confirmModalCancel" data-i18n="modal_cancel">Cancel</button>
+      <button type="button" class="btn btn-danger" id="confirmModalOk" data-i18n="modal_confirm">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script id="appScript">
+// ==================== TRANSLATIONS ====================
+// Kept deliberately plain/simple in all three languages, since farmers use this tool directly.
+// Default language is English; Spanish and Portuguese (Brazil) are machine-translated first
+// drafts pending native-speaker review.
+const TRANSLATIONS = {
+  en: {
+    app_title: "CPS Calculator", app_subtitle: "FGD data entry",
+    notice: "How to use this tool: first, on Tab 1, mark which activities happen on the farm and what type of coffee is sold. Then go to Tab 2, where only the cost questions that apply will show up. Everything you type is saved automatically on this device, inside this FGD. For paid workers, you can enter days worked or a fixed contract amount, whichever is easier. For tools or equipment that last several years (like a sprayer pump), enter how much it cost and how many years it lasts; the tool works out the yearly cost on its own. Use the buttons at the top to start another FGD, to export one FGD, or to export all of them together.",
+    lang_switch_label: "Language:",
+    field_fgd_name: "FGD name or code", field_flo_id: "FLO-ID", field_coop_name: "Cooperative name",
+    field_area_unit: "Area unit", area_unit_ha: "Hectare (ha)", area_unit_mz: "Manzana", area_unit_acre: "Acre", area_unit_other: "Other",
+    field_area_unit_other_name: "Name of that unit",
+    unit_short_ha: "ha", unit_short_mz: "mz", unit_short_acre: "acre", unit_generic: "area unit", unit_currency_generic: "currency",
+    field_currency: "Local currency", field_daily_wage: "Daily wage (currency/day)",
+    save_status_auto: "Saved on this device", save_status_blocked: "Cannot save on this device — export your data before closing",
+    save_status_json: "JSON file downloaded", save_status_csv: "CSV file downloaded",
+    tab1_label: "Farm activities", tab2_label: "Cost questionnaire",
+    continue_btn: "Continue to questionnaire →",
+    presentation_card_title: "Coffee type and yield",
+    presentation_card_desc: "Used to turn the production cost into a price per kg. The GBE conversion ratio (how many kg of this type equal 1 kg GBE) fills in automatically, but you can adjust it.",
+    field_presentation: "Coffee type sold", field_gbe_ratio: "Kg of this type = 1 kg GBE",
+    field_yield: "Real yield (kg/{u}, in that type)", field_yield_equiv: "Equivalent yield",
+    presentation_cherry: "Red cherry", presentation_dried_cherry: "Dried cherry", presentation_wet_parchment: "Wet parchment",
+    presentation_dry_parchment: "Dry parchment", presentation_green_bean: "Green bean (GBE)",
+    activity_group1_title: "1. Crop Establishment", activity_group1_desc: "Activities for starting or renewing coffee plots.",
+    activity_group2_title: "2. Crop Management", activity_group2_desc: "Ongoing activities to keep coffee plants healthy and productive.",
+    activity_group3_title: "3. Harvesting and Processing", activity_group3_desc: "Activities to pick the coffee and prepare it for sale.",
+    opt_nursery_establishment: "Nursery Establishment", opt_land_preparation: "Land Preparation", opt_planting_grafting_renovation: "Planting, Grafting and Renovation",
+    opt_fertilization: "Fertilization", opt_pest_disease_control: "Pest and Disease Control", opt_weed_management: "Weed Management", opt_pruning_crop_rejuvenation: "Pruning and Crop Rejuvenation",
+    opt_coffee_harvesting: "Coffee Harvesting", opt_coffee_processing: "Coffee Processing",
+    cat_land_prep: "Land Preparation", cat_renovation: "Nursery Establishment and Planting/Renovation", cat_fertilization: "Fertilization",
+    cat_maintenance: "Pruning and Crop Rejuvenation", cat_ipdm: "Pest and Disease Control", cat_weed: "Weed Management",
+    cat_harvest: "Coffee Harvesting", cat_postharvest: "Coffee Processing", cat_admin: "Farm Administration and Services",
+    ex_land_prep_input: "Machinery rental", ex_land_prep_labour: "Clearing and leveling the land", ex_land_prep_activity: "Leveling the land",
+    ex_renovation_input: "Coffee seedlings", ex_renovation_labour: "Planting seedlings", ex_renovation_activity: "Planting seedlings",
+    ex_fertilization_input: "Urea 46%", ex_fertilization_labour: "Applying fertilizer", ex_fertilization_activity: "Vegetative-stage application",
+    ex_maintenance_input: "Pruning tools", ex_maintenance_labour: "Maintenance pruning", ex_maintenance_activity: "Maintenance pruning",
+    ex_ipdm_input: "Fungicide", ex_ipdm_labour: "Spraying", ex_ipdm_activity: "Coffee borer control",
+    ex_weed_input: "Herbicide", ex_weed_labour: "Manual weeding", ex_weed_activity: "Manual weeding",
+    ex_harvest_input: "Harvest sacks", ex_harvest_labour: "Picking cherries", ex_harvest_activity: "Picking cherries",
+    ex_postharvest_input: "Fuel for pulping machine", ex_postharvest_labour: "Pulping and drying", ex_postharvest_activity: "Pulping and drying",
+    ex_admin_input: "Administrative services", ex_admin_labour: "Farm administration", ex_admin_activity: "Farm administration",
+    ex_default_input: "input", ex_default_labour: "activity", ex_default_activity: "activity",
+    comp_inputs: "Inputs", comp_household: "Family labour", comp_household_hint: "not included in the cost total",
+    comp_hired: "Paid labour", comp_hired_hint: "by day or by contract",
+    comp_variable: "Variable costs", comp_fixed: "Fixed costs", comp_fixed_hint: "purchase cost ÷ useful life",
+    mode_global: "Global", mode_activity: "By activity",
+    entrytype_days: "By day", entrytype_lumpsum: "Contract",
+    ph_description_generic: "Description", ph_cost_generic: "Cost description",
+    ph_amount: "amount", ph_days: "days", ph_fixed_amount: "fixed amount", ph_purchase_cost: "purchase cost", ph_useful_life: "useful life (years)",
+    ph_activity_name: "Activity name (e.g.", ph_tool_equipment: "Description (e.g. tool or equipment)",
+    add_entry_prefix: "+ Add", add_activity_btn: "+ Add activity", remove_btn_title: "Remove",
+    kpi_total: "CPS Total", kpi_total_unit: "{c}/{u}", kpi_inputs: "Inputs", kpi_household_days: "Family labour days",
+    kpi_hired_cost: "Paid labour (cost)", kpi_hired_days: "Paid labour days", kpi_variable: "Variable costs", kpi_fixed: "Fixed costs",
+    section_categories: "Cost categories", edit_activities_link: "Edit selected activities",
+    empty_categories: "No activities selected yet.", empty_categories_link: "Go to Tab 1 to select the farm's activities.",
+    empty_summary: "No category selected.",
+    subtotal_prefix: "Subtotal", subtotal_unit: "{c} / {u}",
+    subtotal_note: "Family labour:", subtotal_note_mid: "days · Paid labour:", subtotal_note_wage: "days (wage",
+    table_title: "Summary by category", table_note: "Totals only — the line-by-line detail stays in the questionnaire, not in this summary.",
+    th_category: "Category", th_mode: "Entry mode", th_hh_days: "Family labour days", th_hired_days: "Paid labour days",
+    th_total: "Total ({c}/{u})", th_price_pres: "Price/kg (coffee type)", th_price_gbe: "Price/kg GBE",
+    total_cps_row: "Total CPS",
+    yield_gbe_suffix: "kg GBE/{u}",
+    unit_per_year: "/year", unit_per_area: "/{u}", cost_colon: "Cost:",
+    // ---- records list ----
+    btn_my_records: "My FGDs", btn_new_record: "+ New FGD",
+    btn_export_this_json: "Save this FGD (JSON)", btn_export_this_csv: "Export this FGD (CSV)",
+    btn_export_all_csv: "Export all (CSV)", btn_export_all_json: "Back up all (JSON)",
+    btn_import_json: "Load JSON", btn_delete_all: "Delete all data",
+    btn_open_record: "Open", btn_delete_record: "Delete this FGD",
+    records_heading: "FGDs on this device",
+    records_help: "Each FGD you capture is stored separately on this device. Open one to keep working on it, or start a new one. Nothing is sent anywhere: to get the data out, use \"Export all (CSV)\" for a single file with one row per FGD, or \"Back up all (JSON)\" to move everything to another device.",
+    records_count_suffix: "FGD(s) saved on this device",
+    records_empty_title: "No FGDs saved yet",
+    records_empty_body: "Start your first FGD. It stays on this device until you export it.",
+    untitled_fgd: "FGD without a name", no_coop: "Cooperative not entered",
+    col_updated: "Last change", record_open_now: "Open now",
+    // ---- compare ----
+    land_card_title: "Coffee land on the farm",
+    land_card_desc: "Split the coffee area by the state it is in. Costs for each block are entered per unit of that block's area, and the tool multiplies them by it. Leave all three blank to keep working per unit of area, as before.",
+    area_establishment: "Establishment (new areas)", area_renovation: "Renovation / rehabilitation",
+    area_productive: "Productive areas", area_total: "Total coffee area",
+    area_establishment_l: "Establishment ({u})", area_renovation_l: "Renovation ({u})", area_productive_l: "Productive ({u})",
+    land_note_blank: "No areas entered: totals stay as a cost per unit of area, and the price per kg uses the yield on its own.",
+    land_note_active: "Areas entered: the three blocks are summed as they stand, with no amortisation. A year with new plantings reads as a more expensive year, which is the point.",
+    status_label: "Applies to",
+    status_establishment: "Establishment", status_renovation: "Renovation",
+    status_productive: "Productive", status_annual: "Annual overhead",
+    status_hint_annual: "entered as a yearly total, not per unit of area",
+    th_status: "Applies to", th_annual_cost: "Annual cost", th_cost_per_area: "Cost per unit of its area",
+    subtotal_block: "Subtotal", block_area_suffix: "of area",
+    results_title: "Results for the whole farm",
+    res_farm_area: "Total coffee area", res_production: "Production", res_production_gbe: "Production (GBE)",
+    res_cost_per_area: "Cost per unit of total area", res_total_annual: "Total annual cost",
+    kpi_total_annual: "Total annual cost",
+    subtotal_unit_annual: "{c} / year",
+    th_farm_area: "Farm area", th_annual_cost_compare: "Annual cost",
+    tab_list_records: "My FGDs", tab_list_compare: "Compare FGDs",
+    search_label: "Search", search_placeholder: "FGD name, cooperative or FLO-ID", search_clear: "Clear",
+    search_no_match: "No FGD matches that search.", search_clear_link: "Clear the search",
+    records_count_filtered: "Showing {n} of {total} FGDs",
+    compare_help: "Every FGD saved on this device, side by side. Use the filters to compare like with like: a price per kg of cherry and a price per kg of parchment are not the same thing. The price per kg GBE is the one figure that is comparable across coffee types.",
+    compare_need_more: "Save at least two FGDs to compare them.",
+    compare_no_match: "No FGD matches these filters.",
+    compare_mixed_currency: "These FGDs do not all use the same currency or area unit, so the money averages are left blank. Filter by currency and area unit to see them.",
+    compare_mixed_presentation: "These FGDs do not all sell the same coffee type, so the yield and price-per-kg averages are left blank. The price per kg GBE stays comparable. Filter by coffee type to see the rest.",
+    compare_avg: "Average",
+    compare_mixed_basis: "Some of these FGDs have no farm areas entered, so they have no annual cost. The farm area and annual cost averages are left blank rather than covering only part of the set.",
+    filter_presentation: "Coffee type", filter_currency: "Currency", filter_area_unit: "Area unit",
+    filter_all: "All", filter_reset: "Clear filters",
+    th_fgd: "FGD", th_coop: "Cooperative", th_currency: "Currency / unit", th_wage: "Daily wage", th_total_compare: "Total CPS",
+    th_type: "Coffee type", th_yield: "Yield", th_yield_gbe: "Yield (GBE)",
+    // ---- confirmations ----
+    modal_cancel: "Cancel", modal_confirm: "Confirm", modal_delete: "Delete",
+    confirm_delete_record: "Delete this FGD and everything entered in it? This cannot be undone.",
+    confirm_delete_all: "Delete every FGD stored on this device? This cannot be undone. Export a JSON backup first if you are not sure.",
+    confirm_import: "Load FGDs from \"FILENAME\"? They are added to the list; nothing already on this device is deleted.",
+    alert_import_invalid: "This is not a valid file from this calculator. Nothing was loaded.",
+    import_done: "FGD(s) loaded"
+  },
+  es: {
+    app_title: "Calculadora CPS", app_subtitle: "Captura en FGD",
+    notice: "Cómo usar esta herramienta: primero, en la Pestaña 1, marquen qué actividades hacen en la finca y qué tipo de café venden. Luego pasen a la Pestaña 2, donde solo aparecerán las preguntas de costos que les corresponden. Todo lo que escriban queda guardado automáticamente en este dispositivo, dentro de este FGD. Para el pago a trabajadores contratados, pueden anotar los días trabajados o el monto de un contrato, lo que sea más fácil. Para herramientas o equipos que duran varios años (como una bomba de fumigar), anoten cuánto costaron y cuántos años duran; la herramienta calcula sola cuánto corresponde por año. Usen los botones de arriba para empezar otro FGD, exportar un FGD, o exportar todos juntos.",
+    lang_switch_label: "Idioma:",
+    field_fgd_name: "Nombre o código del FGD", field_flo_id: "FLO-ID", field_coop_name: "Nombre de la cooperativa",
+    field_area_unit: "Unidad de área", area_unit_ha: "Hectárea (ha)", area_unit_mz: "Manzana", area_unit_acre: "Acre", area_unit_other: "Otra",
+    field_area_unit_other_name: "Nombre de esa unidad",
+    unit_short_ha: "ha", unit_short_mz: "mz", unit_short_acre: "acre", unit_generic: "unidad", unit_currency_generic: "moneda",
+    field_currency: "Moneda local", field_daily_wage: "Jornal diario (moneda/día)",
+    save_status_auto: "Guardado en este dispositivo", save_status_blocked: "No se puede guardar en este dispositivo — exporte sus datos antes de cerrar",
+    save_status_json: "Archivo JSON descargado", save_status_csv: "Archivo CSV descargado",
+    tab1_label: "Actividades de la finca", tab2_label: "Cuestionario de costos",
+    continue_btn: "Continuar al cuestionario →",
+    presentation_card_title: "Presentación del café y rendimiento",
+    presentation_card_desc: "Se usa para convertir el costo de producción en un precio por kg. El ratio de conversión a GBE (cuántos kg de esta presentación equivalen a 1 kg GBE) se autocompleta, pero puede ajustarlo.",
+    field_presentation: "Presentación del café", field_gbe_ratio: "Kg de esta presentación = 1 kg GBE",
+    field_yield: "Rendimiento real (kg/{u} en esa presentación)", field_yield_equiv: "Rendimiento equivalente",
+    presentation_cherry: "Cereza roja", presentation_dried_cherry: "Cereza seca", presentation_wet_parchment: "Pergamino húmedo",
+    presentation_dry_parchment: "Pergamino seco", presentation_green_bean: "Grano verde (GBE)",
+    activity_group1_title: "1. Establecimiento del Cultivo", activity_group1_desc: "Actividades relacionadas con el inicio o la renovación de los lotes de café.",
+    activity_group2_title: "2. Manejo del Cultivo", activity_group2_desc: "Actividades continuas para mantener las plantas de café sanas y productivas.",
+    activity_group3_title: "3. Cosecha y Procesamiento", activity_group3_desc: "Actividades para recolectar el café y prepararlo para la venta.",
+    opt_nursery_establishment: "Establecimiento de Vivero", opt_land_preparation: "Preparación de Tierra", opt_planting_grafting_renovation: "Siembra, Injerto y Renovación",
+    opt_fertilization: "Fertilización", opt_pest_disease_control: "Control de Plagas y Enfermedades", opt_weed_management: "Manejo de Malezas", opt_pruning_crop_rejuvenation: "Poda y Rejuvenecimiento del Cultivo",
+    opt_coffee_harvesting: "Cosecha de Café", opt_coffee_processing: "Procesamiento de Café",
+    cat_land_prep: "Preparación de Tierra", cat_renovation: "Establecimiento de Vivero y Siembra/Renovación", cat_fertilization: "Fertilización",
+    cat_maintenance: "Poda y Rejuvenecimiento del Cultivo", cat_ipdm: "Control de Plagas y Enfermedades", cat_weed: "Manejo de Malezas",
+    cat_harvest: "Cosecha de Café", cat_postharvest: "Procesamiento de Café", cat_admin: "Administración y Servicios de la Finca",
+    ex_land_prep_input: "Alquiler de maquinaria", ex_land_prep_labour: "Limpieza y nivelación del terreno", ex_land_prep_activity: "Nivelación del terreno",
+    ex_renovation_input: "Plántulas de café", ex_renovation_labour: "Siembra de plántulas", ex_renovation_activity: "Siembra de plántulas",
+    ex_fertilization_input: "Urea 46%", ex_fertilization_labour: "Aplicación de fertilizante", ex_fertilization_activity: "Aplicación etapa vegetativa",
+    ex_maintenance_input: "Herramientas de poda", ex_maintenance_labour: "Poda de mantenimiento", ex_maintenance_activity: "Poda de mantenimiento",
+    ex_ipdm_input: "Fungicida", ex_ipdm_labour: "Fumigación", ex_ipdm_activity: "Control de broca",
+    ex_weed_input: "Herbicida", ex_weed_labour: "Deshierbe manual", ex_weed_activity: "Deshierbe manual",
+    ex_harvest_input: "Sacos de cosecha", ex_harvest_labour: "Recolección de cerezas", ex_harvest_activity: "Recolección de cerezas",
+    ex_postharvest_input: "Combustible para despulpadora", ex_postharvest_labour: "Despulpado y secado", ex_postharvest_activity: "Despulpado y secado",
+    ex_admin_input: "Servicios administrativos", ex_admin_labour: "Gestión administrativa", ex_admin_activity: "Gestión administrativa",
+    ex_default_input: "insumo", ex_default_labour: "actividad", ex_default_activity: "actividad",
+    comp_inputs: "Insumos", comp_household: "Mano de obra familiar", comp_household_hint: "no se incluye en el costo total",
+    comp_hired: "Mano de obra contratada", comp_hired_hint: "por jornal o por contrato",
+    comp_variable: "Costos variables", comp_fixed: "Costos fijos", comp_fixed_hint: "costo de compra ÷ vida útil",
+    mode_global: "Entrada Global", mode_activity: "Por actividad",
+    entrytype_days: "Jornal", entrytype_lumpsum: "Contrato",
+    ph_description_generic: "Descripción", ph_cost_generic: "Descripción del costo",
+    ph_amount: "monto", ph_days: "días", ph_fixed_amount: "monto fijo", ph_purchase_cost: "costo de compra", ph_useful_life: "vida útil (años)",
+    ph_activity_name: "Nombre de la actividad (ej.", ph_tool_equipment: "Descripción (ej. herramienta o equipo)",
+    add_entry_prefix: "+ Agregar", add_activity_btn: "+ Agregar actividad", remove_btn_title: "Eliminar",
+    kpi_total: "CPS Total", kpi_total_unit: "{c}/{u}", kpi_inputs: "Insumos", kpi_household_days: "Días MO familiar",
+    kpi_hired_cost: "MO contratada (costo)", kpi_hired_days: "Días MO contratada", kpi_variable: "Costos variables", kpi_fixed: "Costos fijos",
+    section_categories: "Categorías de costo", edit_activities_link: "Editar actividades seleccionadas",
+    empty_categories: "Ninguna actividad seleccionada todavía.", empty_categories_link: "Ve a la pestaña 1 para seleccionar las actividades de la finca.",
+    empty_summary: "Ninguna categoría seleccionada.",
+    subtotal_prefix: "Subtotal", subtotal_unit: "{c} / {u}",
+    subtotal_note: "MO familiar:", subtotal_note_mid: "días · MO contratada:", subtotal_note_wage: "días (jornal",
+    table_title: "Resumen por categoría", table_note: "Solo totales — el detalle por línea queda en el cuestionario, no en este resumen.",
+    th_category: "Categoría", th_mode: "Modo de entrada", th_hh_days: "Días MO familiar", th_hired_days: "Días MO contratada",
+    th_total: "Total ({c}/{u})", th_price_pres: "Precio/kg (presentación)", th_price_gbe: "Precio/kg GBE",
+    total_cps_row: "Total CPS",
+    yield_gbe_suffix: "kg GBE/{u}",
+    unit_per_year: "/año", unit_per_area: "/{u}", cost_colon: "Costo:",
+    btn_my_records: "Mis FGD", btn_new_record: "+ Nuevo FGD",
+    btn_export_this_json: "Guardar este FGD (JSON)", btn_export_this_csv: "Exportar este FGD (CSV)",
+    btn_export_all_csv: "Exportar todos (CSV)", btn_export_all_json: "Respaldar todos (JSON)",
+    btn_import_json: "Cargar JSON", btn_delete_all: "Borrar todos los datos",
+    btn_open_record: "Abrir", btn_delete_record: "Borrar este FGD",
+    records_heading: "FGD guardados en este dispositivo",
+    records_help: "Cada FGD que capturen se guarda por separado en este dispositivo. Abran uno para seguir trabajando en él, o empiecen uno nuevo. Nada se envía a ningún lado: para sacar los datos, usen \"Exportar todos (CSV)\" para un solo archivo con una fila por FGD, o \"Respaldar todos (JSON)\" para pasar todo a otro dispositivo.",
+    records_count_suffix: "FGD guardados en este dispositivo",
+    records_empty_title: "Todavía no hay FGD guardados",
+    records_empty_body: "Empiecen su primer FGD. Se queda en este dispositivo hasta que lo exporten.",
+    untitled_fgd: "FGD sin nombre", no_coop: "Cooperativa sin anotar",
+    col_updated: "Último cambio", record_open_now: "Abierto ahora",
+    land_card_title: "Tierra de café en la finca",
+    land_card_desc: "Dividan el área de café según el estado en que está. Los costos de cada bloque se anotan por unidad de área de ese bloque, y la herramienta los multiplica por ella. Si dejan los tres en blanco, todo sigue funcionando por unidad de área, como antes.",
+    area_establishment: "Establecimiento (áreas nuevas)", area_renovation: "Renovación / rehabilitación",
+    area_productive: "Áreas productivas", area_total: "Área total de café",
+    area_establishment_l: "Establecimiento ({u})", area_renovation_l: "Renovación ({u})", area_productive_l: "Productiva ({u})",
+    land_note_blank: "Sin áreas anotadas: los totales quedan como costo por unidad de área, y el precio por kg usa solo el rendimiento.",
+    land_note_active: "Áreas anotadas: los tres bloques se suman tal cual, sin amortizar nada. Un año con siembras nuevas sale como un año más caro, que es justamente la idea.",
+    status_label: "Corresponde a",
+    status_establishment: "Establecimiento", status_renovation: "Renovación",
+    status_productive: "Productiva", status_annual: "Costo anual fijo",
+    status_hint_annual: "se anota como total del año, no por unidad de área",
+    th_status: "Corresponde a", th_annual_cost: "Costo anual", th_cost_per_area: "Costo por unidad de su área",
+    subtotal_block: "Subtotal", block_area_suffix: "de área",
+    results_title: "Resultados de toda la finca",
+    res_farm_area: "Área total de café", res_production: "Producción", res_production_gbe: "Producción (GBE)",
+    res_cost_per_area: "Costo por unidad de área total", res_total_annual: "Costo anual total",
+    kpi_total_annual: "Costo anual total",
+    subtotal_unit_annual: "{c} / año",
+    th_farm_area: "Área de la finca", th_annual_cost_compare: "Costo anual",
+    tab_list_records: "Mis FGD", tab_list_compare: "Comparar FGD",
+    search_label: "Buscar", search_placeholder: "Nombre del FGD, cooperativa o FLO-ID", search_clear: "Limpiar",
+    search_no_match: "Ningún FGD coincide con esa búsqueda.", search_clear_link: "Quitar la búsqueda",
+    records_count_filtered: "Mostrando {n} de {total} FGD",
+    compare_help: "Todos los FGD guardados en este dispositivo, uno al lado del otro. Usen los filtros para comparar lo comparable: un precio por kg de cereza y uno por kg de pergamino no son lo mismo. El precio por kg GBE es el único que se puede comparar entre presentaciones distintas.",
+    compare_need_more: "Guarden al menos dos FGD para poder compararlos.",
+    compare_no_match: "Ningún FGD coincide con estos filtros.",
+    compare_mixed_currency: "Estos FGD no usan todos la misma moneda o unidad de área, así que los promedios de dinero se dejan en blanco. Filtren por moneda y unidad de área para verlos.",
+    compare_mixed_presentation: "Estos FGD no venden todos la misma presentación, así que los promedios de rendimiento y de precio por kg se dejan en blanco. El precio por kg GBE sigue siendo comparable. Filtren por presentación para ver el resto.",
+    compare_avg: "Promedio",
+    compare_mixed_basis: "Algunos de estos FGD no tienen áreas anotadas, así que no tienen costo anual. Los promedios de área y de costo anual se dejan en blanco en vez de cubrir solo una parte del grupo.",
+    filter_presentation: "Presentación", filter_currency: "Moneda", filter_area_unit: "Unidad de área",
+    filter_all: "Todas", filter_reset: "Quitar filtros",
+    th_fgd: "FGD", th_coop: "Cooperativa", th_currency: "Moneda / unidad", th_wage: "Jornal diario", th_total_compare: "CPS Total",
+    th_type: "Presentación", th_yield: "Rendimiento", th_yield_gbe: "Rendimiento (GBE)",
+    modal_cancel: "Cancelar", modal_confirm: "Confirmar", modal_delete: "Borrar",
+    confirm_delete_record: "¿Borrar este FGD y todo lo capturado en él? No se puede deshacer.",
+    confirm_delete_all: "¿Borrar todos los FGD guardados en este dispositivo? No se puede deshacer. Si no están seguros, hagan primero un respaldo JSON.",
+    confirm_import: "¿Cargar los FGD del archivo \"FILENAME\"? Se agregan a la lista; no se borra nada de lo que ya está en este dispositivo.",
+    alert_import_invalid: "Este archivo no es un archivo válido de la calculadora. No se cargó nada.",
+    import_done: "FGD cargados"
+  },
+  pt: {
+    app_title: "Calculadora CPS", app_subtitle: "Coleta no FGD",
+    notice: "Como usar esta ferramenta: primeiro, na Aba 1, marquem quais atividades são feitas na propriedade e qual tipo de café é vendido. Depois vão para a Aba 2, onde só aparecem as perguntas de custo que se aplicam. Tudo que vocês digitarem fica salvo automaticamente neste dispositivo, dentro deste FGD. Para trabalhadores contratados, podem anotar os dias trabalhados ou o valor de um contrato, o que for mais fácil. Para ferramentas ou equipamentos que duram vários anos (como uma bomba de pulverizar), anotem quanto custou e quantos anos dura; a ferramenta calcula sozinha quanto corresponde por ano. Usem os botões de cima para começar outro FGD, exportar um FGD, ou exportar todos juntos.",
+    lang_switch_label: "Idioma:",
+    field_fgd_name: "Nome ou código do FGD", field_flo_id: "FLO-ID", field_coop_name: "Nome da cooperativa",
+    field_area_unit: "Unidade de área", area_unit_ha: "Hectare (ha)", area_unit_mz: "Manzana", area_unit_acre: "Acre", area_unit_other: "Outra",
+    field_area_unit_other_name: "Nome dessa unidade",
+    unit_short_ha: "ha", unit_short_mz: "mz", unit_short_acre: "acre", unit_generic: "unidade", unit_currency_generic: "moeda",
+    field_currency: "Moeda local", field_daily_wage: "Diária (moeda/dia)",
+    save_status_auto: "Salvo neste dispositivo", save_status_blocked: "Não é possível salvar neste dispositivo — exporte seus dados antes de fechar",
+    save_status_json: "Arquivo JSON baixado", save_status_csv: "Arquivo CSV baixado",
+    tab1_label: "Atividades da propriedade", tab2_label: "Questionário de custos",
+    continue_btn: "Continuar para o questionário →",
+    presentation_card_title: "Tipo de café e produtividade",
+    presentation_card_desc: "Usado para transformar o custo de produção em preço por kg. A razão de conversão para GBE (quantos kg desse tipo equivalem a 1 kg GBE) é preenchida automaticamente, mas pode ser ajustada.",
+    field_presentation: "Tipo de café vendido", field_gbe_ratio: "Kg deste tipo = 1 kg GBE",
+    field_yield: "Produtividade real (kg/{u}, nesse tipo)", field_yield_equiv: "Produtividade equivalente",
+    presentation_cherry: "Cereja", presentation_dried_cherry: "Cereja seca", presentation_wet_parchment: "Perg. lavado",
+    presentation_dry_parchment: "Perg. seco", presentation_green_bean: "Verde (GBE)",
+    activity_group1_title: "1. Implantação da Lavoura", activity_group1_desc: "Atividades para iniciar ou renovar os talhões de café.",
+    activity_group2_title: "2. Manejo da Lavoura", activity_group2_desc: "Atividades contínuas para manter as plantas de café saudáveis e produtivas.",
+    activity_group3_title: "3. Colheita e Processamento", activity_group3_desc: "Atividades para colher o café e prepará-lo para venda.",
+    opt_nursery_establishment: "Formação de Viveiro", opt_land_preparation: "Preparo do Solo", opt_planting_grafting_renovation: "Plantio, Enxertia e Renovação",
+    opt_fertilization: "Adubação", opt_pest_disease_control: "Controle de Pragas e Doenças", opt_weed_management: "Controle de Plantas Daninhas", opt_pruning_crop_rejuvenation: "Poda e Recepa",
+    opt_coffee_harvesting: "Colheita do Café", opt_coffee_processing: "Processamento do Café",
+    cat_land_prep: "Preparo do Solo", cat_renovation: "Formação de Viveiro e Plantio/Renovação", cat_fertilization: "Adubação",
+    cat_maintenance: "Poda e Recepa", cat_ipdm: "Controle de Pragas e Doenças", cat_weed: "Controle de Plantas Daninhas",
+    cat_harvest: "Colheita do Café", cat_postharvest: "Processamento do Café", cat_admin: "Administração e Serviços da Propriedade",
+    ex_land_prep_input: "Aluguel de máquinas", ex_land_prep_labour: "Limpeza e nivelamento do terreno", ex_land_prep_activity: "Nivelamento do terreno",
+    ex_renovation_input: "Mudas de café", ex_renovation_labour: "Plantio de mudas", ex_renovation_activity: "Plantio de mudas",
+    ex_fertilization_input: "Ureia 46%", ex_fertilization_labour: "Aplicação de adubo", ex_fertilization_activity: "Aplicação na fase vegetativa",
+    ex_maintenance_input: "Ferramentas de poda", ex_maintenance_labour: "Poda de manutenção", ex_maintenance_activity: "Poda de manutenção",
+    ex_ipdm_input: "Fungicida", ex_ipdm_labour: "Pulverização", ex_ipdm_activity: "Controle da broca",
+    ex_weed_input: "Herbicida", ex_weed_labour: "Capina manual", ex_weed_activity: "Capina manual",
+    ex_harvest_input: "Sacos de colheita", ex_harvest_labour: "Colheita dos grãos", ex_harvest_activity: "Colheita dos grãos",
+    ex_postharvest_input: "Combustível para despolpadeira", ex_postharvest_labour: "Despolpa e secagem", ex_postharvest_activity: "Despolpa e secagem",
+    ex_admin_input: "Serviços administrativos", ex_admin_labour: "Gestão administrativa", ex_admin_activity: "Gestão administrativa",
+    ex_default_input: "insumo", ex_default_labour: "atividade", ex_default_activity: "atividade",
+    comp_inputs: "Insumos", comp_household: "Mão de obra familiar", comp_household_hint: "não entra no custo total",
+    comp_hired: "Mão de obra contratada", comp_hired_hint: "por diária ou por contrato",
+    comp_variable: "Custos variáveis", comp_fixed: "Custos fixos", comp_fixed_hint: "custo de compra ÷ vida útil",
+    mode_global: "Global", mode_activity: "Por atividade",
+    entrytype_days: "Diária", entrytype_lumpsum: "Contrato",
+    ph_description_generic: "Descrição", ph_cost_generic: "Descrição do custo",
+    ph_amount: "valor", ph_days: "dias", ph_fixed_amount: "valor fixo", ph_purchase_cost: "custo de compra", ph_useful_life: "vida útil (anos)",
+    ph_activity_name: "Nome da atividade (ex.", ph_tool_equipment: "Descrição (ex. ferramenta ou equipamento)",
+    add_entry_prefix: "+ Adicionar", add_activity_btn: "+ Adicionar atividade", remove_btn_title: "Remover",
+    kpi_total: "CPS Total", kpi_total_unit: "{c}/{u}", kpi_inputs: "Insumos", kpi_household_days: "Dias MO familiar",
+    kpi_hired_cost: "MO contratada (custo)", kpi_hired_days: "Dias MO contratada", kpi_variable: "Custos variáveis", kpi_fixed: "Custos fixos",
+    section_categories: "Categorias de custo", edit_activities_link: "Editar atividades selecionadas",
+    empty_categories: "Nenhuma atividade selecionada ainda.", empty_categories_link: "Vá à Aba 1 para selecionar as atividades da propriedade.",
+    empty_summary: "Nenhuma categoria selecionada.",
+    subtotal_prefix: "Subtotal", subtotal_unit: "{c} / {u}",
+    subtotal_note: "MO familiar:", subtotal_note_mid: "dias · MO contratada:", subtotal_note_wage: "dias (diária",
+    table_title: "Resumo por categoria", table_note: "Somente totais — o detalhe linha a linha fica no questionário, não neste resumo.",
+    th_category: "Categoria", th_mode: "Modo de entrada", th_hh_days: "Dias MO familiar", th_hired_days: "Dias MO contratada",
+    th_total: "Total ({c}/{u})", th_price_pres: "Preço/kg (tipo)", th_price_gbe: "Preço/kg GBE",
+    total_cps_row: "Total CPS",
+    yield_gbe_suffix: "kg GBE/{u}",
+    unit_per_year: "/ano", unit_per_area: "/{u}", cost_colon: "Custo:",
+    btn_my_records: "Meus FGD", btn_new_record: "+ Novo FGD",
+    btn_export_this_json: "Salvar este FGD (JSON)", btn_export_this_csv: "Exportar este FGD (CSV)",
+    btn_export_all_csv: "Exportar todos (CSV)", btn_export_all_json: "Backup de todos (JSON)",
+    btn_import_json: "Carregar JSON", btn_delete_all: "Apagar todos os dados",
+    btn_open_record: "Abrir", btn_delete_record: "Apagar este FGD",
+    records_heading: "FGD salvos neste dispositivo",
+    records_help: "Cada FGD coletado fica salvo separadamente neste dispositivo. Abram um para continuar trabalhando nele, ou comecem um novo. Nada é enviado para lugar algum: para tirar os dados, usem \"Exportar todos (CSV)\" para um único arquivo com uma linha por FGD, ou \"Backup de todos (JSON)\" para levar tudo para outro dispositivo.",
+    records_count_suffix: "FGD salvos neste dispositivo",
+    records_empty_title: "Nenhum FGD salvo ainda",
+    records_empty_body: "Comecem o primeiro FGD. Ele fica neste dispositivo até ser exportado.",
+    untitled_fgd: "FGD sem nome", no_coop: "Cooperativa não informada",
+    col_updated: "Última alteração", record_open_now: "Aberto agora",
+    land_card_title: "Terra de café na propriedade",
+    land_card_desc: "Dividam a área de café pelo estado em que está. Os custos de cada bloco são anotados por unidade de área daquele bloco, e a ferramenta multiplica por ela. Se deixarem os três em branco, tudo continua por unidade de área, como antes.",
+    area_establishment: "Implantação (áreas novas)", area_renovation: "Renovação / reabilitação",
+    area_productive: "Áreas produtivas", area_total: "Área total de café",
+    area_establishment_l: "Implantação ({u})", area_renovation_l: "Renovação ({u})", area_productive_l: "Produtiva ({u})",
+    land_note_blank: "Sem áreas informadas: os totais ficam como custo por unidade de área, e o preço por kg usa só a produtividade.",
+    land_note_active: "Áreas informadas: os três blocos são somados como estão, sem amortizar nada. Um ano com plantios novos aparece como um ano mais caro, que é exatamente a ideia.",
+    status_label: "Corresponde a",
+    status_establishment: "Implantação", status_renovation: "Renovação",
+    status_productive: "Produtiva", status_annual: "Custo anual fixo",
+    status_hint_annual: "anotado como total do ano, não por unidade de área",
+    th_status: "Corresponde a", th_annual_cost: "Custo anual", th_cost_per_area: "Custo por unidade da sua área",
+    subtotal_block: "Subtotal", block_area_suffix: "de área",
+    results_title: "Resultados de toda a propriedade",
+    res_farm_area: "Área total de café", res_production: "Produção", res_production_gbe: "Produção (GBE)",
+    res_cost_per_area: "Custo por unidade de área total", res_total_annual: "Custo anual total",
+    kpi_total_annual: "Custo anual total",
+    subtotal_unit_annual: "{c} / ano",
+    th_farm_area: "Área da propriedade", th_annual_cost_compare: "Custo anual",
+    tab_list_records: "Meus FGD", tab_list_compare: "Comparar FGD",
+    search_label: "Buscar", search_placeholder: "Nome do FGD, cooperativa ou FLO-ID", search_clear: "Limpar",
+    search_no_match: "Nenhum FGD corresponde a essa busca.", search_clear_link: "Limpar a busca",
+    records_count_filtered: "Mostrando {n} de {total} FGD",
+    compare_help: "Todos os FGD salvos neste dispositivo, lado a lado. Usem os filtros para comparar o que é comparável: um preço por kg de cereja e um por kg de pergaminho não são a mesma coisa. O preço por kg GBE é o único comparável entre tipos diferentes.",
+    compare_need_more: "Salvem pelo menos dois FGD para poder compará-los.",
+    compare_no_match: "Nenhum FGD corresponde a estes filtros.",
+    compare_mixed_currency: "Estes FGD não usam todos a mesma moeda ou unidade de área, então as médias de dinheiro ficam em branco. Filtrem por moeda e unidade de área para vê-las.",
+    compare_mixed_presentation: "Estes FGD não vendem todos o mesmo tipo de café, então as médias de produtividade e de preço por kg ficam em branco. O preço por kg GBE continua comparável. Filtrem por tipo de café para ver o resto.",
+    compare_avg: "Média",
+    compare_mixed_basis: "Alguns destes FGD não têm áreas informadas, então não têm custo anual. As médias de área e de custo anual ficam em branco em vez de cobrir só parte do grupo.",
+    filter_presentation: "Tipo de café", filter_currency: "Moeda", filter_area_unit: "Unidade de área",
+    filter_all: "Todos", filter_reset: "Limpar filtros",
+    th_fgd: "FGD", th_coop: "Cooperativa", th_currency: "Moeda / unidade", th_wage: "Diária", th_total_compare: "CPS Total",
+    th_type: "Tipo de café", th_yield: "Produtividade", th_yield_gbe: "Produtividade (GBE)",
+    modal_cancel: "Cancelar", modal_confirm: "Confirmar", modal_delete: "Apagar",
+    confirm_delete_record: "Apagar este FGD e tudo que foi digitado nele? Não é possível desfazer.",
+    confirm_delete_all: "Apagar todos os FGD salvos neste dispositivo? Não é possível desfazer. Se não tiverem certeza, façam primeiro um backup JSON.",
+    confirm_import: "Carregar os FGD do arquivo \"FILENAME\"? Eles são adicionados à lista; nada do que já está neste dispositivo é apagado.",
+    alert_import_invalid: "Este arquivo não é um arquivo válido desta calculadora. Nada foi carregado.",
+    import_done: "FGD carregados"
+  }
+};
+
+let appLang = "en";
+function t(key){
+  return (TRANSLATIONS[appLang] && TRANSLATIONS[appLang][key]) || TRANSLATIONS.en[key] || key;
+}
+
+// The area unit is chosen per FGD, so every label that mentions one is built at
+// render time rather than hardcoded. Strings carry {u} for the area unit and {c}
+// for the currency; ti() fills them in for a given record.
+function areaUnitOf(rec){
+  const r = rec || state;
+  if(!r) return t("unit_short_ha");
+  if(r.areaUnit === "otro") return (r.areaUnitOther || "").trim() || t("unit_generic");
+  return t("unit_short_" + r.areaUnit) || t("unit_generic");
+}
+function currencyOf(rec){
+  const r = rec || state;
+  return (r && (r.currency || "").trim()) || t("unit_currency_generic");
+}
+// An "annual overhead" category is captured as a yearly total, so its labels must not
+// say "per hectare". Every other category is per unit of its own block's area.
+function unitSuffixForCat(catId){
+  return state && statusOfCategory(state, catId) === "annual"
+    ? t("unit_per_year") : ti("unit_per_area");
+}
+
+function ti(key, rec){
+  return t(key).replace(/\{u\}/g, areaUnitOf(rec)).replace(/\{c\}/g, currencyOf(rec));
+}
+
+// Escapes text before it goes into an HTML attribute or text node. Without this a
+// quote or angle bracket typed by a farmer (e.g. a 5" pipe) breaks the row it sits in.
+function esc(s){
+  return String(s === null || s === undefined ? "" : s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
+// ---- Farm activity groups (Tab 1), matching the SurveyJS main_activities_* checkboxes ----
+const ACTIVITY_GROUPS = [
+  {
+    id: "crop_establishment", titleKey: "activity_group1_title", descKey: "activity_group1_desc",
+    options: [
+      { value: "nursery_establishment", labelKey: "opt_nursery_establishment" },
+      { value: "land_preparation", labelKey: "opt_land_preparation" },
+      { value: "planting_grafting_renovation", labelKey: "opt_planting_grafting_renovation" }
+    ]
+  },
+  {
+    id: "crop_management", titleKey: "activity_group2_title", descKey: "activity_group2_desc",
+    options: [
+      { value: "fertilization", labelKey: "opt_fertilization" },
+      { value: "pest_disease_control", labelKey: "opt_pest_disease_control" },
+      { value: "weed_management", labelKey: "opt_weed_management" },
+      { value: "pruning_crop_rejuvenation", labelKey: "opt_pruning_crop_rejuvenation" }
+    ]
+  },
+  {
+    id: "harvesting_processing", titleKey: "activity_group3_title", descKey: "activity_group3_desc",
+    options: [
+      { value: "coffee_harvesting", labelKey: "opt_coffee_harvesting" },
+      { value: "coffee_processing", labelKey: "opt_coffee_processing" }
+    ]
+  }
+];
+
+// ---- Categories (Tier 1), gated by the activity selections above. gate:null = always visible (Administration). ----
+const CATEGORIES = [
+  { id: "land_prep",    labelKey: "cat_land_prep",    gate: { group: "crop_establishment", values: ["land_preparation"] } },
+  { id: "renovation",   labelKey: "cat_renovation",   gate: { group: "crop_establishment", values: ["nursery_establishment", "planting_grafting_renovation"] } },
+  { id: "fertilization",labelKey: "cat_fertilization",gate: { group: "crop_management", values: ["fertilization"] } },
+  { id: "maintenance",  labelKey: "cat_maintenance",  gate: { group: "crop_management", values: ["pruning_crop_rejuvenation"] } },
+  { id: "ipdm",         labelKey: "cat_ipdm",         gate: { group: "crop_management", values: ["pest_disease_control"] } },
+  { id: "weed",         labelKey: "cat_weed",         gate: { group: "crop_management", values: ["weed_management"] } },
+  { id: "harvest",      labelKey: "cat_harvest",      gate: { group: "harvesting_processing", values: ["coffee_harvesting"] } },
+  { id: "postharvest",  labelKey: "cat_postharvest",  gate: { group: "harvesting_processing", values: ["coffee_processing"] } },
+  { id: "admin",        labelKey: "cat_admin",        gate: null, excludeComponents: ["inputs", "hired"] }
+];
+
+// Per-category example text for entry placeholders, so hints don't all read like fertilization.
+const CATEGORY_EXAMPLE_KEYS = {
+  land_prep: "land_prep", renovation: "renovation", fertilization: "fertilization", maintenance: "maintenance",
+  ipdm: "ipdm", weed: "weed", harvest: "harvest", postharvest: "postharvest", admin: "admin"
+};
+function categoryExamples(catId){
+  const k = CATEGORY_EXAMPLE_KEYS[catId];
+  if(!k) return { input: t("ex_default_input"), labour: t("ex_default_labour"), activity: t("ex_default_activity") };
+  return { input: t(`ex_${k}_input`), labour: t(`ex_${k}_labour`), activity: t(`ex_${k}_activity`) };
+}
+function componentsForCategory(cat){
+  const exclude = cat.excludeComponents || [];
+  return COMPONENTS.filter(c => !exclude.includes(c.id));
+}
+function categoryById(catId){
+  return CATEGORIES.find(c => c.id === catId);
+}
+
+// ---- Land status blocks ----
+// A farm's coffee land sits in three states plus a fourth bucket for overheads that are
+// not tied to any area. Costs in the three area blocks are captured per unit of THAT
+// block's area and multiplied by it; "annual" costs are absolute yearly amounts.
+// No amortisation happens anywhere: the blocks are summed as they stand, per the
+// COSP methodology, so a year with new plantings genuinely reads as a more expensive year.
+const LAND_STATUSES = [
+  { id: "establishment", labelKey: "status_establishment", areaKey: "establishment" },
+  { id: "renovation",    labelKey: "status_renovation",    areaKey: "renovation" },
+  { id: "productive",    labelKey: "status_productive",    areaKey: "productive" },
+  { id: "annual",        labelKey: "status_annual",        areaKey: null }
+];
+function statusById(id){ return LAND_STATUSES.find(s => s.id === id); }
+
+// Sensible starting point per category, overridable per FGD. The "renovation" category
+// covers nursery establishment AND replanting, so it could belong to either block;
+// it defaults to establishment and the facilitator moves it when it is a renovation.
+const DEFAULT_CATEGORY_STATUS = {
+  land_prep: "establishment", renovation: "establishment",
+  fertilization: "productive", maintenance: "productive", ipdm: "productive",
+  weed: "productive", harvest: "productive", postharvest: "productive",
+  admin: "annual"
+};
+function statusOfCategory(rec, catId){
+  const cs = rec.categories[catId];
+  const id = cs && cs.status;
+  return statusById(id) ? id : (DEFAULT_CATEGORY_STATUS[catId] || "productive");
+}
+
+// Tier 3 components.
+const COMPONENTS = [
+  { id: "inputs",    labelKey: "comp_inputs",    type: "currency", costed: true  },
+  { id: "household", labelKey: "comp_household", type: "days",     costed: false, hintKey: "comp_household_hint" },
+  { id: "hired",     labelKey: "comp_hired",     type: "days",     costed: true,  hintKey: "comp_hired_hint", hasContractOption: true },
+  { id: "variable",  labelKey: "comp_variable",  type: "currency", costed: true  },
+  { id: "fixed",     labelKey: "comp_fixed",     type: "currency", costed: true,  hasDepreciation: true, hintKey: "comp_fixed_hint" }
+];
+
+// Coffee presentation options and GBE conversion ratios (kg of that presentation per 1 kg GBE).
+// cherry/dry_parchment derived from FI's own survey glossary; dried_cherry and wet_parchment per Jonnathan.
+const PRESENTATIONS = [
+  { value: "cherry",        labelKey: "presentation_cherry",        defaultRatio: "5.00" },
+  { value: "dried_cherry",  labelKey: "presentation_dried_cherry",  defaultRatio: "2.00" },
+  { value: "wet_parchment", labelKey: "presentation_wet_parchment", defaultRatio: "2.56" },
+  { value: "dry_parchment", labelKey: "presentation_dry_parchment", defaultRatio: "1.25" },
+  { value: "green_bean",    labelKey: "presentation_green_bean",    defaultRatio: "1.00" }
+];
+function presentationLabel(value){
+  const p = PRESENTATIONS.find(p => p.value === value);
+  return p ? t(p.labelKey) : value;
+}
+
+// ==================== STORAGE ====================
+// One key holds every FGD captured on this device, as a map of id -> record.
+// Earlier versions stored a single FGD under STORAGE_KEY_LEGACY; that record is
+// migrated into the map the first time this version loads, so nothing is lost.
+const STORAGE_KEY_RECORDS = "cosp_fgd_records_v2";
+const STORAGE_KEY_PREV_V1 = "cosp_fgd_records_v1";
+const STORAGE_KEY_LEGACY  = "cosp_fgd_calculator_state_v5";
+const STORAGE_KEY_LANG    = "cosp_fgd_lang_v1";
+
+let records = {};       // id -> record
+let currentId = null;   // id of the record open in the editor
+let state = null;       // the open record itself (kept as `state` so the form code reads the same)
+let screen = "list";    // "list" = overview of FGDs, "editor" = one FGD open
+let compareFilters = { presentation: "", currency: "", areaUnit: "" };
+let recordSearch = "";  // in memory only: a search that survived a restart would hide
+                        // most of the list and look like lost data
+
+function generateRecordId(){
+  return "fgd_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 8);
+}
+
+function emptyEntry(comp){
+  if(comp.hasDepreciation) return { label: "", purchaseCost: "", usefulLife: "" };
+  if(comp.type === "currency") return { label: "", value: "" };
+  if(comp.hasContractOption) return { label: "", entryType: "days", days: "", value: "" };
+  return { label: "", days: "" };
+}
+
+function emptyGlobal(){
+  const g = {};
+  COMPONENTS.forEach(c => { g[c.id] = [emptyEntry(c)]; });
+  return g;
+}
+
+function emptyActivityComponents(){
+  const c = {};
+  COMPONENTS.forEach(k => {
+    if(k.hasContractOption) c[k.id] = { entryType: "days", days: "", value: "" };
+    else if(k.hasDepreciation) c[k.id] = { purchaseCost: "", usefulLife: "" };
+    else c[k.id] = "";
+  });
+  return c;
+}
+
+function emptyActivitiesState(){
+  const a = {};
+  ACTIVITY_GROUPS.forEach(g => a[g.id] = []);
+  return a;
+}
+
+function defaultRecord(){
+  const cats = {};
+  CATEGORIES.forEach(cat => {
+    cats[cat.id] = {
+      mode: "global",
+      status: DEFAULT_CATEGORY_STATUS[cat.id] || "productive",
+      global: emptyGlobal(),
+      activities: [ { name: "", ...emptyActivityComponents() } ],
+      open: false
+    };
+  });
+  return {
+    meta: {
+      id: generateRecordId(),
+      formatVersion: 6,
+      lang: appLang,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    },
+    fgdName: "", floId: "", coopName: "", areaUnit: "ha", areaUnitOther: "", currency: "", dailyWage: "",
+    presentation: "cherry", gbeRatio: "5.00", yieldPerHa: "",
+    areas: { establishment: "", renovation: "", productive: "" },
+    selectedActivities: emptyActivitiesState(),
+    activeTab: "activities",
+    categories: cats
+  };
+}
+
+function sanitizeRecord(parsed){
+  const base = defaultRecord();
+  const merged = Object.assign(base, parsed, {
+    meta: Object.assign(base.meta, (parsed && parsed.meta) || {}),
+    areas: Object.assign(base.areas, (parsed && parsed.areas) || {}),
+    selectedActivities: Object.assign(base.selectedActivities, (parsed && parsed.selectedActivities) || {}),
+    categories: Object.assign(base.categories, (parsed && parsed.categories) || {})
+  });
+  if(!merged.meta.id) merged.meta.id = generateRecordId();
+  // The comparison moved out of the editor, so a record saved on that tab must not
+  // reopen onto a tab that no longer exists there.
+  if(merged.activeTab !== "questionnaire") merged.activeTab = "activities";
+  // Records saved before this version had lang at the top level instead of in meta.
+  if(parsed && parsed.lang && !(parsed.meta && parsed.meta.lang)) merged.meta.lang = parsed.lang;
+  // Migrate sessions saved before the switch from a "kg presentation x factor = kg GBE" multiplier
+  // to a "kg presentation per 1 kg GBE" ratio (the farmer-facing framing).
+  if(parsed && parsed.gbeFactor !== undefined && parsed.gbeRatio === undefined){
+    const f = num(parsed.gbeFactor);
+    merged.gbeRatio = f > 0 ? (1 / f).toFixed(2) : "";
+  }
+  CATEGORIES.forEach(cat => {
+    const cs = merged.categories[cat.id];
+    // Records captured before land blocks existed have no status; give them the default.
+    if(!statusById(cs.status)) cs.status = DEFAULT_CATEGORY_STATUS[cat.id] || "productive";
+    if(!cs.global) cs.global = emptyGlobal();
+    COMPONENTS.forEach(c => {
+      if(!Array.isArray(cs.global[c.id]) || !cs.global[c.id].length){
+        cs.global[c.id] = [emptyEntry(c)];
+      }
+      if(c.hasContractOption){
+        cs.global[c.id].forEach(e => {
+          if(!e.entryType) e.entryType = "days";
+          if(e.value === undefined) e.value = "";
+        });
+      }
+      if(c.hasDepreciation){
+        cs.global[c.id].forEach(e => {
+          // Migrate the old flat {label,value} fixed-cost shape: treat the old value as the
+          // purchase cost with a 1-year useful life, so previously saved totals don't change.
+          if(e.purchaseCost === undefined){
+            e.purchaseCost = e.value !== undefined ? e.value : "";
+            e.usefulLife = "1";
+          }
+          if(e.usefulLife === undefined) e.usefulLife = "";
+        });
+      }
+    });
+    if(!cs.activities || !cs.activities.length) cs.activities = [ { name: "", ...emptyActivityComponents() } ];
+    cs.activities.forEach(act => {
+      COMPONENTS.forEach(c => {
+        if(c.hasContractOption){
+          if(typeof act[c.id] !== "object" || act[c.id] === null){
+            act[c.id] = { entryType: "days", days: act[c.id] || "", value: "" };
+          }
+          if(!act[c.id].entryType) act[c.id].entryType = "days";
+        }
+        if(c.hasDepreciation){
+          if(typeof act[c.id] !== "object" || act[c.id] === null){
+            act[c.id] = { purchaseCost: act[c.id] || "", usefulLife: "1" };
+          }
+          if(act[c.id].usefulLife === undefined) act[c.id].usefulLife = "";
+        }
+      });
+    });
+  });
+  return merged;
+}
+
+function loadAllRecords(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY_RECORDS);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      const map = {};
+      Object.values(parsed).forEach(r => {
+        const rec = sanitizeRecord(r);
+        map[rec.meta.id] = rec;
+      });
+      return map;
+    }
+  }catch(e){ /* fall through to the older keys below */ }
+  // GitHub Pages project sites share one origin, so a v1 install and this one see the
+  // same localStorage. Copy v1's records across once, without deleting them, so the
+  // older app keeps working untouched if it is still installed on the device.
+  try{
+    const prev = localStorage.getItem(STORAGE_KEY_PREV_V1);
+    if(prev){
+      const parsed = JSON.parse(prev);
+      const map = {};
+      Object.values(parsed).forEach(r => { const rec = sanitizeRecord(r); map[rec.meta.id] = rec; });
+      persistAllRecords(map);
+      return map;
+    }
+  }catch(e){ /* fall through to the legacy single-FGD key */ }
+  try{
+    const legacy = localStorage.getItem(STORAGE_KEY_LEGACY);
+    if(legacy){
+      const rec = sanitizeRecord(JSON.parse(legacy));
+      const map = { [rec.meta.id]: rec };
+      persistAllRecords(map);
+      localStorage.removeItem(STORAGE_KEY_LEGACY);
+      return map;
+    }
+  }catch(e){ /* nothing to migrate */ }
+  return {};
+}
+
+function persistAllRecords(map){
+  try{
+    localStorage.setItem(STORAGE_KEY_RECORDS, JSON.stringify(map));
+    return true;
+  }catch(e){
+    return false;
+  }
+}
+
+function setSaveStatus(text){
+  document.getElementById("saveStatus").textContent = text;
+}
+
+// Called on every keystroke by the form code. Stamps the open record and rewrites the map.
+function saveState(){
+  if(!state) return;
+  state.meta.updatedAt = new Date().toISOString();
+  state.meta.lang = appLang;
+  records[state.meta.id] = state;
+  if(persistAllRecords(records)){
+    setSaveStatus(t("save_status_auto") + " " + new Date().toLocaleTimeString());
+  }else{
+    // localStorage can be blocked in private browsing or when storage is full.
+    // Data still lives in memory, so exports keep working; warn instead of failing silently.
+    setSaveStatus(t("save_status_blocked"));
+  }
+}
+
+// ==================== CALCULATION ====================
+// These take an explicit record so the same functions serve the open FGD, the
+// records list, the comparison tab, and the exports.
+
+function num(v){ const n = parseFloat(v); return isNaN(n) ? 0 : n; }
+
+function wageOf(rec){ return num(rec.dailyWage); }
+function wage(){ return state ? wageOf(state) : 0; }
+
+function isCategoryVisibleIn(rec, cat){
+  if(!cat.gate) return true;
+  const selected = (rec.selectedActivities && rec.selectedActivities[cat.gate.group]) || [];
+  return cat.gate.values.some(v => selected.includes(v));
+}
+function visibleCategoriesIn(rec){
+  return CATEGORIES.filter(cat => isCategoryVisibleIn(rec, cat));
+}
+function visibleCategories(){
+  return state ? visibleCategoriesIn(state) : [];
+}
+
+function depreciatedAnnualCost(entry){
+  const life = num(entry.usefulLife) || 1;
+  return num(entry.purchaseCost) / life;
+}
+
+// Monetary contribution of one component within a category (0 for non-costed "days" components)
+function componentMonetary(rec, catState, comp){
+  const w = wageOf(rec);
+  if(catState.mode === "global"){
+    const entries = catState.global[comp.id];
+    if(comp.hasDepreciation){
+      return entries.reduce((s,e) => s + depreciatedAnnualCost(e), 0);
+    } else if(comp.type === "currency"){
+      return entries.reduce((s,e) => s + num(e.value), 0);
+    } else if(comp.hasContractOption){
+      return entries.reduce((s,e) => {
+        if(e.entryType === "lumpsum") return s + num(e.value);
+        return s + num(e.days) * w;
+      }, 0);
+    } else {
+      return comp.costed ? entries.reduce((s,e) => s + num(e.days) * w, 0) : 0;
+    }
+  } else {
+    return catState.activities.reduce((s, act) => {
+      if(comp.hasDepreciation) return s + depreciatedAnnualCost(act[comp.id] || {});
+      if(comp.type === "currency") return s + num(act[comp.id]);
+      if(comp.hasContractOption){
+        const entry = act[comp.id] || {};
+        if(entry.entryType === "lumpsum") return s + num(entry.value);
+        return s + num(entry.days) * w;
+      }
+      return comp.costed ? s + num(act[comp.id]) * w : s;
+    }, 0);
+  }
+}
+
+// Days total for a "days"-type component within a category (lump-sum contract entries don't count as days)
+function componentDays(catState, comp){
+  if(comp.type !== "days") return 0;
+  if(catState.mode === "global"){
+    return catState.global[comp.id].reduce((s,e) => {
+      if(comp.hasContractOption && e.entryType === "lumpsum") return s;
+      return s + num(e.days);
+    }, 0);
+  } else {
+    return catState.activities.reduce((s, act) => {
+      if(comp.hasContractOption){
+        const entry = act[comp.id] || {};
+        if(entry.entryType === "lumpsum") return s;
+        return s + num(entry.days);
+      }
+      return s + num(act[comp.id]);
+    }, 0);
+  }
+}
+
+function categoryTotal(rec, catState){
+  return COMPONENTS.reduce((s,c) => s + componentMonetary(rec, catState, c), 0);
+}
+function categoryHouseholdDays(catState){
+  return componentDays(catState, COMPONENTS.find(c => c.id === "household"));
+}
+function categoryHiredDays(catState){
+  return componentDays(catState, COMPONENTS.find(c => c.id === "hired"));
+}
+
+function yieldOf(rec){ return num(rec.yieldPerHa); }
+function gbeRatioOf(rec){ return num(rec.gbeRatio); }
+function yieldGbeOf(rec){ const r = gbeRatioOf(rec); return r > 0 ? yieldOf(rec) / r : 0; }
+function pricePresOf(rec, total){ const y = yieldOf(rec); return y > 0 ? total / y : null; }
+function priceGbeOf(rec, total){ const y = yieldGbeOf(rec); return y > 0 ? total / y : null; }
+
+// ---- Farm areas ----
+function areaFor(rec, statusId){
+  const st = statusById(statusId);
+  if(!st || !st.areaKey) return null;              // "annual": not tied to an area
+  return num((rec.areas || {})[st.areaKey]);
+}
+function totalFarmArea(rec){
+  const a = rec.areas || {};
+  return num(a.establishment) + num(a.renovation) + num(a.productive);
+}
+// With no areas entered the tool behaves exactly as it did before land blocks existed:
+// one cost per unit of area, divided by one yield. Nothing already captured changes.
+function usesBlocks(rec){ return totalFarmArea(rec) > 0; }
+
+// Everything the list screen, the comparison tab and the exports need about one FGD.
+function recordSummary(rec){
+  const useBlocks = usesBlocks(rec);
+  const comps = {};
+  COMPONENTS.forEach(c => comps[c.id] = 0);
+  const blocks = {};
+  LAND_STATUSES.forEach(st => blocks[st.id] = {
+    area: st.areaKey ? num((rec.areas || {})[st.areaKey]) : null,
+    perArea: 0, total: 0, hhDays: 0, hiredDays: 0
+  });
+
+  const perCategory = {};
+  let total = 0, hhDays = 0, hiredDays = 0;
+
+  CATEGORIES.forEach(cat => {
+    const cs = rec.categories[cat.id];
+    const visible = isCategoryVisibleIn(rec, cat);
+    const status = statusOfCategory(rec, cat.id);
+    const perArea = visible ? categoryTotal(rec, cs) : 0;
+    const catHh = visible ? categoryHouseholdDays(cs) : 0;
+    const catHired = visible ? categoryHiredDays(cs) : 0;
+    // In block mode an area-based category is scaled by its own block's area; an
+    // "annual" category is already an absolute yearly amount, so it scales by one.
+    const mult = !useBlocks ? 1 : (status === "annual" ? 1 : (blocks[status].area || 0));
+
+    perCategory[cat.id] = {
+      visible, status, mode: cs.mode,
+      perArea, annual: perArea * mult,
+      hhDays: catHh, hiredDays: catHired,
+      hhDaysAnnual: catHh * mult, hiredDaysAnnual: catHired * mult
+    };
+    if(!visible) return;
+
+    blocks[status].perArea += perArea;
+    blocks[status].total += perArea * mult;
+    blocks[status].hhDays += catHh * mult;
+    blocks[status].hiredDays += catHired * mult;
+
+    total += perArea * mult;
+    hhDays += catHh * mult;
+    hiredDays += catHired * mult;
+    COMPONENTS.forEach(c => comps[c.id] += componentMonetary(rec, cs, c) * mult);
+  });
+
+  const farmArea = totalFarmArea(rec);
+  const productiveArea = num((rec.areas || {}).productive);
+  const ratio = gbeRatioOf(rec);
+
+  // Yield is quoted per unit of PRODUCTIVE area, the figure a farmer actually knows.
+  // Total production therefore comes from the productive block alone, while the cost
+  // it has to cover is the whole farm's, including this year's new plantings.
+  const production = useBlocks ? yieldOf(rec) * productiveArea : 0;
+  const productionGbe = ratio > 0 ? production / ratio : 0;
+
+  const perAreaCost = useBlocks ? (farmArea > 0 ? total / farmArea : 0) : total;
+  const pricePres = useBlocks
+    ? (production > 0 ? total / production : null)
+    : pricePresOf(rec, total);
+  const priceGbe = useBlocks
+    ? (productionGbe > 0 ? total / productionGbe : null)
+    : priceGbeOf(rec, total);
+
+  return {
+    useBlocks, blocks, perCategory,
+    farmArea, productiveArea, production, productionGbe,
+    total,                       // annual cost in block mode, cost per area unit otherwise
+    perAreaCost,                 // always a cost per unit of area, so it is comparable
+    components: comps, hhDays, hiredDays,
+    yieldPres: yieldOf(rec), yieldGbe: yieldGbeOf(rec),
+    pricePres, priceGbe
+  };
+}
+
+function fmt(n){ return n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function fmtDays(n){ return n.toLocaleString('es-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 }); }
+function fmtPrice(v){ return v === null ? "—" : fmt(v); }
+function fmtDate(iso){
+  if(!iso) return "";
+  try{
+    const d = new Date(iso);
+    return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) +
+      " " + d.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
+  }catch(e){ return iso; }
+}
+
+// Wrappers used by the questionnaire, which always works on the open record.
+function yieldPerHa(){ return yieldOf(state); }
+function gbeRatio(){ return gbeRatioOf(state); }
+function yieldGbePerHa(){ return yieldGbeOf(state); }
+function pricePerKgPresentation(total){ return pricePresOf(state, total); }
+function pricePerKgGbe(total){ return priceGbeOf(state, total); }
+
+// ==================== CONFIRMATION DIALOG ====================
+// window.confirm() is unreliable in iOS browsers that are not Safari, so the
+// confirmation is plain in-page HTML instead and behaves the same everywhere.
+function showConfirm(message, okLabel, onConfirm){
+  const overlay = document.getElementById("confirmModal");
+  const okBtn = document.getElementById("confirmModalOk");
+  const cancelBtn = document.getElementById("confirmModalCancel");
+  document.getElementById("confirmModalMessage").textContent = message;
+  okBtn.textContent = okLabel;
+  cancelBtn.textContent = t("modal_cancel");
+  overlay.style.display = "flex";
+  function cleanup(){
+    overlay.style.display = "none";
+    okBtn.removeEventListener("click", onOk);
+    cancelBtn.removeEventListener("click", onCancel);
+    overlay.removeEventListener("click", onOverlay);
+  }
+  function onOk(){ cleanup(); onConfirm(); }
+  function onCancel(){ cleanup(); }
+  function onOverlay(e){ if(e.target === overlay) onCancel(); }
+  okBtn.addEventListener("click", onOk);
+  cancelBtn.addEventListener("click", onCancel);
+  overlay.addEventListener("click", onOverlay);
+}
+
+// ==================== SCREEN: LIST OF FGDs ====================
+
+// Accent- and case-insensitive, so a facilitator typing "cafe" on a phone keyboard
+// still finds "Sol y Café". Several words are treated as AND, so "sol cusco" narrows
+// rather than widens.
+function normalizeSearch(v){
+  return String(v === null || v === undefined ? "" : v)
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+}
+function recordMatchesSearch(rec, needle){
+  if(!needle) return true;
+  const haystack = normalizeSearch([rec.fgdName, rec.coopName, rec.floId].join(" "));
+  return needle.split(/\s+/).every(word => haystack.includes(word));
+}
+
+function sortedRecords(){
+  return Object.values(records).sort((a,b) =>
+    (b.meta.updatedAt || "").localeCompare(a.meta.updatedAt || ""));
+}
+
+function renderRecordsList(){
+  const container = document.getElementById("recordsListContainer");
+  const all = sortedRecords();
+  const needle = normalizeSearch(recordSearch);
+  const list = all.filter(rec => recordMatchesSearch(rec, needle));
+
+  // No point offering a search box on an empty device, or a Clear button with
+  // nothing to clear.
+  document.getElementById("recordSearchBar").style.display = all.length ? "" : "none";
+  document.getElementById("recordSearchClear").style.display = recordSearch ? "" : "none";
+
+  if(!all.length){
+    container.innerHTML = `
+      <div class="empty-state records-empty">
+        <h2>${esc(t("records_empty_title"))}</h2>
+        <p>${esc(t("records_empty_body"))}</p>
+        <button type="button" class="btn btn-save" data-new-record>${esc(t("btn_new_record"))}</button>
+      </div>`;
+    const btn = container.querySelector("[data-new-record]");
+    if(btn) btn.addEventListener("click", createNewRecord);
+    return;
+  }
+
+  if(!list.length){
+    container.innerHTML = `
+      <div class="empty-state">${esc(t("search_no_match"))}
+        <a data-clear-search>${esc(t("search_clear_link"))}</a>
+      </div>`;
+    const link = container.querySelector("[data-clear-search]");
+    if(link) link.addEventListener("click", clearRecordSearch);
+    return;
+  }
+  const cards = list.map(rec => {
+    const s = recordSummary(rec);
+    const cur = rec.currency ? " " + esc(rec.currency) : "";
+    const isCurrent = rec.meta.id === currentId;
+    return `
+      <div class="record-card ${isCurrent ? 'current' : ''}">
+        <div class="record-card-main">
+          <div class="record-card-title">${esc(rec.fgdName || t("untitled_fgd"))}</div>
+          <div class="record-card-sub">${esc(rec.coopName || t("no_coop"))}${rec.floId ? " · " + esc(rec.floId) : ""}</div>
+          <div class="record-card-total">${esc(t("kpi_total"))}: ${fmt(s.perAreaCost)}${cur} / ${esc(areaUnitOf(rec))}</div>
+          <div class="record-card-date">${esc(t("col_updated"))}: ${esc(fmtDate(rec.meta.updatedAt))}${isCurrent ? " · " + esc(t("record_open_now")) : ""}</div>
+        </div>
+        <div class="record-card-actions">
+          <button type="button" class="btn btn-primary btn-sm" data-open-record="${esc(rec.meta.id)}">${esc(t("btn_open_record"))}</button>
+          <button type="button" class="btn btn-outline btn-sm" data-export-json="${esc(rec.meta.id)}">JSON</button>
+          <button type="button" class="btn btn-outline btn-sm" data-export-csv="${esc(rec.meta.id)}">CSV</button>
+          <button type="button" class="btn-icon" data-delete-record="${esc(rec.meta.id)}" title="${esc(t("btn_delete_record"))}">&times;</button>
+        </div>
+      </div>`;
+  }).join("");
+  const countText = needle
+    ? t("records_count_filtered").replace("{n}", list.length).replace("{total}", all.length)
+    : list.length + " " + t("records_count_suffix");
+  container.innerHTML = `
+    <p class="records-count">${esc(countText)}</p>
+    <div class="records-list">${cards}</div>`;
+
+  container.querySelectorAll("[data-open-record]").forEach(b =>
+    b.addEventListener("click", () => openRecord(b.getAttribute("data-open-record"))));
+  container.querySelectorAll("[data-export-json]").forEach(b =>
+    b.addEventListener("click", () => exportRecordJson(records[b.getAttribute("data-export-json")])));
+  container.querySelectorAll("[data-export-csv]").forEach(b =>
+    b.addEventListener("click", () => exportRecordsCsv([records[b.getAttribute("data-export-csv")]], false)));
+  container.querySelectorAll("[data-delete-record]").forEach(b =>
+    b.addEventListener("click", () => deleteRecord(b.getAttribute("data-delete-record"))));
+}
+
+function applyScreen(){
+  document.getElementById("screenList").classList.toggle("active", screen === "list");
+  document.getElementById("screenEditor").classList.toggle("active", screen === "editor");
+  document.querySelectorAll(".editor-only").forEach(el => {
+    el.style.display = screen === "editor" ? "" : "none";
+  });
+}
+
+function clearRecordSearch(){
+  recordSearch = "";
+  const box = document.getElementById("recordSearch");
+  box.value = "";
+  renderRecordsList();
+  box.focus();
+}
+
+function goToRecordsList(){
+  screen = "list";
+  applyScreen();
+  switchListTab(listTab);
+  window.scrollTo(0, 0);
+}
+
+// Every label that names an area unit is rebuilt from the record, so switching from
+// hectares to manzanas relabels the yield field, the questionnaire and the summary
+// header together instead of leaving "kg/ha" sitting next to manzana costs.
+function refreshUnitLabels(){
+  const isOther = state && state.areaUnit === "otro";
+  document.getElementById("areaUnitOtherField").style.display = isOther ? "" : "none";
+  applyStaticTranslations();
+  if(state){
+    updateYieldGbeDisplay();
+    renderQuestionnaireTab();
+  }
+}
+
+function fillSetupFields(){
+  document.getElementById("fgdName").value = state.fgdName || "";
+  document.getElementById("floId").value = state.floId || "";
+  document.getElementById("coopName").value = state.coopName || "";
+  document.getElementById("areaUnit").value = state.areaUnit || "ha";
+  document.getElementById("areaUnitOther").value = state.areaUnitOther || "";
+  document.getElementById("currency").value = state.currency || "";
+  document.getElementById("dailyWage").value = state.dailyWage || "";
+  document.getElementById("presentationSelect").value = state.presentation || "cherry";
+  document.getElementById("gbeRatioInput").value = state.gbeRatio || "";
+  document.getElementById("yieldPerHaInput").value = state.yieldPerHa || "";
+  document.getElementById("areaEstablishment").value = (state.areas && state.areas.establishment) || "";
+  document.getElementById("areaRenovation").value = (state.areas && state.areas.renovation) || "";
+  document.getElementById("areaProductive").value = (state.areas && state.areas.productive) || "";
+  updateYieldGbeDisplay();
+}
+
+function openRecord(id){
+  if(!records[id]) return;
+  currentId = id;
+  state = records[id];
+  screen = "editor";
+  applyScreen();
+  fillSetupFields();
+  refreshUnitLabels();
+  renderActivitiesTab();
+  renderQuestionnaireTab();
+  switchTab(state.activeTab === "questionnaire" ? "questionnaire" : "activities");
+  setSaveStatus(t("save_status_auto"));
+  window.scrollTo(0, 0);
+}
+
+function createNewRecord(){
+  const rec = defaultRecord();
+  records[rec.meta.id] = rec;
+  persistAllRecords(records);
+  openRecord(rec.meta.id);
+}
+
+function deleteRecord(id){
+  showConfirm(t("confirm_delete_record"), t("modal_delete"), () => {
+    delete records[id];
+    persistAllRecords(records);
+    if(currentId === id){ currentId = null; state = null; screen = "list"; }
+    goToRecordsList();
+  });
+}
+
+function deleteAllRecords(){
+  showConfirm(t("confirm_delete_all"), t("modal_delete"), () => {
+    records = {};
+    currentId = null;
+    state = null;
+    persistAllRecords(records);
+    screen = "list";
+    compareFilters = { presentation: "", currency: "", areaUnit: "" };
+    recordSearch = "";
+    document.getElementById("recordSearch").value = "";
+    goToRecordsList();
+  });
+}
+
+// ==================== TAB 1: ACTIVITY PICKER ====================
+
+function renderActivitiesTab(){
+  if(!state) return;
+  const container = document.getElementById("activityGroupsContainer");
+  container.innerHTML = ACTIVITY_GROUPS.map(group => {
+    const selected = state.selectedActivities[group.id] || [];
+    return `
+      <div class="activity-group-card">
+        <h3>${esc(t(group.titleKey))}</h3>
+        <div class="group-desc">${esc(t(group.descKey))}</div>
+        <div class="activity-choices">
+          ${group.options.map(opt => {
+            const checked = selected.includes(opt.value);
+            return `
+              <label class="activity-choice ${checked ? 'checked' : ''}">
+                <input type="checkbox" data-activity-group="${group.id}" data-activity-value="${opt.value}" ${checked ? 'checked' : ''}>
+                ${esc(t(opt.labelKey))}
+              </label>`;
+          }).join("")}
+        </div>
+      </div>`;
+  }).join("");
+
+  container.querySelectorAll("input[data-activity-group]").forEach(input => {
+    input.addEventListener("change", () => {
+      const group = input.getAttribute("data-activity-group");
+      const value = input.getAttribute("data-activity-value");
+      const arr = state.selectedActivities[group] || (state.selectedActivities[group] = []);
+      const idx = arr.indexOf(value);
+      if(input.checked && idx === -1) arr.push(value);
+      if(!input.checked && idx !== -1) arr.splice(idx, 1);
+      saveState();
+      renderActivitiesTab();
+      renderQuestionnaireTab();
+    });
+  });
+}
+
+// ==================== TAB 2: QUESTIONNAIRE ====================
+
+function globalComponentHtml(catId, comp, catState){
+  const entries = catState.global[comp.id];
+  const hintHtml = comp.hintKey ? ` <span class="c-hint">(${esc(t(comp.hintKey))})</span>` : "";
+  let subtotalHtml;
+  if(comp.hasDepreciation){
+    subtotalHtml = fmt(entries.reduce((s,e) => s + depreciatedAnnualCost(e), 0));
+  } else if(comp.type === "currency"){
+    subtotalHtml = fmt(entries.reduce((s,e) => s + num(e.value), 0));
+  } else if(comp.hasContractOption){
+    const cost = entries.reduce((s,e) => s + (e.entryType === "lumpsum" ? num(e.value) : num(e.days) * wage()), 0);
+    const days = entries.reduce((s,e) => s + (e.entryType === "lumpsum" ? 0 : num(e.days)), 0);
+    subtotalHtml = `${fmt(cost)}<span class="c-subtotal-days">${fmtDays(days)} ${esc(t("ph_days"))}</span>`;
+  } else if(comp.costed){
+    const days = entries.reduce((s,e) => s + num(e.days), 0);
+    subtotalHtml = `${fmt(days * wage())}<span class="c-subtotal-days">${fmtDays(days)} ${esc(t("ph_days"))}</span>`;
+  } else {
+    const days = entries.reduce((s,e) => s + num(e.days), 0);
+    subtotalHtml = `${fmtDays(days)} ${esc(t("ph_days"))}`;
+  }
+
+  const rowsHtml = entries.map((entry, i) => {
+    const ex = categoryExamples(catId);
+    const removeBtn = entries.length > 1
+      ? `<button type="button" class="remove-btn" data-remove-entry="${catId}|${comp.id}" data-index="${i}" title="${esc(t('remove_btn_title'))}">&times;</button>`
+      : `<span style="width:22px;display:inline-block;"></span>`;
+    if(comp.hasDepreciation){
+      const annual = depreciatedAnnualCost(entry);
+      return `
+        <div class="entry-row">
+          <input type="text" placeholder="${esc(t('ph_tool_equipment'))}" data-path="categories.${catId}.global.${comp.id}.${i}.label" value="${esc(entry.label)}">
+          <input type="number" step="any" min="0" placeholder="${esc(t('ph_purchase_cost'))}" data-path="categories.${catId}.global.${comp.id}.${i}.purchaseCost" value="${esc(entry.purchaseCost)}">
+          <input type="number" step="any" min="1" placeholder="${esc(t('ph_useful_life'))}" data-path="categories.${catId}.global.${comp.id}.${i}.usefulLife" value="${esc(entry.usefulLife)}">
+          <span class="computed-cost" data-entry-cost="${catId}|${comp.id}|${i}">${fmt(annual)}${esc(t("unit_per_year"))}</span>
+          ${removeBtn}
+        </div>`;
+    } else if(comp.type === "currency"){
+      const placeholder = comp.id === "inputs" ? `${t('ph_description_generic')} (${ex.input})` : t('ph_cost_generic');
+      return `
+        <div class="entry-row">
+          <input type="text" placeholder="${esc(placeholder)}" data-path="categories.${catId}.global.${comp.id}.${i}.label" value="${esc(entry.label)}">
+          <input type="number" step="any" min="0" placeholder="0.00" data-path="categories.${catId}.global.${comp.id}.${i}.value" value="${esc(entry.value)}">
+          ${removeBtn}
+        </div>`;
+    } else if(comp.hasContractOption){
+      const isLumpsum = entry.entryType === "lumpsum";
+      const entryCost = isLumpsum ? num(entry.value) : num(entry.days) * wage();
+      return `
+        <div class="entry-row">
+          <div class="entry-type-toggle" data-entry-type-toggle="${catId}|${comp.id}|${i}">
+            <button type="button" class="${!isLumpsum ? 'active' : ''}" data-entry-type="days">${esc(t('entrytype_days'))}</button>
+            <button type="button" class="${isLumpsum ? 'active' : ''}" data-entry-type="lumpsum">${esc(t('entrytype_lumpsum'))}</button>
+          </div>
+          <input type="text" placeholder="${esc(t('ph_description_generic') + ' (' + ex.labour + ')')}" data-path="categories.${catId}.global.${comp.id}.${i}.label" value="${esc(entry.label)}">
+          ${isLumpsum
+            ? `<input type="number" step="any" min="0" placeholder="${esc(t('ph_fixed_amount'))}" data-path="categories.${catId}.global.${comp.id}.${i}.value" value="${esc(entry.value)}">`
+            : `<input type="number" step="any" min="0" placeholder="${esc(t('ph_days'))}" data-path="categories.${catId}.global.${comp.id}.${i}.days" value="${esc(entry.days)}">`
+          }
+          <span class="computed-cost" data-entry-cost="${catId}|${comp.id}|${i}">${fmt(entryCost)}</span>
+          ${removeBtn}
+        </div>`;
+    } else {
+      const entryCost = comp.costed ? num(entry.days) * wage() : 0;
+      return `
+        <div class="entry-row">
+          <input type="text" placeholder="${esc(t('ph_description_generic') + ' (' + ex.labour + ')')}" data-path="categories.${catId}.global.${comp.id}.${i}.label" value="${esc(entry.label)}">
+          <input type="number" step="any" min="0" placeholder="${esc(t('ph_days'))}" data-path="categories.${catId}.global.${comp.id}.${i}.days" value="${esc(entry.days)}">
+          ${comp.costed ? `<span class="computed-cost" data-entry-cost="${catId}|${comp.id}|${i}">${fmt(entryCost)}</span>` : ''}
+          ${removeBtn}
+        </div>`;
+    }
+  }).join("");
+
+  return `
+    <div class="component-block ${comp.type === 'days' && !comp.costed ? 'not-costed' : ''}" data-component="${comp.id}">
+      <div class="component-block-head">
+        <span class="c-name">${esc(t(comp.labelKey))}${hintHtml}</span>
+        <span class="c-subtotal" data-component-subtotal="${catId}|${comp.id}">${subtotalHtml}</span>
+      </div>
+      ${rowsHtml}
+      <button type="button" class="add-entry-btn" data-add-entry="${catId}|${comp.id}">${esc(t("add_entry_prefix"))} ${esc(t(comp.labelKey).toLowerCase())}</button>
+    </div>`;
+}
+
+function activityComponentFieldsHtml(catId, activityIndex, values){
+  const cat = categoryById(catId);
+  const comps = componentsForCategory(cat);
+  const ex = categoryExamples(catId);
+  const hiredComp = comps.find(c => c.hasContractOption);
+  const fixedComp = comps.find(c => c.hasDepreciation);
+  const gridComps = comps.filter(c => !c.hasContractOption && !c.hasDepreciation);
+
+  const gridHtml = gridComps.map(c => {
+    const u = unitSuffixForCat(catId);
+    const suffix = c.type === "days" ? ` (${t("ph_days")}${u})` : ` (${u})`;
+    return `
+      <div class="field">
+        <label>${esc(t(c.labelKey) + suffix)}</label>
+        <input type="number" step="any" min="0" placeholder="0.00"
+          data-path="categories.${catId}.activities.${activityIndex}.${c.id}" value="${esc(values[c.id])}">
+      </div>`;
+  }).join("");
+
+  let hiredHtml = "";
+  if(hiredComp){
+    const entry = values[hiredComp.id] || { entryType: "days", days: "", value: "" };
+    const isLumpsum = entry.entryType === "lumpsum";
+    const entryCost = isLumpsum ? num(entry.value) : num(entry.days) * wage();
+    const basePath = `categories.${catId}.activities.${activityIndex}.${hiredComp.id}`;
+    hiredHtml = `
+      <div class="activity-hired-block">
+        <div class="ahb-head">
+          <span class="c-name">${esc(t(hiredComp.labelKey))} <span class="c-hint">(${esc(ex.labour)})</span></span>
+          <span class="entry-type-toggle" data-entry-type-toggle-activity="${catId}|${activityIndex}|${hiredComp.id}">
+            <button type="button" class="${!isLumpsum ? 'active' : ''}" data-entry-type="days">${esc(t('entrytype_days'))}</button>
+            <button type="button" class="${isLumpsum ? 'active' : ''}" data-entry-type="lumpsum">${esc(t('entrytype_lumpsum'))}</button>
+          </span>
+        </div>
+        <div class="ahb-row">
+          ${isLumpsum
+            ? `<input type="number" step="any" min="0" placeholder="${esc(t('ph_fixed_amount') + ' ' + unitSuffixForCat(catId))}" data-path="${basePath}.value" value="${esc(entry.value)}">`
+            : `<input type="number" step="any" min="0" placeholder="${esc(t('ph_days') + unitSuffixForCat(catId))}" data-path="${basePath}.days" value="${esc(entry.days)}">`
+          }
+          <span class="computed-cost" data-activity-cost="${catId}|${activityIndex}|${hiredComp.id}">${esc(t("cost_colon"))} ${fmt(entryCost)} ${esc(unitSuffixForCat(catId))}</span>
+        </div>
+      </div>`;
+  }
+
+  let fixedHtml = "";
+  if(fixedComp){
+    const entry = values[fixedComp.id] || { purchaseCost: "", usefulLife: "" };
+    const annual = depreciatedAnnualCost(entry);
+    const basePath = `categories.${catId}.activities.${activityIndex}.${fixedComp.id}`;
+    fixedHtml = `
+      <div class="activity-hired-block">
+        <div class="ahb-head">
+          <span class="c-name">${esc(t(fixedComp.labelKey))} <span class="c-hint">(${esc(t("comp_fixed_hint"))})</span></span>
+        </div>
+        <div class="ahb-row">
+          <input type="number" step="any" min="0" placeholder="${esc(t('ph_purchase_cost'))}" data-path="${basePath}.purchaseCost" value="${esc(entry.purchaseCost)}">
+          <input type="number" step="any" min="1" placeholder="${esc(t('ph_useful_life'))}" data-path="${basePath}.usefulLife" value="${esc(entry.usefulLife)}">
+          <span class="computed-cost" data-activity-cost="${catId}|${activityIndex}|${fixedComp.id}">${fmt(annual)}${esc(t("unit_per_year"))}</span>
+        </div>
+      </div>`;
+  }
+
+  return `<div class="activity-grid">${gridHtml}</div>${hiredHtml}${fixedHtml}`;
+}
+
+function renderCategories(){
+  if(!state) return;
+  const container = document.getElementById("categoriesContainer");
+  const cats = visibleCategories();
+
+  if(!cats.length){
+    container.innerHTML = `<div class="empty-state">${esc(t("empty_categories"))} <a data-go-to-activities>${esc(t("empty_categories_link"))}</a></div>`;
+    const link = container.querySelector("[data-go-to-activities]");
+    if(link) link.addEventListener("click", () => switchTab("activities"));
+    return;
+  }
+
+  container.innerHTML = cats.map(cat => {
+    const cs = state.categories[cat.id];
+    const total = categoryTotal(state, cs);
+    const hhDays = categoryHouseholdDays(cs);
+    const hiredDays = categoryHiredDays(cs);
+    const globalActive = cs.mode === "global";
+    const status = statusOfCategory(state, cat.id);
+    return `
+    <div class="category" data-cat="${cat.id}">
+      <div class="cat-head ${cs.open ? 'open' : ''}" data-toggle-open="${cat.id}">
+        <span class="name"><span class="chevron">&#9656;</span>&nbsp; ${esc(t(cat.labelKey))}</span>
+        <div class="cat-right">
+          <select class="status-select" data-status-select="${cat.id}" title="${esc(t('status_label'))}">
+            ${LAND_STATUSES.map(st => `<option value="${st.id}" ${st.id === status ? 'selected' : ''}>${esc(t(st.labelKey))}</option>`).join("")}
+          </select>
+          <div class="toggle-group" data-mode-toggle="${cat.id}">
+            <button type="button" class="${globalActive ? 'active' : ''}" data-mode="global">${esc(t('mode_global'))}</button>
+            <button type="button" class="${!globalActive ? 'active' : ''}" data-mode="activity">${esc(t('mode_activity'))}</button>
+          </div>
+          <span class="cat-total">${fmt(total)}</span>
+        </div>
+      </div>
+      <div class="cat-body ${cs.open ? 'open' : ''}" data-body="${cat.id}">
+        ${globalActive ? `
+          ${componentsForCategory(cat).map(c => globalComponentHtml(cat.id, c, cs)).join("")}
+        ` : `
+          <div data-activities="${cat.id}">
+            ${cs.activities.map((act, i) => `
+              <div class="activity-row" data-activity-index="${i}">
+                <div class="activity-top">
+                  <input type="text" placeholder="${esc(t('ph_activity_name') + ' ' + categoryExamples(cat.id).activity + ')')}"
+                    data-path="categories.${cat.id}.activities.${i}.name" value="${esc(act.name)}">
+                  ${cs.activities.length > 1 ? `<button type="button" class="activity-remove" data-remove-activity="${cat.id}" data-index="${i}">${esc(t('remove_btn_title'))}</button>` : ''}
+                </div>
+                ${activityComponentFieldsHtml(cat.id, i, act)}
+              </div>
+            `).join("")}
+          </div>
+          <button type="button" class="add-activity-btn" data-add-activity="${cat.id}">${esc(t("add_activity_btn"))}</button>
+        `}
+        <div class="subtotal-line">
+          ${esc(t("subtotal_prefix"))} ${esc(t(cat.labelKey))}: <strong data-cat-subtotal="${cat.id}">${fmt(total)}</strong> ${esc(status === "annual" ? ti("subtotal_unit_annual") : ti("subtotal_unit"))}
+          <span class="note" data-cat-note="${cat.id}">${esc(t("subtotal_note"))} ${fmtDays(hhDays)} ${esc(t("subtotal_note_mid"))} ${fmtDays(hiredDays)} ${esc(t("subtotal_note_wage"))} ${fmt(wage())})</span>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+
+  attachCategoryListeners();
+}
+
+function attachCategoryListeners(){
+  document.querySelectorAll("[data-toggle-open]").forEach(el => {
+    el.addEventListener("click", (e) => {
+      if(e.target.closest("[data-mode-toggle]") || e.target.closest("[data-status-select]")) return;
+      const id = el.getAttribute("data-toggle-open");
+      state.categories[id].open = !state.categories[id].open;
+      renderCategories();
+      updateTotalsOnly();
+    });
+  });
+
+  document.querySelectorAll("[data-status-select]").forEach(sel => {
+    sel.addEventListener("change", () => {
+      state.categories[sel.getAttribute("data-status-select")].status = sel.value;
+      saveState();
+      renderCategories();
+      updateTotalsOnly();
+    });
+  });
+
+  document.querySelectorAll("[data-mode-toggle]").forEach(group => {
+    group.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = group.getAttribute("data-mode-toggle");
+        state.categories[id].mode = btn.getAttribute("data-mode");
+        state.categories[id].open = true;
+        saveState();
+        renderCategories();
+        updateTotalsOnly();
+      });
+    });
+  });
+
+  document.querySelectorAll("[data-add-activity]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-add-activity");
+      state.categories[id].activities.push({ name: "", ...emptyActivityComponents() });
+      saveState();
+      renderCategories();
+      updateTotalsOnly();
+    });
+  });
+
+  document.querySelectorAll("[data-remove-activity]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-remove-activity");
+      const idx = parseInt(btn.getAttribute("data-index"), 10);
+      state.categories[id].activities.splice(idx, 1);
+      saveState();
+      renderCategories();
+      updateTotalsOnly();
+    });
+  });
+
+  document.querySelectorAll("[data-add-entry]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const [catId, compId] = btn.getAttribute("data-add-entry").split("|");
+      const comp = COMPONENTS.find(c => c.id === compId);
+      state.categories[catId].global[compId].push(emptyEntry(comp));
+      saveState();
+      renderCategories();
+      updateTotalsOnly();
+    });
+  });
+
+  document.querySelectorAll("[data-remove-entry]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const [catId, compId] = btn.getAttribute("data-remove-entry").split("|");
+      const idx = parseInt(btn.getAttribute("data-index"), 10);
+      state.categories[catId].global[compId].splice(idx, 1);
+      saveState();
+      renderCategories();
+      updateTotalsOnly();
+    });
+  });
+
+  document.querySelectorAll("[data-entry-type-toggle]").forEach(group => {
+    group.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const [catId, compId, idx] = group.getAttribute("data-entry-type-toggle").split("|");
+        state.categories[catId].global[compId][parseInt(idx,10)].entryType = btn.getAttribute("data-entry-type");
+        saveState();
+        renderCategories();
+        updateTotalsOnly();
+      });
+    });
+  });
+
+  document.querySelectorAll("[data-entry-type-toggle-activity]").forEach(group => {
+    group.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const [catId, actIdx, compId] = group.getAttribute("data-entry-type-toggle-activity").split("|");
+        state.categories[catId].activities[parseInt(actIdx,10)][compId].entryType = btn.getAttribute("data-entry-type");
+        saveState();
+        renderCategories();
+        updateTotalsOnly();
+      });
+    });
+  });
+
+  document.querySelectorAll("#categoriesContainer input[data-path]").forEach(input => {
+    input.addEventListener("input", () => {
+      setByPath(state, input.getAttribute("data-path"), input.value);
+      saveState();
+      updateTotalsOnly();
+    });
+  });
+}
+
+function setByPath(obj, path, value){
+  const parts = path.split(".");
+  let cur = obj;
+  for(let i=0;i<parts.length-1;i++){
+    const key = isNaN(parts[i]) ? parts[i] : parseInt(parts[i],10);
+    cur = cur[key];
+  }
+  const lastKey = isNaN(parts[parts.length-1]) ? parts[parts.length-1] : parseInt(parts[parts.length-1],10);
+  cur[lastKey] = value;
+}
+
+function updateTotalsOnly(){
+  if(!state) return;
+  let grand = 0;
+  let hhDaysGrand = 0;
+  let hiredDaysGrand = 0;
+  const grandComponents = {};
+  COMPONENTS.forEach(c => grandComponents[c.id] = 0);
+
+  visibleCategories().forEach(cat => {
+    const cs = state.categories[cat.id];
+    const total = categoryTotal(state, cs);
+    const hhDays = categoryHouseholdDays(cs);
+    const hiredDays = categoryHiredDays(cs);
+    grand += total;
+    hhDaysGrand += hhDays;
+    hiredDaysGrand += hiredDays;
+    COMPONENTS.forEach(c => grandComponents[c.id] += componentMonetary(state, cs, c));
+
+    document.querySelectorAll(`.category[data-cat="${cat.id}"] .cat-total`).forEach(el => el.textContent = fmt(total));
+    const subEl = document.querySelector(`[data-cat-subtotal="${cat.id}"]`);
+    if(subEl) subEl.textContent = fmt(total);
+    const noteEl = document.querySelector(`[data-cat-note="${cat.id}"]`);
+    if(noteEl) noteEl.textContent = `${t("subtotal_note")} ${fmtDays(hhDays)} ${t("subtotal_note_mid")} ${fmtDays(hiredDays)} ${t("subtotal_note_wage")} ${fmt(wage())})`;
+
+    if(cs.mode === "global"){
+      COMPONENTS.forEach(comp => {
+        const el = document.querySelector(`[data-component-subtotal="${cat.id}|${comp.id}"]`);
+        if(!el) return;
+        const entries = cs.global[comp.id];
+        if(comp.hasDepreciation){
+          el.textContent = fmt(entries.reduce((s,e) => s + depreciatedAnnualCost(e), 0));
+        } else if(comp.type === "currency"){
+          el.textContent = fmt(entries.reduce((s,e) => s + num(e.value), 0));
+        } else if(comp.hasContractOption){
+          const cost = entries.reduce((s,e) => s + (e.entryType === "lumpsum" ? num(e.value) : num(e.days) * wage()), 0);
+          const days = entries.reduce((s,e) => s + (e.entryType === "lumpsum" ? 0 : num(e.days)), 0);
+          el.innerHTML = `${fmt(cost)}<span class="c-subtotal-days">${fmtDays(days)} ${esc(t("ph_days"))}</span>`;
+        } else if(comp.costed){
+          const days = entries.reduce((s,e) => s + num(e.days), 0);
+          el.innerHTML = `${fmt(days * wage())}<span class="c-subtotal-days">${fmtDays(days)} ${esc(t("ph_days"))}</span>`;
+        } else {
+          const days = entries.reduce((s,e) => s + num(e.days), 0);
+          el.textContent = `${fmtDays(days)} ${t("ph_days")}`;
+        }
+
+        entries.forEach((entry, i) => {
+          const costEl = document.querySelector(`[data-entry-cost="${cat.id}|${comp.id}|${i}"]`);
+          if(!costEl) return;
+          if(comp.hasDepreciation){
+            costEl.textContent = fmt(depreciatedAnnualCost(entry)) + t("unit_per_year");
+          } else if(comp.hasContractOption){
+            costEl.textContent = fmt(entry.entryType === "lumpsum" ? num(entry.value) : num(entry.days) * wage());
+          } else if(comp.type === "days" && comp.costed){
+            costEl.textContent = fmt(num(entry.days) * wage());
+          }
+        });
+      });
+    } else {
+      cs.activities.forEach((act, i) => {
+        const hiredComp = COMPONENTS.find(c => c.hasContractOption);
+        if(hiredComp){
+          const entry = act[hiredComp.id] || {};
+          const el = document.querySelector(`[data-activity-cost="${cat.id}|${i}|${hiredComp.id}"]`);
+          if(el) el.textContent = `${t("cost_colon")} ${fmt(entry.entryType === "lumpsum" ? num(entry.value) : num(entry.days) * wage())} ${unitSuffixForCat(cat.id)}`;
+        }
+        const fixedComp = COMPONENTS.find(c => c.hasDepreciation);
+        if(fixedComp){
+          const entry = act[fixedComp.id] || {};
+          const el = document.querySelector(`[data-activity-cost="${cat.id}|${i}|${fixedComp.id}"]`);
+          if(el) el.textContent = fmt(depreciatedAnnualCost(entry)) + t("unit_per_year");
+        }
+      });
+    }
+  });
+
+  const S = recordSummary(state);
+  const totalLabelEl = document.querySelector('[data-i18n="kpi_total"]');
+  if(totalLabelEl) totalLabelEl.textContent = S.useBlocks ? t("kpi_total_annual") : t("kpi_total");
+  document.getElementById("totalCosp").innerHTML = S.useBlocks
+    ? fmt(S.total) + ` <small>${esc(currencyOf(state))}</small>`
+    : fmt(S.total) + ` <small>${esc(ti("kpi_total_unit"))}</small>`;
+  document.getElementById("totalInputs").textContent = fmt(S.components.inputs);
+  document.getElementById("totalHouseholdDays").innerHTML = fmtDays(S.hhDays) + ` <small>${esc(t("ph_days"))}</small>`;
+  document.getElementById("totalHired").textContent = fmt(S.components.hired);
+  document.getElementById("totalHiredDays").innerHTML = fmtDays(S.hiredDays) + ` <small>${esc(t("ph_days"))}</small>`;
+  document.getElementById("totalVariable").textContent = fmt(S.components.variable);
+  document.getElementById("totalFixed").textContent = fmt(S.components.fixed);
+
+  renderLandCard(S);
+  renderResultsCard(S);
+  renderSummaryTable(S);
+}
+
+// ---- Tab 1: land block card ----
+function renderLandCard(S){
+  if(!state) return;
+  const sum = S || recordSummary(state);
+  const u = areaUnitOf(state);
+  document.getElementById("areaTotalDisplay").value =
+    (sum.farmArea > 0 ? fmtDays(sum.farmArea) : "0.0") + " " + u;
+  const bar = document.getElementById("landBar");
+  const legend = document.getElementById("landLegend");
+  const colours = { establishment: "var(--eggplant)", renovation: "var(--tangerine)", productive: "var(--mint-dark)" };
+  const areaStatuses = LAND_STATUSES.filter(st => st.areaKey);
+  if(sum.farmArea > 0){
+    bar.style.display = "flex";
+    bar.innerHTML = areaStatuses.map(st => {
+      const pct = (sum.blocks[st.id].area / sum.farmArea) * 100;
+      return `<div style="width:${pct}%; background:${colours[st.id]};"></div>`;
+    }).join("");
+    legend.innerHTML = areaStatuses.map(st => {
+      const pct = Math.round((sum.blocks[st.id].area / sum.farmArea) * 100);
+      return `<span><i style="background:${colours[st.id]}"></i>${esc(t(st.labelKey))} ${pct}%</span>`;
+    }).join("");
+  }else{
+    bar.style.display = "none";
+    legend.innerHTML = "";
+  }
+  document.getElementById("landNote").textContent = sum.farmArea > 0 ? t("land_note_active") : t("land_note_blank");
+}
+
+// ---- Tab 2: whole-farm results, only meaningful once areas exist ----
+function renderResultsCard(S){
+  const card = document.getElementById("resultsCard");
+  if(!state || !S.useBlocks){ card.style.display = "none"; return; }
+  card.style.display = "";
+  const u = areaUnitOf(state);
+  const c = currencyOf(state);
+  const cell = (label, value) => `<div><div class="r-label">${esc(label)}</div><div class="r-value">${esc(value)}</div></div>`;
+  document.getElementById("resultsGrid").innerHTML =
+      cell(t("res_farm_area"), fmtDays(S.farmArea) + " " + u)
+    + cell(t("res_production"), fmtDays(S.production) + " kg")
+    + cell(t("res_production_gbe"), fmtDays(S.productionGbe) + " kg GBE")
+    + cell(t("res_total_annual"), fmt(S.total) + " " + c)
+    + cell(t("res_cost_per_area"), fmt(S.perAreaCost) + " " + c + "/" + u)
+    + cell(t("th_price_pres"), fmtPrice(S.pricePres))
+    + cell(t("th_price_gbe"), fmtPrice(S.priceGbe));
+}
+
+
+
+// data-label on every cell drives the stacked card layout on phones (see the
+// max-width:700px rules). It has no effect on wide screens.
+// The columns differ between the two modes, so the header is built here rather than
+// sitting static in the markup.
+function renderSummaryTable(S){
+  if(!state) return;
+  const sum = S || recordSummary(state);
+  const table = document.getElementById("summaryTable");
+  const thead = table.querySelector("thead");
+  const tbody = table.querySelector("tbody");
+  const cats = visibleCategories();
+
+  const cols = sum.useBlocks
+    ? [ t("th_category"), t("th_status"), t("th_hh_days"), t("th_hired_days"), t("th_cost_per_area"), t("th_annual_cost") ]
+    : [ t("th_category"), t("th_mode"), t("th_hh_days"), t("th_hired_days"), ti("th_total"), t("th_price_pres"), t("th_price_gbe") ];
+  const numeric = sum.useBlocks ? [2,3,4,5] : [2,3,4,5,6];
+  thead.innerHTML = `<tr>${cols.map((c,i) =>
+    `<th class="${numeric.includes(i) ? 'num' : ''}">${esc(c)}</th>`).join("")}</tr>`;
+
+  const cell = (i, value, extraClass) =>
+    `<td class="${numeric.includes(i) ? 'num' : ''} ${extraClass || ''}" data-label="${esc(cols[i])}">${value}</td>`;
+  const head = (value, extraClass) =>
+    `<td class="row-head ${extraClass || ''}" data-label="${esc(cols[0])}">${value}</td>`;
+
+  if(!cats.length){
+    tbody.innerHTML = `<tr><td colspan="${cols.length}" style="color:var(--grey);">${esc(t("empty_summary"))}</td></tr>`;
+    return;
+  }
+
+  let html = "";
+
+  if(sum.useBlocks){
+    // Grouped by land block, with a subtotal under each. No allocation happens between
+    // blocks: the subtotals are simply added up.
+    LAND_STATUSES.forEach(st => {
+      const inBlock = cats.filter(cat => sum.perCategory[cat.id].status === st.id);
+      if(!inBlock.length) return;
+      inBlock.forEach(cat => {
+        const pc = sum.perCategory[cat.id];
+        html += `<tr>
+          ${head(esc(t(cat.labelKey)))}
+          ${cell(1, esc(t(st.labelKey)))}
+          ${cell(2, fmtDays(pc.hhDays))}
+          ${cell(3, fmtDays(pc.hiredDays))}
+          ${cell(4, st.areaKey ? fmt(pc.perArea) : "\u2014")}
+          ${cell(5, fmt(pc.annual))}
+        </tr>`;
+      });
+      const b = sum.blocks[st.id];
+      const areaText = st.areaKey ? ` (${fmtDays(b.area)} ${esc(areaUnitOf(state))})` : "";
+      html += `<tr class="block-row">
+        ${head(esc(t("subtotal_block") + " " + t(st.labelKey)) + areaText)}
+        ${cell(1, "", "empty-cell")}
+        ${cell(2, fmtDays(b.hhDays))}
+        ${cell(3, fmtDays(b.hiredDays))}
+        ${cell(4, st.areaKey ? fmt(b.perArea) : "\u2014")}
+        ${cell(5, fmt(b.total))}
+      </tr>`;
+    });
+    html += `<tr class="total-row">
+      ${head(esc(t("res_total_annual")))}
+      ${cell(1, "", "empty-cell")}
+      ${cell(2, fmtDays(sum.hhDays))}
+      ${cell(3, fmtDays(sum.hiredDays))}
+      ${cell(4, "", "empty-cell")}
+      ${cell(5, fmt(sum.total))}
+    </tr>`;
+  }else{
+    cats.forEach(cat => {
+      const pc = sum.perCategory[cat.id];
+      html += `<tr>
+        ${head(esc(t(cat.labelKey)))}
+        ${cell(1, esc(pc.mode === "global" ? t("mode_global") : t("mode_activity")))}
+        ${cell(2, fmtDays(pc.hhDays))}
+        ${cell(3, fmtDays(pc.hiredDays))}
+        ${cell(4, fmt(pc.perArea))}
+        ${cell(5, fmtPrice(pricePerKgPresentation(pc.perArea)))}
+        ${cell(6, fmtPrice(pricePerKgGbe(pc.perArea)))}
+      </tr>`;
+    });
+    html += `<tr class="total-row">
+      ${head(esc(t("total_cps_row")))}
+      ${cell(1, "", "empty-cell")}
+      ${cell(2, fmtDays(sum.hhDays))}
+      ${cell(3, fmtDays(sum.hiredDays))}
+      ${cell(4, fmt(sum.total))}
+      ${cell(5, fmtPrice(sum.pricePres))}
+      ${cell(6, fmtPrice(sum.priceGbe))}
+    </tr>`;
+  }
+
+  tbody.innerHTML = html;
+}
+
+function renderQuestionnaireTab(){
+  renderCategories();
+  updateTotalsOnly();
+}
+
+// ==================== TAB 3: COMPARISON ACROSS FGDs ====================
+
+function renderCompareTab(){
+  const container = document.getElementById("compareContainer");
+  const all = sortedRecords();
+  if(all.length < 2){
+    container.innerHTML = `<div class="empty-state">${esc(t("compare_need_more"))}</div>`;
+    return;
+  }
+
+  // Filter options are built from the FGDs actually on the device, so the dropdowns
+  // never offer a currency or coffee type nobody captured.
+  const presOptions = [...new Set(all.map(r => r.presentation))];
+  const curOptions  = [...new Set(all.map(r => (r.currency || "").trim()))].filter(Boolean);
+  const unitOptions = [...new Set(all.map(r => areaUnitOf(r)))];
+
+  // Drop any filter value that no longer exists (e.g. after deleting an FGD).
+  if(compareFilters.presentation && !presOptions.includes(compareFilters.presentation)) compareFilters.presentation = "";
+  if(compareFilters.currency && !curOptions.includes(compareFilters.currency)) compareFilters.currency = "";
+  if(compareFilters.areaUnit && !unitOptions.includes(compareFilters.areaUnit)) compareFilters.areaUnit = "";
+
+  const list = all.filter(r =>
+    (!compareFilters.presentation || r.presentation === compareFilters.presentation) &&
+    (!compareFilters.currency || (r.currency || "").trim() === compareFilters.currency) &&
+    (!compareFilters.areaUnit || areaUnitOf(r) === compareFilters.areaUnit));
+
+  const hasFilter = compareFilters.presentation || compareFilters.currency || compareFilters.areaUnit;
+  const sel = (id, label, options, current, labelFn) => `
+    <div class="field">
+      <label>${esc(label)}</label>
+      <select data-compare-filter="${id}">
+        <option value="">${esc(t("filter_all"))}</option>
+        ${options.map(o => `<option value="${esc(o)}" ${o === current ? "selected" : ""}>${esc(labelFn ? labelFn(o) : o)}</option>`).join("")}
+      </select>
+    </div>`;
+  const filterBar = `
+    <div class="filter-bar">
+      ${sel("presentation", t("filter_presentation"), presOptions, compareFilters.presentation, presentationLabel)}
+      ${sel("currency", t("filter_currency"), curOptions, compareFilters.currency)}
+      ${sel("areaUnit", t("filter_area_unit"), unitOptions, compareFilters.areaUnit)}
+      ${hasFilter ? `<button type="button" class="btn btn-outline btn-sm filter-reset" data-compare-filter-reset>${esc(t("filter_reset"))}</button>` : ""}
+    </div>`;
+
+  function wireFilters(){
+    container.querySelectorAll("[data-compare-filter]").forEach(el => {
+      el.addEventListener("change", () => {
+        compareFilters[el.getAttribute("data-compare-filter")] = el.value;
+        renderCompareTab();
+      });
+    });
+    const reset = container.querySelector("[data-compare-filter-reset]");
+    if(reset) reset.addEventListener("click", () => {
+      compareFilters = { presentation: "", currency: "", areaUnit: "" };
+      renderCompareTab();
+    });
+  }
+
+  if(!list.length){
+    container.innerHTML = filterBar + `<div class="empty-state">${esc(t("compare_no_match"))}</div>`;
+    wireFilters();
+    return;
+  }
+
+  // A kilo of cherry and a kilo of parchment are different things, so averaging yield
+  // or price per kg across coffee types produces a number that means nothing. Same for
+  // money across currencies or area units. Those averages are blanked rather than shown,
+  // because a facilitator who never touches the filters should not be handed a wrong figure.
+  const mixedPresentation = new Set(list.map(r => r.presentation)).size > 1;
+  const mixedUnits = new Set(list.map(r => (r.currency || "").trim().toUpperCase() + "|" + areaUnitOf(r))).size > 1;
+  // Some FGDs may predate land blocks and have no areas at all. Averaging farm area or
+  // annual cost over only the ones that have them, under a row labelled with the full
+  // count, would quietly understate both. Blank them instead.
+  const mixedBasis = new Set(list.map(r => usesBlocks(r))).size > 1;
+
+  const summaries = list.map(r => ({ rec: r, s: recordSummary(r) }));
+  const avg = (pick) => {
+    const vals = summaries.map(pick).filter(v => v !== null && v !== undefined && isFinite(v));
+    return vals.length ? vals.reduce((a,b) => a+b, 0) / vals.length : null;
+  };
+  const avgNum   = (pick, suppressed) => suppressed ? "—" : fmt(avg(pick) || 0);
+  const avgDays  = (pick, suppressed) => suppressed ? "—" : fmtDays(avg(pick) || 0);
+  const avgPrice = (pick, suppressed) => suppressed ? "—" : fmtPrice(avg(pick));
+
+  const rows = summaries.map(({rec, s}) => `
+    <tr>
+      <td class="row-head" data-label="${esc(t("th_fgd"))}">${esc(rec.fgdName || t("untitled_fgd"))}</td>
+      <td data-label="${esc(t("th_coop"))}">${esc(rec.coopName || "—")}</td>
+      <td data-label="${esc(t("th_currency"))}">${esc(currencyOf(rec) + " / " + areaUnitOf(rec))}</td>
+      <td class="num" data-label="${esc(t("th_wage"))}">${fmt(wageOf(rec))}</td>
+      <td data-label="${esc(t("th_type"))}">${esc(presentationLabel(rec.presentation))}</td>
+      <td class="num" data-label="${esc(t("th_yield"))}">${fmtDays(s.yieldPres)}</td>
+      <td class="num" data-label="${esc(t("th_yield_gbe"))}">${fmtDays(s.yieldGbe)}</td>
+      <td class="num" data-label="${esc(t("th_farm_area"))}">${s.useBlocks ? fmtDays(s.farmArea) : "\u2014"}</td>
+      <td class="num" data-label="${esc(t("th_hh_days"))}">${fmtDays(s.hhDays)}</td>
+      <td class="num" data-label="${esc(t("th_hired_days"))}">${fmtDays(s.hiredDays)}</td>
+      <td class="num" data-label="${esc(ti("th_total", rec))}">${fmt(s.perAreaCost)}</td>
+      <td class="num" data-label="${esc(t("th_annual_cost_compare"))}">${s.useBlocks ? fmt(s.total) : "\u2014"}</td>
+      <td class="num" data-label="${esc(t("th_price_pres"))}">${fmtPrice(s.pricePres)}</td>
+      <td class="num" data-label="${esc(t("th_price_gbe"))}">${fmtPrice(s.priceGbe)}</td>
+    </tr>`).join("");
+
+  container.innerHTML = filterBar
+    + (mixedPresentation ? `<div class="warn-note">${esc(t("compare_mixed_presentation"))}</div>` : "")
+    + (mixedUnits ? `<div class="warn-note">${esc(t("compare_mixed_currency"))}</div>` : "")
+    + (mixedBasis ? `<div class="warn-note">${esc(t("compare_mixed_basis"))}</div>` : "")
+    + `<div class="table-card" style="margin-top:0;">
+      <table class="dt">
+        <thead>
+          <tr>
+            <th>${esc(t("th_fgd"))}</th>
+            <th>${esc(t("th_coop"))}</th>
+            <th>${esc(t("th_currency"))}</th>
+            <th class="num">${esc(t("th_wage"))}</th>
+            <th>${esc(t("th_type"))}</th>
+            <th class="num">${esc(t("th_yield"))}</th>
+            <th class="num">${esc(t("th_yield_gbe"))}</th>
+            <th class="num">${esc(t("th_farm_area"))}</th>
+            <th class="num">${esc(t("th_hh_days"))}</th>
+            <th class="num">${esc(t("th_hired_days"))}</th>
+            <th class="num">${esc(t("th_total_compare"))}</th>
+            <th class="num">${esc(t("th_annual_cost_compare"))}</th>
+            <th class="num">${esc(t("th_price_pres"))}</th>
+            <th class="num">${esc(t("th_price_gbe"))}</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows}
+          <tr class="total-row">
+            <td class="row-head" data-label="${esc(t("th_fgd"))}">${esc(t("compare_avg"))} (${list.length})</td>
+            <td class="empty-cell"></td>
+            <td class="empty-cell"></td>
+            <td class="num" data-label="${esc(t("th_wage"))}">${avgNum(x => wageOf(x.rec), mixedUnits)}</td>
+            <td class="empty-cell"></td>
+            <td class="num" data-label="${esc(t("th_yield"))}">${avgDays(x => x.s.yieldPres, mixedPresentation)}</td>
+            <td class="num" data-label="${esc(t("th_yield_gbe"))}">${avgDays(x => x.s.yieldGbe, false)}</td>
+            <td class="num" data-label="${esc(t("th_farm_area"))}">${avgDays(x => x.s.useBlocks ? x.s.farmArea : null, mixedUnits || mixedBasis)}</td>
+            <td class="num" data-label="${esc(t("th_hh_days"))}">${avgDays(x => x.s.hhDays, false)}</td>
+            <td class="num" data-label="${esc(t("th_hired_days"))}">${avgDays(x => x.s.hiredDays, false)}</td>
+            <td class="num" data-label="${esc(t("th_total_compare"))}">${avgNum(x => x.s.perAreaCost, mixedUnits)}</td>
+            <td class="num" data-label="${esc(t("th_annual_cost_compare"))}">${avgNum(x => x.s.useBlocks ? x.s.total : null, mixedUnits || mixedBasis)}</td>
+            <td class="num" data-label="${esc(t("th_price_pres"))}">${avgPrice(x => x.s.pricePres, mixedPresentation || mixedUnits)}</td>
+            <td class="num" data-label="${esc(t("th_price_gbe"))}">${avgPrice(x => x.s.priceGbe, mixedUnits)}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>`;
+
+  wireFilters();
+}
+
+// ==================== TABS ====================
+
+function switchTab(tab){
+  if(state){
+    state.activeTab = tab;
+    saveState();
+  }
+  ["activities","questionnaire"].forEach(name => {
+    const panelId = "tabPanel" + name.charAt(0).toUpperCase() + name.slice(1);
+    const btnId = "tabBtn" + name.charAt(0).toUpperCase() + name.slice(1);
+    document.getElementById(panelId).classList.toggle("active", tab === name);
+    document.getElementById(btnId).classList.toggle("active", tab === name);
+  });
+}
+
+// The overview screen has its own two tabs: the list of FGDs, and the comparison
+// across all of them. The comparison is a property of the whole device, not of any
+// one FGD, so it lives here rather than inside an open questionnaire.
+let listTab = "records";
+function switchListTab(tab){
+  listTab = tab;
+  document.getElementById("listPanelRecords").classList.toggle("active", tab === "records");
+  document.getElementById("listPanelCompare").classList.toggle("active", tab === "compare");
+  document.getElementById("listTabRecords").classList.toggle("active", tab === "records");
+  document.getElementById("listTabCompare").classList.toggle("active", tab === "compare");
+  if(tab === "records") renderRecordsList(); else renderCompareTab();
+}
+
+// ==================== LANGUAGE ====================
+
+function applyStaticTranslations(){
+  document.querySelectorAll("[data-i18n], [data-i18n-unit]").forEach(el => {
+    const unitKey = el.getAttribute("data-i18n-unit");
+    const key = unitKey || el.getAttribute("data-i18n");
+    const value = unitKey ? ti(unitKey) : t(key);
+    // Only replace this node's own text, not any nested elements (e.g. the logo's <span>,
+    // or KPI cards whose value is filled in separately by updateTotalsOnly).
+    const directTextNode = [...el.childNodes].find(n => n.nodeType === 3);
+    if(directTextNode){
+      directTextNode.textContent = value;
+    } else if(!el.children.length){
+      el.textContent = value;
+    }
+  });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el => {
+    el.setAttribute("placeholder", t(el.getAttribute("data-i18n-ph")));
+  });
+  document.title = t("app_title") + " — " + t("app_subtitle");
+}
+
+function rebuildPresentationSelect(){
+  const sel = document.getElementById("presentationSelect");
+  sel.innerHTML = PRESENTATIONS.map(p => `<option value="${p.value}">${esc(t(p.labelKey))}</option>`).join("");
+  if(state) sel.value = state.presentation || "cherry";
+}
+
+function setLanguage(lang){
+  appLang = lang;
+  try{ localStorage.setItem(STORAGE_KEY_LANG, lang); }catch(e){ /* not fatal */ }
+  document.querySelectorAll("#langToggle button").forEach(b => b.classList.toggle("active", b.getAttribute("data-lang") === lang));
+  applyStaticTranslations();
+  rebuildPresentationSelect();
+  if(state){
+    state.meta.lang = lang;
+    saveState();
+    updateYieldGbeDisplay();
+    renderActivitiesTab();
+    renderQuestionnaireTab();
+  }
+  if(screen === "list") switchListTab(listTab);
+}
+
+// ==================== SETUP FIELDS ====================
+
+function bindSetupField(id, key, extra){
+  document.getElementById(id).addEventListener("input", (e) => {
+    if(!state) return;
+    state[key] = e.target.value;
+    saveState();
+    if(extra) extra();
+  });
+}
+
+function updateYieldGbeDisplay(){
+  if(!state) return;
+  const y = yieldGbePerHa();
+  document.getElementById("yieldGbeDisplay").value = (y > 0 ? fmtDays(y) : "0.0") + " " + ti("yield_gbe_suffix");
+}
+
+bindSetupField("fgdName", "fgdName");
+bindSetupField("floId", "floId");
+bindSetupField("coopName", "coopName");
+bindSetupField("currency", "currency", refreshUnitLabels);
+bindSetupField("areaUnitOther", "areaUnitOther", refreshUnitLabels);
+bindSetupField("dailyWage", "dailyWage", updateTotalsOnly);
+bindSetupField("gbeRatioInput", "gbeRatio", () => { updateYieldGbeDisplay(); updateTotalsOnly(); });
+bindSetupField("yieldPerHaInput", "yieldPerHa", () => { updateYieldGbeDisplay(); updateTotalsOnly(); });
+
+[["areaEstablishment","establishment"],["areaRenovation","renovation"],["areaProductive","productive"]]
+  .forEach(([id, key]) => {
+    document.getElementById(id).addEventListener("input", (e) => {
+      if(!state) return;
+      state.areas[key] = e.target.value;
+      saveState();
+      // Entering the first area switches the whole record from "per unit of area" to
+      // whole-farm figures, so the questionnaire labels and summary have to redraw too.
+      renderQuestionnaireTab();
+    });
+  });
+
+document.getElementById("areaUnit").addEventListener("change", (e) => {
+  if(!state) return;
+  state.areaUnit = e.target.value;
+  saveState();
+  refreshUnitLabels();
+});
+
+document.getElementById("presentationSelect").addEventListener("change", (e) => {
+  if(!state) return;
+  state.presentation = e.target.value;
+  const preset = PRESENTATIONS.find(p => p.value === state.presentation);
+  state.gbeRatio = preset ? preset.defaultRatio : "";
+  document.getElementById("gbeRatioInput").value = state.gbeRatio;
+  saveState();
+  updateYieldGbeDisplay();
+  updateTotalsOnly();
+});
+
+document.querySelectorAll("#langToggle button").forEach(btn => {
+  btn.addEventListener("click", () => setLanguage(btn.getAttribute("data-lang")));
+});
+
+document.getElementById("recordSearch").addEventListener("input", (e) => {
+  recordSearch = e.target.value;
+  renderRecordsList();
+});
+document.getElementById("recordSearchClear").addEventListener("click", clearRecordSearch);
+
+document.getElementById("listTabRecords").addEventListener("click", () => switchListTab("records"));
+document.getElementById("listTabCompare").addEventListener("click", () => switchListTab("compare"));
+document.getElementById("tabBtnActivities").addEventListener("click", () => switchTab("activities"));
+document.getElementById("tabBtnQuestionnaire").addEventListener("click", () => switchTab("questionnaire"));
+document.getElementById("continueToQuestionnaire").addEventListener("click", () => switchTab("questionnaire"));
+document.getElementById("editActivitiesLink").addEventListener("click", () => switchTab("activities"));
+
+// ==================== EXPORT / IMPORT ====================
+
+// Blob + createObjectURL downloads can silently fail in some mobile webviews.
+// A data: URI on the anchor's href is honoured far more reliably.
+function downloadFile(filename, mimeType, content){
+  const dataUri = "data:" + mimeType + ";charset=utf-8," + encodeURIComponent(content);
+  try{
+    const a = document.createElement("a");
+    a.href = dataUri;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }catch(e){
+    // Last resort: open it in a new tab so the person can save it manually.
+    window.open(dataUri, "_blank");
+  }
+}
+
+function safeName(s, fallback){
+  return (s || fallback).replace(/[^a-z0-9_-]/gi, "_");
+}
+function today(){ return new Date().toISOString().slice(0,10); }
+
+function csvEscape(v){
+  if(v === null || v === undefined) return "";
+  const s = String(v);
+  return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+
+// One flat row per FGD. Column names use the internal (English) category ids rather
+// than the translated labels, so files from facilitators working in different
+// languages line up in the same master sheet.
+function csvColumnsForRecord(rec){
+  const s = recordSummary(rec);
+  const cols = [];
+  const push = (label, value) => cols.push([label, value]);
+
+  push("fgd_id", rec.meta.id);
+  push("fgd_name", rec.fgdName);
+  push("flo_id", rec.floId);
+  push("coop_name", rec.coopName);
+  push("area_unit", rec.areaUnit);
+  push("area_unit_custom_name", rec.areaUnitOther || "");
+  push("currency", rec.currency);
+  push("daily_wage", rec.dailyWage);
+  push("coffee_type", rec.presentation);
+  push("gbe_ratio_kg_of_type_per_1kg_gbe", rec.gbeRatio);
+  push("yield_kg_per_productive_area_unit", rec.yieldPerHa);
+  push("yield_kg_gbe_per_productive_area_unit", s.yieldGbe);
+  push("uses_land_blocks", s.useBlocks ? 1 : 0);
+  push("area_establishment", (rec.areas || {}).establishment || "");
+  push("area_renovation", (rec.areas || {}).renovation || "");
+  push("area_productive", (rec.areas || {}).productive || "");
+  push("area_total_coffee", s.farmArea);
+
+  CATEGORIES.forEach(cat => {
+    const c = s.perCategory[cat.id];
+    push(cat.id + "_selected", c.visible ? 1 : 0);
+    push(cat.id + "_entry_mode", c.mode);
+    push(cat.id + "_land_status", c.status);
+    push(cat.id + "_cost_per_its_area_unit", c.perArea);
+    push(cat.id + "_annual_cost", c.annual);
+    push(cat.id + "_family_labour_days_per_area_unit", c.hhDays);
+    push(cat.id + "_hired_labour_days_per_area_unit", c.hiredDays);
+  });
+  LAND_STATUSES.forEach(st => {
+    const b = s.blocks[st.id];
+    push("block_" + st.id + "_area", st.areaKey ? b.area : "");
+    push("block_" + st.id + "_cost_per_area_unit", st.areaKey ? b.perArea : "");
+    push("block_" + st.id + "_annual_cost", b.total);
+  });
+
+  push("total_inputs", s.components.inputs);
+  push("total_hired_labour_cost", s.components.hired);
+  push("total_variable_costs", s.components.variable);
+  push("total_fixed_costs_annualised", s.components.fixed);
+  push("total_family_labour_days", s.hhDays);
+  push("total_hired_labour_days", s.hiredDays);
+  push("total_annual_cost", s.useBlocks ? s.total : "");
+  push("total_cps_per_area_unit", s.perAreaCost);
+  push("production_kg_in_type", s.useBlocks ? s.production : "");
+  push("production_kg_gbe", s.useBlocks ? s.productionGbe : "");
+  push("price_per_kg_in_type", s.pricePres === null ? "" : s.pricePres);
+  push("price_per_kg_gbe", s.priceGbe === null ? "" : s.priceGbe);
+  push("language", rec.meta.lang || "");
+  push("created_at", rec.meta.createdAt || "");
+  push("updated_at", rec.meta.updatedAt || "");
+
+  return cols;
+}
+
+function exportRecordsCsv(recs, isAll){
+  const list = recs.filter(Boolean);
+  if(!list.length) return;
+  const rowsOfCols = list.map(csvColumnsForRecord);
+  const header = rowsOfCols[0].map(p => csvEscape(p[0])).join(",");
+  const lines = rowsOfCols.map(cols => cols.map(p => csvEscape(p[1])).join(","));
+  const csv = header + "\n" + lines.join("\n") + "\n";
+  const filename = isAll
+    ? `cps_all_fgds_${today()}.csv`
+    : `cps_${safeName(list[0].fgdName, "fgd")}_${today()}.csv`;
+  downloadFile(filename, "text/csv", csv);
+  setSaveStatus(t("save_status_csv") + " " + new Date().toLocaleTimeString());
+}
+
+function exportRecordJson(rec){
+  if(!rec) return;
+  downloadFile(`cps_${safeName(rec.fgdName, "fgd")}_${today()}.json`, "application/json", JSON.stringify(rec, null, 2));
+  setSaveStatus(t("save_status_json") + " " + new Date().toLocaleTimeString());
+}
+
+function exportAllJson(){
+  const list = sortedRecords();
+  if(!list.length) return;
+  downloadFile(`cps_all_fgds_${today()}.json`, "application/json", JSON.stringify(list, null, 2));
+  setSaveStatus(t("save_status_json") + " " + new Date().toLocaleTimeString());
+}
+
+document.getElementById("btnMyRecords").addEventListener("click", goToRecordsList);
+document.getElementById("btnNewRecord").addEventListener("click", createNewRecord);
+document.getElementById("btnExportJson").addEventListener("click", () => exportRecordJson(state));
+document.getElementById("btnExportCsv").addEventListener("click", () => exportRecordsCsv([state], false));
+document.getElementById("btnExportAllCsv").addEventListener("click", () => exportRecordsCsv(sortedRecords(), true));
+document.getElementById("btnExportAllJson").addEventListener("click", exportAllJson);
+document.getElementById("btnDeleteAll").addEventListener("click", deleteAllRecords);
+document.getElementById("btnImportJson").addEventListener("click", () => document.getElementById("importFileInput").click());
+
+document.getElementById("importFileInput").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (evt) => {
+    let parsed;
+    try{
+      parsed = JSON.parse(evt.target.result);
+    }catch(err){
+      alert(t("alert_import_invalid"));
+      e.target.value = "";
+      return;
+    }
+    const incoming = Array.isArray(parsed) ? parsed : [parsed];
+    const usable = incoming.filter(r => r && typeof r === "object" && r.categories);
+    if(!usable.length){
+      alert(t("alert_import_invalid"));
+      e.target.value = "";
+      return;
+    }
+    showConfirm(t("confirm_import").replace("FILENAME", file.name), t("modal_confirm"), () => {
+      let lastId = null;
+      usable.forEach(raw => {
+        const rec = sanitizeRecord(raw);
+        // Keep the original id when it is new to this device, so re-importing a backup
+        // updates the same FGD instead of piling up duplicates. Give it a fresh id only
+        // when that id is already taken by a different FGD.
+        if(records[rec.meta.id] && records[rec.meta.id] !== rec) rec.meta.id = generateRecordId();
+        records[rec.meta.id] = rec;
+        lastId = rec.meta.id;
+      });
+      persistAllRecords(records);
+      recordSearch = "";
+      document.getElementById("recordSearch").value = "";
+      if(usable.length === 1 && lastId) openRecord(lastId);
+      else goToRecordsList();
+    });
+    e.target.value = "";
+  };
+  reader.readAsText(file);
+});
+
+// ==================== INIT ====================
+
+(function init(){
+  let savedLang = null;
+  try{ savedLang = localStorage.getItem(STORAGE_KEY_LANG); }catch(e){ /* default stays English */ }
+  if(savedLang && TRANSLATIONS[savedLang]) appLang = savedLang;
+
+  records = loadAllRecords();
+
+  // No language chosen on this device yet (first run, or an upgrade from the
+  // single-FGD version): fall back to the language the newest FGD was saved in.
+  if(!savedLang){
+    const newest = sortedRecords()[0];
+    const recLang = newest && newest.meta && newest.meta.lang;
+    if(recLang && TRANSLATIONS[recLang]) appLang = recLang;
+  }
+
+  document.querySelectorAll("#langToggle button").forEach(b =>
+    b.classList.toggle("active", b.getAttribute("data-lang") === appLang));
+  applyStaticTranslations();
+  rebuildPresentationSelect();
+
+  const list = sortedRecords();
+  if(list.length === 1){
+    // A single FGD on the device is almost certainly the one being worked on
+    // (including a record just migrated from the older single-FGD version).
+    openRecord(list[0].meta.id);
+  }else{
+    screen = "list";
+    applyScreen();
+    switchListTab("records");
+  }
+  setSaveStatus(t("save_status_auto"));
+})();
+
+// ==================== PWA: service worker ====================
+// Only meaningful when served over HTTPS (e.g. GitHub Pages). Silently does nothing
+// otherwise; everything else in the tool still works.
+if("serviceWorker" in navigator && location.protocol !== "file:"){
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(() => { /* offline install unavailable */ });
+  });
+}
+</script>
+
+</body>
+</html>
