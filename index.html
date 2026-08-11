@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CPS Calculator — FGD data entry</title>
+<title>COSP Calculator — FGD data entry</title>
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#001B6E">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Calculadora CPS">
+<meta name="apple-mobile-web-app-title" content="Calculadora COSP">
 <link rel="icon" href="./icon-192.png">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -201,6 +201,7 @@
 
   /* ---- Records list screen ---- */
   .records-count { color: var(--text-light); font-size: .85rem; margin: -6px 0 14px; }
+  .table-footnote { color: var(--text-light); font-size: .78rem; line-height: 1.5; margin: 18px 0 4px; }
   .records-list { display: flex; flex-direction: column; gap: 10px; }
   .record-card { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap;
     border: 1px solid var(--border); border-left: 4px solid var(--tangerine); border-radius: 10px;
@@ -297,6 +298,14 @@
          Only presentation changes here; CSV and JSON exports are built
          from the data, not from this markup, so they are unaffected. ---- */
   @media (max-width: 700px) {
+    header { padding: 12px 14px; gap: 10px; flex-wrap: nowrap; align-items: center; }
+    header .left { flex: 1 1 auto; min-width: 0; }
+    header .logo { font-size: 1.05rem; line-height: 1.2; }
+    header .logo span { display: block; margin-left: 0; font-size: .74rem; }
+    .lang-switch { margin-left: auto; flex-shrink: 0; padding: 3px 4px; gap: 0; }
+    .lang-switch-label { display: none; }
+    .lang-switch .toggle-group button { padding: 5px 9px; font-size: .72rem; }
+
     .top-actions { gap: 6px; padding: 8px 12px; }
     .top-actions .btn { padding: 7px 10px; font-size: .74rem; min-height: 36px; flex: 1 1 auto; }
     .top-actions .spacer { display: none; }
@@ -339,7 +348,7 @@
 
 <header>
   <div class="left">
-    <div class="logo" data-i18n="app_title">CPS Calculator <span data-i18n="app_subtitle">FGD data entry</span></div>
+    <div class="logo" data-i18n="app_title">COSP Calculator <span data-i18n="app_subtitle">FGD data entry</span></div>
   </div>
   <div class="lang-switch">
     <span class="lang-switch-label" data-i18n="lang_switch_label">Language:</span>
@@ -482,7 +491,6 @@
         </div>
         <div class="land-bar" id="landBar"></div>
         <div class="land-legend" id="landLegend"></div>
-        <div class="table-note" style="margin-top:10px;" id="landNote"></div>
       </div>
       <div class="activity-group-card">
         <h3 data-i18n="presentation_card_title">Coffee type and yield</h3>
@@ -554,8 +562,8 @@
 // drafts pending native-speaker review.
 const TRANSLATIONS = {
   en: {
-    app_title: "CPS Calculator", app_subtitle: "FGD data entry",
-    notice: "How to use this tool: first, on Tab 1, mark which activities happen on the farm and what type of coffee is sold. Then go to Tab 2, where only the cost questions that apply will show up. Everything you type is saved automatically on this device, inside this FGD. For paid workers, you can enter days worked or a fixed contract amount, whichever is easier. For tools or equipment that last several years (like a sprayer pump), enter how much it cost and how many years it lasts; the tool works out the yearly cost on its own. Use the buttons at the top to start another FGD, to export one FGD, or to export all of them together.",
+    app_title: "COSP Calculator", app_subtitle: "FGD data entry",
+    notice: "How to use this tool. On tab 1, record how the coffee land is split between new areas, areas being renovated and productive areas, then mark which activities happen on the farm, what type of coffee is sold and the yield. A tab appears for establishment and for renovation only when you enter an area for them, and each asks five short questions about that block. The cost questionnaire then covers the productive area, plus farm administration as a yearly overhead. Everything you type is saved on this device, inside this FGD. For paid workers you can enter days worked or a fixed contract amount, whichever is easier. For tools that last several years, enter what they cost and how many years they last, and the yearly share is worked out for you. Choose inputs and variable costs from the list where you can, and add a quantity and unit if the group knows them. Use the buttons at the top to start another FGD or to export.",
     lang_switch_label: "Language:",
     field_fgd_name: "FGD name or code", field_flo_id: "FLO-ID", field_coop_name: "Cooperative name",
     field_area_unit: "Area unit", area_unit_ha: "Hectare (ha)", area_unit_mz: "Manzana", area_unit_acre: "Acre", area_unit_other: "Other",
@@ -600,7 +608,7 @@ const TRANSLATIONS = {
     ph_amount: "amount", ph_days: "days", ph_fixed_amount: "fixed amount", ph_purchase_cost: "purchase cost", ph_useful_life: "useful life (years)",
     ph_activity_name: "Activity name (e.g.", ph_tool_equipment: "Description (e.g. tool or equipment)",
     add_entry_prefix: "+ Add", add_activity_btn: "+ Add activity", remove_btn_title: "Remove",
-    kpi_total: "CPS Total", kpi_total_unit: "{c}/{u}", kpi_inputs: "Inputs", kpi_household_days: "Family labour days",
+    kpi_total: "COSP Total", kpi_total_unit: "{c}/{u}", kpi_inputs: "Inputs", kpi_household_days: "Family labour days",
     kpi_hired_cost: "Paid labour (cost)", kpi_hired_days: "Paid labour days", kpi_variable: "Variable costs", kpi_fixed: "Fixed costs",
     section_categories: "Cost categories", edit_activities_link: "Edit selected activities",
     empty_categories: "No activities selected yet.", empty_categories_link: "Go to Tab 1 to select the farm's activities.",
@@ -610,7 +618,7 @@ const TRANSLATIONS = {
     table_title: "Summary by category", table_note: "Totals only — the line-by-line detail stays in the questionnaire, not in this summary.",
     th_category: "Category", th_mode: "Entry mode", th_hh_days: "Family labour days", th_hired_days: "Paid labour days",
     th_total: "Total ({c}/{u})", th_price_pres: "Price/kg (coffee type)", th_price_gbe: "Price/kg GBE",
-    total_cps_row: "Total CPS",
+    total_cps_row: "Total COSP",
     yield_gbe_suffix: "kg GBE/{u}",
     unit_per_year: "/year", unit_per_area: "/{u}", cost_colon: "Cost:",
     // ---- records list ----
@@ -628,12 +636,10 @@ const TRANSLATIONS = {
     col_updated: "Last change", record_open_now: "Open now",
     // ---- compare ----
     land_card_title: "Coffee land on the farm",
-    land_card_desc: "Split the coffee area by the state it is in. Costs for each block are entered per unit of that block's area, and the tool multiplies them by it. Leave all three blank to keep working per unit of area, as before.",
+    land_card_desc: "Split the coffee area by the state it is in. Costs for each block are entered per unit of that block's area, and the tool multiplies them by it. If you leave the three blank, the FGD reports costs for the productive area only.",
     area_establishment: "Establishment (new areas)", area_renovation: "Renovation / rehabilitation",
     area_productive: "Productive areas", area_total: "Total coffee area",
     area_establishment_l: "Establishment ({u})", area_renovation_l: "Renovation ({u})", area_productive_l: "Productive ({u})",
-    land_note_blank: "No areas entered: totals stay as a cost per unit of area, and the price per kg uses the yield on its own.",
-    land_note_active: "Areas entered: the three blocks are summed as they stand, with no amortisation. A year with new plantings reads as a more expensive year, which is the point.",
     status_label: "Applies to",
     status_establishment: "Establishment", status_renovation: "Renovation",
     status_productive: "Productive", status_annual: "Annual overhead",
@@ -686,7 +692,7 @@ const TRANSLATIONS = {
     compare_mixed_basis: "Some of these FGDs have no farm areas entered, so they have no annual cost. The farm area and annual cost averages are left blank rather than covering only part of the set.",
     filter_presentation: "Coffee type", filter_currency: "Currency", filter_area_unit: "Area unit",
     filter_all: "All", filter_reset: "Clear filters",
-    th_fgd: "FGD", th_coop: "Cooperative", th_currency: "Currency / unit", th_wage: "Daily wage", th_total_compare: "Total CPS",
+    th_fgd: "FGD", th_coop: "Cooperative", th_currency: "Currency / unit", th_wage: "Daily wage", th_total_compare: "Total COSP",
     th_type: "Coffee type", th_yield: "Yield", th_yield_gbe: "Yield (GBE)",
     // ---- confirmations ----
     modal_cancel: "Cancel", modal_confirm: "Confirm", modal_delete: "Delete",
@@ -697,8 +703,8 @@ const TRANSLATIONS = {
     import_done: "FGD(s) loaded"
   },
   es: {
-    app_title: "Calculadora CPS", app_subtitle: "Captura en FGD",
-    notice: "Cómo usar esta herramienta: primero, en la Pestaña 1, marquen qué actividades hacen en la finca y qué tipo de café venden. Luego pasen a la Pestaña 2, donde solo aparecerán las preguntas de costos que les corresponden. Todo lo que escriban queda guardado automáticamente en este dispositivo, dentro de este FGD. Para el pago a trabajadores contratados, pueden anotar los días trabajados o el monto de un contrato, lo que sea más fácil. Para herramientas o equipos que duran varios años (como una bomba de fumigar), anoten cuánto costaron y cuántos años duran; la herramienta calcula sola cuánto corresponde por año. Usen los botones de arriba para empezar otro FGD, exportar un FGD, o exportar todos juntos.",
+    app_title: "Calculadora COSP", app_subtitle: "Captura en FGD",
+    notice: "Cómo usar esta herramienta. En la pestaña 1, anoten cómo se reparte la tierra de café entre áreas nuevas, áreas en renovación y áreas productivas; luego marquen qué actividades se hacen en la finca, qué tipo de café se vende y el rendimiento. Aparece una pestaña para establecimiento y otra para renovación solo cuando anotan un área para ellas, y cada una hace cinco preguntas cortas sobre ese bloque. El cuestionario de costos cubre entonces el área productiva, más la administración de la finca como costo anual. Todo lo que escriban queda guardado en este dispositivo, dentro de este FGD. Para trabajadores contratados pueden anotar los días trabajados o el monto de un contrato, lo que sea más fácil. Para herramientas que duran varios años, anoten cuánto costaron y cuántos años duran, y la parte anual se calcula sola. Elijan los insumos y costos variables del listado cuando se pueda, y agreguen cantidad y unidad si el grupo las conoce. Usen los botones de arriba para empezar otro FGD o para exportar.",
     lang_switch_label: "Idioma:",
     field_fgd_name: "Nombre o código del FGD", field_flo_id: "FLO-ID", field_coop_name: "Nombre de la cooperativa",
     field_area_unit: "Unidad de área", area_unit_ha: "Hectárea (ha)", area_unit_mz: "Manzana", area_unit_acre: "Acre", area_unit_other: "Otra",
@@ -743,7 +749,7 @@ const TRANSLATIONS = {
     ph_amount: "monto", ph_days: "días", ph_fixed_amount: "monto fijo", ph_purchase_cost: "costo de compra", ph_useful_life: "vida útil (años)",
     ph_activity_name: "Nombre de la actividad (ej.", ph_tool_equipment: "Descripción (ej. herramienta o equipo)",
     add_entry_prefix: "+ Agregar", add_activity_btn: "+ Agregar actividad", remove_btn_title: "Eliminar",
-    kpi_total: "CPS Total", kpi_total_unit: "{c}/{u}", kpi_inputs: "Insumos", kpi_household_days: "Días MO familiar",
+    kpi_total: "COSP Total", kpi_total_unit: "{c}/{u}", kpi_inputs: "Insumos", kpi_household_days: "Días MO familiar",
     kpi_hired_cost: "MO contratada (costo)", kpi_hired_days: "Días MO contratada", kpi_variable: "Costos variables", kpi_fixed: "Costos fijos",
     section_categories: "Categorías de costo", edit_activities_link: "Editar actividades seleccionadas",
     empty_categories: "Ninguna actividad seleccionada todavía.", empty_categories_link: "Ve a la pestaña 1 para seleccionar las actividades de la finca.",
@@ -753,7 +759,7 @@ const TRANSLATIONS = {
     table_title: "Resumen por categoría", table_note: "Solo totales — el detalle por línea queda en el cuestionario, no en este resumen.",
     th_category: "Categoría", th_mode: "Modo de entrada", th_hh_days: "Días MO familiar", th_hired_days: "Días MO contratada",
     th_total: "Total ({c}/{u})", th_price_pres: "Precio/kg (presentación)", th_price_gbe: "Precio/kg GBE",
-    total_cps_row: "Total CPS",
+    total_cps_row: "Total COSP",
     yield_gbe_suffix: "kg GBE/{u}",
     unit_per_year: "/año", unit_per_area: "/{u}", cost_colon: "Costo:",
     btn_my_records: "Mis FGD", btn_new_record: "+ Nuevo FGD",
@@ -769,12 +775,10 @@ const TRANSLATIONS = {
     untitled_fgd: "FGD sin nombre", no_coop: "Cooperativa sin anotar",
     col_updated: "Último cambio", record_open_now: "Abierto ahora",
     land_card_title: "Tierra de café en la finca",
-    land_card_desc: "Dividan el área de café según el estado en que está. Los costos de cada bloque se anotan por unidad de área de ese bloque, y la herramienta los multiplica por ella. Si dejan los tres en blanco, todo sigue funcionando por unidad de área, como antes.",
+    land_card_desc: "Dividan el área de café según el estado en que está. Los costos de cada bloque se anotan por unidad de área de ese bloque, y la herramienta los multiplica por ella. Si dejan los tres en blanco, el FGD reporta únicamente los costos del área productiva.",
     area_establishment: "Establecimiento (áreas nuevas)", area_renovation: "Renovación / rehabilitación",
     area_productive: "Áreas productivas", area_total: "Área total de café",
     area_establishment_l: "Establecimiento ({u})", area_renovation_l: "Renovación ({u})", area_productive_l: "Productiva ({u})",
-    land_note_blank: "Sin áreas anotadas: los totales quedan como costo por unidad de área, y el precio por kg usa solo el rendimiento.",
-    land_note_active: "Áreas anotadas: los tres bloques se suman tal cual, sin amortizar nada. Un año con siembras nuevas sale como un año más caro, que es justamente la idea.",
     status_label: "Corresponde a",
     status_establishment: "Establecimiento", status_renovation: "Renovación",
     status_productive: "Productiva", status_annual: "Costo anual fijo",
@@ -827,7 +831,7 @@ const TRANSLATIONS = {
     compare_mixed_basis: "Algunos de estos FGD no tienen áreas anotadas, así que no tienen costo anual. Los promedios de área y de costo anual se dejan en blanco en vez de cubrir solo una parte del grupo.",
     filter_presentation: "Presentación", filter_currency: "Moneda", filter_area_unit: "Unidad de área",
     filter_all: "Todas", filter_reset: "Quitar filtros",
-    th_fgd: "FGD", th_coop: "Cooperativa", th_currency: "Moneda / unidad", th_wage: "Jornal diario", th_total_compare: "CPS Total",
+    th_fgd: "FGD", th_coop: "Cooperativa", th_currency: "Moneda / unidad", th_wage: "Jornal diario", th_total_compare: "COSP Total",
     th_type: "Presentación", th_yield: "Rendimiento", th_yield_gbe: "Rendimiento (GBE)",
     modal_cancel: "Cancelar", modal_confirm: "Confirmar", modal_delete: "Borrar",
     confirm_delete_record: "¿Borrar este FGD y todo lo capturado en él? No se puede deshacer.",
@@ -837,8 +841,8 @@ const TRANSLATIONS = {
     import_done: "FGD cargados"
   },
   pt: {
-    app_title: "Calculadora CPS", app_subtitle: "Coleta no FGD",
-    notice: "Como usar esta ferramenta: primeiro, na Aba 1, marquem quais atividades são feitas na propriedade e qual tipo de café é vendido. Depois vão para a Aba 2, onde só aparecem as perguntas de custo que se aplicam. Tudo que vocês digitarem fica salvo automaticamente neste dispositivo, dentro deste FGD. Para trabalhadores contratados, podem anotar os dias trabalhados ou o valor de um contrato, o que for mais fácil. Para ferramentas ou equipamentos que duram vários anos (como uma bomba de pulverizar), anotem quanto custou e quantos anos dura; a ferramenta calcula sozinha quanto corresponde por ano. Usem os botões de cima para começar outro FGD, exportar um FGD, ou exportar todos juntos.",
+    app_title: "Calculadora COSP", app_subtitle: "Coleta no FGD",
+    notice: "Como usar esta ferramenta. Na aba 1, anotem como a terra de café se divide entre áreas novas, áreas em renovação e áreas produtivas; depois marquem quais atividades são feitas na propriedade, qual tipo de café é vendido e a produtividade. Uma aba aparece para implantação e outra para renovação apenas quando informarem uma área para elas, e cada uma faz cinco perguntas curtas sobre aquele bloco. O questionário de custos cobre então a área produtiva, mais a administração da propriedade como custo anual. Tudo que digitarem fica salvo neste dispositivo, dentro deste FGD. Para trabalhadores contratados podem anotar os dias trabalhados ou o valor de um contrato, o que for mais fácil. Para ferramentas que duram vários anos, anotem quanto custaram e quantos anos duram, e a parte anual é calculada sozinha. Escolham os insumos e custos variáveis da lista quando possível, e acrescentem quantidade e unidade se o grupo as souber. Usem os botões de cima para começar outro FGD ou para exportar.",
     lang_switch_label: "Idioma:",
     field_fgd_name: "Nome ou código do FGD", field_flo_id: "FLO-ID", field_coop_name: "Nome da cooperativa",
     field_area_unit: "Unidade de área", area_unit_ha: "Hectare (ha)", area_unit_mz: "Manzana", area_unit_acre: "Acre", area_unit_other: "Outra",
@@ -883,7 +887,7 @@ const TRANSLATIONS = {
     ph_amount: "valor", ph_days: "dias", ph_fixed_amount: "valor fixo", ph_purchase_cost: "custo de compra", ph_useful_life: "vida útil (anos)",
     ph_activity_name: "Nome da atividade (ex.", ph_tool_equipment: "Descrição (ex. ferramenta ou equipamento)",
     add_entry_prefix: "+ Adicionar", add_activity_btn: "+ Adicionar atividade", remove_btn_title: "Remover",
-    kpi_total: "CPS Total", kpi_total_unit: "{c}/{u}", kpi_inputs: "Insumos", kpi_household_days: "Dias MO familiar",
+    kpi_total: "COSP Total", kpi_total_unit: "{c}/{u}", kpi_inputs: "Insumos", kpi_household_days: "Dias MO familiar",
     kpi_hired_cost: "MO contratada (custo)", kpi_hired_days: "Dias MO contratada", kpi_variable: "Custos variáveis", kpi_fixed: "Custos fixos",
     section_categories: "Categorias de custo", edit_activities_link: "Editar atividades selecionadas",
     empty_categories: "Nenhuma atividade selecionada ainda.", empty_categories_link: "Vá à Aba 1 para selecionar as atividades da propriedade.",
@@ -893,7 +897,7 @@ const TRANSLATIONS = {
     table_title: "Resumo por categoria", table_note: "Somente totais — o detalhe linha a linha fica no questionário, não neste resumo.",
     th_category: "Categoria", th_mode: "Modo de entrada", th_hh_days: "Dias MO familiar", th_hired_days: "Dias MO contratada",
     th_total: "Total ({c}/{u})", th_price_pres: "Preço/kg (tipo)", th_price_gbe: "Preço/kg GBE",
-    total_cps_row: "Total CPS",
+    total_cps_row: "Total COSP",
     yield_gbe_suffix: "kg GBE/{u}",
     unit_per_year: "/ano", unit_per_area: "/{u}", cost_colon: "Custo:",
     btn_my_records: "Meus FGD", btn_new_record: "+ Novo FGD",
@@ -909,12 +913,10 @@ const TRANSLATIONS = {
     untitled_fgd: "FGD sem nome", no_coop: "Cooperativa não informada",
     col_updated: "Última alteração", record_open_now: "Aberto agora",
     land_card_title: "Terra de café na propriedade",
-    land_card_desc: "Dividam a área de café pelo estado em que está. Os custos de cada bloco são anotados por unidade de área daquele bloco, e a ferramenta multiplica por ela. Se deixarem os três em branco, tudo continua por unidade de área, como antes.",
+    land_card_desc: "Dividam a área de café pelo estado em que está. Os custos de cada bloco são anotados por unidade de área daquele bloco, e a ferramenta multiplica por ela. Se deixarem os três em branco, o FGD reporta apenas os custos da área produtiva.",
     area_establishment: "Implantação (áreas novas)", area_renovation: "Renovação / reabilitação",
     area_productive: "Áreas produtivas", area_total: "Área total de café",
     area_establishment_l: "Implantação ({u})", area_renovation_l: "Renovação ({u})", area_productive_l: "Produtiva ({u})",
-    land_note_blank: "Sem áreas informadas: os totais ficam como custo por unidade de área, e o preço por kg usa só a produtividade.",
-    land_note_active: "Áreas informadas: os três blocos são somados como estão, sem amortizar nada. Um ano com plantios novos aparece como um ano mais caro, que é exatamente a ideia.",
     status_label: "Corresponde a",
     status_establishment: "Implantação", status_renovation: "Renovação",
     status_productive: "Produtiva", status_annual: "Custo anual fixo",
@@ -967,7 +969,7 @@ const TRANSLATIONS = {
     compare_mixed_basis: "Alguns destes FGD não têm áreas informadas, então não têm custo anual. As médias de área e de custo anual ficam em branco em vez de cobrir só parte do grupo.",
     filter_presentation: "Tipo de café", filter_currency: "Moeda", filter_area_unit: "Unidade de área",
     filter_all: "Todos", filter_reset: "Limpar filtros",
-    th_fgd: "FGD", th_coop: "Cooperativa", th_currency: "Moeda / unidade", th_wage: "Diária", th_total_compare: "CPS Total",
+    th_fgd: "FGD", th_coop: "Cooperativa", th_currency: "Moeda / unidade", th_wage: "Diária", th_total_compare: "COSP Total",
     th_type: "Tipo de café", th_yield: "Produtividade", th_yield_gbe: "Produtividade (GBE)",
     modal_cancel: "Cancelar", modal_confirm: "Confirmar", modal_delete: "Apagar",
     confirm_delete_record: "Apagar este FGD e tudo que foi digitado nele? Não é possível desfazer.",
@@ -2519,7 +2521,6 @@ function renderLandCard(S){
     bar.style.display = "none";
     legend.innerHTML = "";
   }
-  document.getElementById("landNote").textContent = sum.farmArea > 0 ? t("land_note_active") : t("land_note_blank");
 }
 
 // data-label on every cell drives the stacked card layout on phones (see the
@@ -2878,7 +2879,7 @@ function renderItemsTab(){
         </tbody>
       </table>
     </div>
-    <p class="records-count">${esc(t("items_footnote"))}</p>`;
+    <p class="table-footnote">${esc(t("items_footnote"))}</p>`;
   wire();
 }
 
@@ -2888,7 +2889,7 @@ function exportItemDetailCsv(){
   const cols = ["fgd_id","fgd_name","coop_name","country","currency","land_block","category","component","item_code","item_label","quantity","unit","cost"];
   const body = lines.map(l => [l.fgdId,l.fgdName,l.coopName,l.country,l.currency,l.block,l.category,l.component,l.code,l.label,l.qty,l.unit,l.value]
     .map(csvEscape).join(","));
-  downloadFile(`cps_input_detail_${today()}.csv`, "text/csv", cols.join(",") + "\n" + body.join("\n") + "\n");
+  downloadFile(`cosp_input_detail_${today()}.csv`, "text/csv", cols.join(",") + "\n" + body.join("\n") + "\n");
   setSaveStatus(t("save_status_csv") + " " + new Date().toLocaleTimeString());
 }
 
@@ -3168,7 +3169,7 @@ function csvColumnsForRecord(rec){
   push("total_family_labour_days", s.hhDays);
   push("total_hired_labour_days", s.hiredDays);
   push("total_annual_cost", s.useBlocks ? s.total : "");
-  push("total_cps_per_area_unit", s.perAreaCost);
+  push("total_cosp_per_area_unit", s.perAreaCost);
   push("production_kg_in_type", s.useBlocks ? s.production : "");
   push("production_kg_gbe", s.useBlocks ? s.productionGbe : "");
   push("price_per_kg_in_type", s.pricePres === null ? "" : s.pricePres);
@@ -3188,22 +3189,22 @@ function exportRecordsCsv(recs, isAll){
   const lines = rowsOfCols.map(cols => cols.map(p => csvEscape(p[1])).join(","));
   const csv = header + "\n" + lines.join("\n") + "\n";
   const filename = isAll
-    ? `cps_all_fgds_${today()}.csv`
-    : `cps_${safeName(list[0].fgdName, "fgd")}_${today()}.csv`;
+    ? `cosp_all_fgds_${today()}.csv`
+    : `cosp_${safeName(list[0].fgdName, "fgd")}_${today()}.csv`;
   downloadFile(filename, "text/csv", csv);
   setSaveStatus(t("save_status_csv") + " " + new Date().toLocaleTimeString());
 }
 
 function exportRecordJson(rec){
   if(!rec) return;
-  downloadFile(`cps_${safeName(rec.fgdName, "fgd")}_${today()}.json`, "application/json", JSON.stringify(rec, null, 2));
+  downloadFile(`cosp_${safeName(rec.fgdName, "fgd")}_${today()}.json`, "application/json", JSON.stringify(rec, null, 2));
   setSaveStatus(t("save_status_json") + " " + new Date().toLocaleTimeString());
 }
 
 function exportAllJson(){
   const list = sortedRecords();
   if(!list.length) return;
-  downloadFile(`cps_all_fgds_${today()}.json`, "application/json", JSON.stringify(list, null, 2));
+  downloadFile(`cosp_all_fgds_${today()}.json`, "application/json", JSON.stringify(list, null, 2));
   setSaveStatus(t("save_status_json") + " " + new Date().toLocaleTimeString());
 }
 

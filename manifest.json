@@ -1,7 +1,7 @@
 {
-  "name": "Calculadora CPS - Captura FGD",
-  "short_name": "Calculadora CPS",
-  "description": "Herramienta para calcular el Costo de Producci\u00f3n Sostenible del caf\u00e9 durante los grupos focales (FGD).",
+  "name": "COSP Calculator",
+  "short_name": "COSP",
+  "description": "Herramienta para calcular el Costo de Producci\u00f3n Sostenible (COSP) del caf\u00e9 durante los grupos focales (FGD).",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

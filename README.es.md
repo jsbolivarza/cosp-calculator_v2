@@ -1,8 +1,8 @@
-# Calculadora CPS (PWA)
+# Calculadora COSP (PWA)
 
 *English: [README.md](README.md)*
 
-Herramienta para calcular el Costo de Producción Sostenible del café durante los grupos
+Herramienta para calcular el Costo de Producción Sostenible (COSP) del café durante los grupos
 focales (FGD). Se instala como app en un teléfono, tablet o computador y funciona sin conexión
 después de la primera vez que se abre.
 
@@ -64,7 +64,7 @@ seguidos sin perder ni mezclar los datos.
 
 - **+ Nuevo FGD** empieza uno nuevo sin tocar los anteriores.
 - **Abrir** retoma un FGD ya empezado.
-- Cada tarjeta de la lista muestra el nombre, la cooperativa, el CPS total y la fecha del
+- Cada tarjeta de la lista muestra el nombre, la cooperativa, el COSP total y la fecha del
   último cambio, y tiene sus propios botones de JSON, CSV y borrar.
 - **Mis FGD** en la barra superior regresa a esta pantalla desde cualquier lugar.
 
@@ -124,7 +124,7 @@ por ejemplo "Promedio (8)".
 mismo, así que promediar rendimiento o precio por kg entre presentaciones distintas da un
 número sin sentido. Cuando los FGD visibles no comparten presentación, esos dos promedios salen
 como raya y aparece un aviso explicando por qué. Lo mismo pasa con los promedios de dinero
-(jornal, CPS total, precios) cuando se mezclan monedas o unidades de área. Los valores de cada
+(jornal, COSP total, precios) cuando se mezclan monedas o unidades de área. Los valores de cada
 fila siguen visibles, porque cada uno por separado sí es válido.
 
 El **precio por kg GBE** es la única columna de precio comparable entre presentaciones
@@ -210,14 +210,14 @@ datos entre dispositivos.
 ### Columnas del CSV
 
 Los nombres de columna del CSV usan identificadores fijos en inglés, como `fertilization_total`
-y `total_cps_per_area_unit`, y no las etiquetas traducidas. Así los archivos de facilitadores
+y `total_cosp_per_area_unit`, y no las etiquetas traducidas. Así los archivos de facilitadores
 que trabajan en distinto idioma de interfaz se alinean en la misma hoja maestra. El CSV de un
 solo FGD y el de todos tienen exactamente las mismas columnas.
 
 Cada FGD lleva `uses_land_blocks`, que indica si se capturó con áreas. Cuando es 1, la fila trae
 `area_establishment`, `area_renovation`, `area_productive`, `area_total_coffee`, el conjunto de
 subtotales `block_*`, `total_annual_cost`, `production_kg_in_type` y `production_kg_gbe`. Cuando
-es 0, esas columnas van vacías y solo `total_cps_per_area_unit` tiene sentido. Cada categoría
+es 0, esas columnas van vacías y solo `total_cosp_per_area_unit` tiene sentido. Cada categoría
 lleva además `<categoria>_land_status`, su costo por unidad de su propia área, y su costo anual.
 Filtren por `uses_land_blocks` antes de sumar costos anuales.
 
@@ -250,5 +250,5 @@ navegador, aparte de los archivos de la app.
   sistema, porque ese aviso no funciona bien en navegadores iOS distintos de Safari.
 - **La categoría Administración y Servicios de la Finca oculta sus componentes de Insumos y
   Mano de obra contratada**, porque no aplican ahí. Esos dos campos quedan vacíos por diseño.
-  Un valor metido ahí a la fuerza mediante un archivo cargado contaría en el CPS total sin
+  Un valor metido ahí a la fuerza mediante un archivo cargado contaría en el COSP total sin
   aparecer en ninguna pantalla.

@@ -1,8 +1,8 @@
-# CPS Calculator (PWA)
+# COSP Calculator (PWA)
 
 *Español: [README.es.md](README.es.md)*
 
-A tool for calculating the Sustainable Production Cost (Costo de Producción Sostenible) of
+A tool for calculating the Cost of Sustainable Production (COSP) of
 coffee during focus group discussions. It installs as an app on a phone, tablet or computer
 and works offline after the first time it is opened.
 
@@ -63,7 +63,7 @@ without losing or mixing the data.
 
 - **+ New FGD** starts a fresh one without touching the others.
 - **Open** picks up an FGD already started.
-- Each card in the list shows the name, the cooperative, the total CPS and the date of the last
+- Each card in the list shows the name, the cooperative, the total COSP and the date of the last
   change, and carries its own JSON, CSV and delete buttons.
 - **My FGDs** in the top bar returns to this screen from anywhere.
 
@@ -120,7 +120,7 @@ it, for example "Average (8)".
 **Averages that are left blank.** A kilo of cherry and a kilo of dry parchment are not the same
 thing, so averaging yield or price per kg across different coffee types produces a meaningless
 number. When the visible FGDs do not share a coffee type, those two averages show as a dash and
-a note explains why. The same applies to the money averages (daily wage, total CPS, prices)
+a note explains why. The same applies to the money averages (daily wage, total COSP, prices)
 when currencies or area units are mixed. The individual row values stay visible throughout,
 because each one on its own is valid.
 
@@ -203,14 +203,14 @@ first and then load the backup. This is worth knowing when moving data between d
 ### CSV columns
 
 The CSV column names use fixed English identifiers such as `fertilization_total` and
-`total_cps_per_area_unit` rather than the translated labels. Files produced by facilitators
+`total_cosp_per_area_unit` rather than the translated labels. Files produced by facilitators
 working in different interface languages therefore line up in the same master sheet. The single
 FGD CSV and the export all CSV have exactly the same columns.
 
 Every FGD carries `uses_land_blocks`, which says whether it was captured with areas. When it
 is 1 the row has `area_establishment`, `area_renovation`, `area_productive`, `area_total_coffee`,
 a `block_*` set of subtotals, `total_annual_cost`, `production_kg_in_type` and
-`production_kg_gbe`. When it is 0 those are blank and only `total_cps_per_area_unit` is
+`production_kg_gbe`. When it is 0 those are blank and only `total_cosp_per_area_unit` is
 meaningful. Each category also carries `<category>_land_status`, its cost per unit of its own
 area, and its annual cost. Filter on `uses_land_blocks` before summing annual costs.
 
@@ -241,4 +241,4 @@ separately from the app files.
   system popup is unreliable in iOS browsers other than Safari.
 - **The Farm Administration category hides its Inputs and Paid labour components**, since they
   do not apply there. Those two fields stay empty by design. A value forced into them through
-  an imported file would count toward the CPS total without appearing anywhere on screen.
+  an imported file would count toward the COSP total without appearing anywhere on screen.
